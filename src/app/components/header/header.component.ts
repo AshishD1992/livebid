@@ -1,4 +1,5 @@
 import { Component, OnInit, ElementRef, Renderer2 } from '@angular/core';
+import { AuthService } from 'src/app/services/auth.service';
 import { ReportService } from 'src/app/services/report.service';
 
 @Component({
@@ -11,18 +12,22 @@ export class HeaderComponent implements OnInit {
   isNav:boolean=false;
   Data: any;
   username:string;
- 
+  isLoggedIn: boolean = false;
 
 
-  constructor(private reportService: ReportService) { }
+
+  constructor(private reportService: ReportService,private authService: AuthService,) { }
 
   ngOnInit(): void {
+    this.authService.isLoggedIn$.subscribe((isLoggedIn: boolean) => {
+      this.isLoggedIn = isLoggedIn;
+    })
     this.Fund();
     this.userdescription()
     this.bodyElement = document.querySelector('body');
 
   }
-  
+
 
   Fund(){
     this.reportService.Fund().subscribe(data=>{
@@ -55,7 +60,7 @@ export class HeaderComponent implements OnInit {
   closeUserDash() {
     (this.bodyElement as HTMLElement).classList.remove('dash-show');
   }
- 
+
   }
 
 
