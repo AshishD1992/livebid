@@ -1,0 +1,26 @@
+* {
+  box-sizing: border-box;
+  -moz-box-sizing: border-box;
+}
+
+.iti__hide {
+  display: none;
+}
+
+pre {
+  margin: 0 !important;
+  display: inline-block;
+}
+
+.token.operator,
+.token.entity,
+.token.url,
+.language-css .token.string,
+.style .token.string,
+.token.variable {
+  background: none;
+}
+
+#result {
+  margin-bottom: 100px;
+}

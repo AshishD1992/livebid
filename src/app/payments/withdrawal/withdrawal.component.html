@@ -1,0 +1,460 @@
+<div class="report-outer">
+    <div class="code_error">
+
+    </div>
+    <div class="tab-content">
+        <div class="tab-pane active" id="withdrawal">
+            <div class="accordions">
+
+                <div class="accordion-item">
+                    <div class="payment-type-item">
+                        <div class="accordion-title active-title">
+                            <h2 data-toggle="modal" data-target="#paymentPytmPopup" onclick="setwithdrawalOption(1,0,0);">
+                                <div class="logo-wrapper">
+                                    <img src="assets/images/paytm.png">
+                                </div>
+                                <div class="payment-name">
+                                    <h4>withdrawal with</h4>
+                                    <span>Paytm</span>
+                                </div>
+                                <div class="arrow"><i class="fas fa-chevron-down chevron-top"></i></div>
+                            </h2>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="accordion-item">
+                    <div class="payment-type-item">
+                        <div class="accordion-title">
+                            <h2 data-toggle="modal" data-target="#paymentimpsPopup" onclick="setwithdrawalOption(2,0,0);">
+                                <div class="logo-wrapper">
+                                    <img src="assets/images/imps.png">
+                                </div>
+                                <div class="payment-name">
+                                    <h4>withdrawal with</h4>
+                                    <span>Imps</span>
+                                </div>
+                                <div class="arrow"><i class="fas fa-chevron-down"></i></div>
+                            </h2>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="accordion-item">
+                    <div class="payment-type-item">
+                        <div class="accordion-title">
+                            <h2 data-target="#paymentnetPopup" data-toggle="modal" onclick="setwithdrawalOption(6,0,0);">
+                                <div class="logo-wrapper">
+                                    <img src="assets/images/Neteller.png">
+                                </div>
+                                <div class="payment-name">
+                                    <h4>withdrawal with</h4>
+                                    <span>Neteller</span>
+                                </div>
+                                <div class="arrow"><i class="fas fa-chevron-down"></i></div>
+                            </h2>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+</div>
+
+<div id="appendPayOption">
+<div id="paymentPytmPopup" class="modal fade paymentPytmPopup commonpopup" role="dialog" aria-hidden="true"
+        style="display: none;">
+        <div class="modal-dialog">
+            <!-- Modal content-->
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal">
+                        <svg version="1.1" id="Capa_1" xmlns="http://www.w3.org/2000/svg"
+                            xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" viewBox="0 0 384 384"
+                            style="enable-background:new 0 0 384 384;" xml:space="preserve">
+                            <g>
+                                <g>
+                                    <polygon points="384,170.667 81.707,170.667 158.187,94.187 128,64 0,192 128,320 158.187,289.813 81.707,213.333 384,213.333 		
+                            "></polygon>
+                                </g>
+                            </g>
+                            <g>
+                            </g>
+                            <g>
+                            </g>
+                            <g>
+                            </g>
+                            <g>
+                            </g>
+                            <g>
+                            </g>
+                            <g>
+                            </g>
+                            <g>
+                            </g>
+                            <g>
+                            </g>
+                            <g>
+                            </g>
+                            <g>
+                            </g>
+                            <g>
+                            </g>
+                            <g>
+                            </g>
+                            <g>
+                            </g>
+                            <g>
+                            </g>
+                            <g>
+                            </g>
+                        </svg>
+                    </button>
+                </div>
+
+                <div class="modal-body">
+                    <form class="paytmform form-horizontal" id="withdrawal_paytm">
+                        <h2 class="bank_detail_heading">
+                            <span>Your Detail </span>
+                            <div class="payment-logo">
+
+                                <img src="assets/images/paytm.png" alt="Paytm Number">
+                            </div>
+                        </h2>
+                        <input type="hidden" id="min_withdrawal_limit" value="2000">
+
+                        <input type="hidden" id="max_withdrawal_limit" value="98000">
+
+                        <div class="bank_detail_area">
+                            <input type="hidden" name="is_fast" id="is_fast" value="0">
+                            <input type="hidden" name="user_id" value="30749">
+                            <input type="hidden" name="withdrawal_id" id="withdrawal_id" value="0">
+                            <div class="amount-detail">
+                                <label>Account No</label>
+                                <input name="paytm_no" id="paytm_no" value="" class="form-control" minlength="10"
+                                    maxlength="16" placeholder="Paytm Number" type="text" required="">
+                                <span id="paytm_noN" class="errMsg pay-error"></span>
+                            </div>
+
+                            <div class="amount-detail">
+                                <label>Account Name</label>
+                                <input name="message" id="message" value="" class="form-control" placeholder="Name"
+                                    type="text" required="">
+                                <span id="messageN" class="errMsg pay-error"></span>
+                            </div>
+                        </div>
+
+                        <input type="hidden" id="bal" value="-146">
+                        <div class="">
+                            <input type="hidden" name="typ" id="typ" value="1">
+
+                            <input name="amount" id="amount" class="form-control amount-input" placeholder="Amount"
+                                type="text" required="">
+                            <span id="errmsg1"></span>
+                            <span id="amountN" class="errMsg pay-error"></span>
+                        </div>
+                        <input type="hidden" class="input" name="paymode" id="paymode" value="1" readonly="">
+                        <div class="pay_mamount">
+                            Minimum : 2000 Maximum : 98000
+
+                        </div>
+
+                        <div class="flex-btn-group">
+                            <button type="button" class="btn payment-button"
+                                id="confirmWithdrawalTransaction">Withdrawal</button>
+                            <button type="button" class="btn payment-button" id="confirmFastWithdrawal"
+                                data-toggle="modal" data-target="#myModal">Fast Withdrawal</button>
+                        </div>
+
+                        <!--<p class="mt-5 mb-5">Withdrawal Amount</p>							
+                   <h3 id="changeAmount"> </h3> -->
+                    </form>
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+<div id="paymentimpsPopup" class="modal fade paymentimpsPopup commonpopup" role="dialog" aria-hidden="true"
+        style="display: none;">
+        <div class="modal-dialog">
+            <!-- Modal content-->
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal">
+                        <svg version="1.1" id="Capa_1" xmlns="http://www.w3.org/2000/svg"
+                            xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" viewBox="0 0 384 384"
+                            style="enable-background:new 0 0 384 384;" xml:space="preserve">
+                            <g>
+                                <g>
+                                    <polygon points="384,170.667 81.707,170.667 158.187,94.187 128,64 0,192 128,320 158.187,289.813 81.707,213.333 384,213.333 		
+                            "></polygon>
+                                </g>
+                            </g>
+                            <g>
+                            </g>
+                            <g>
+                            </g>
+                            <g>
+                            </g>
+                            <g>
+                            </g>
+                            <g>
+                            </g>
+                            <g>
+                            </g>
+                            <g>
+                            </g>
+                            <g>
+                            </g>
+                            <g>
+                            </g>
+                            <g>
+                            </g>
+                            <g>
+                            </g>
+                            <g>
+                            </g>
+                            <g>
+                            </g>
+                            <g>
+                            </g>
+                            <g>
+                            </g>
+                        </svg>
+                    </button>
+                </div>
+
+                <div class="modal-body">
+                    <form class="paytmform form-horizontal" id="withdrawal_paytm">
+                        <h2 class="bank_detail_heading">
+                            <span>Your Detail </span>
+                            <div class="payment-logo">
+
+                                <img src="assets/images/paytm.png" alt="Paytm Number">
+                            </div>
+                        </h2>
+                        <input type="hidden" id="min_withdrawal_limit" value="2000">
+
+                        <input type="hidden" id="max_withdrawal_limit" value="98000">
+
+                        <div class="bank_detail_area">
+                            <input type="hidden" name="is_fast" id="is_fast" value="0">
+                            <input type="hidden" name="user_id" value="30749">
+                            <input type="hidden" name="withdrawal_id" id="withdrawal_id" value="0">
+                            <div class="amount-detail">
+                                <label>Account No</label>
+                                <input name="paytm_no" id="paytm_no" value="" class="form-control" minlength="10"
+                                    maxlength="16" placeholder="Paytm Number" type="text" required="">
+                                <span id="paytm_noN" class="errMsg pay-error"></span>
+                            </div>
+
+                            <div class="amount-detail">
+                                <label>Account Name</label>
+                                <input name="message" id="message" value="" class="form-control" placeholder="Name"
+                                    type="text" required="">
+                                <span id="messageN" class="errMsg pay-error"></span>
+                            </div>
+                        </div>
+
+                        <input type="hidden" id="bal" value="-146">
+                        <div class="">
+                            <input type="hidden" name="typ" id="typ" value="1">
+
+                            <input name="amount" id="amount" class="form-control amount-input" placeholder="Amount"
+                                type="text" required="">
+                            <span id="errmsg1"></span>
+                            <span id="amountN" class="errMsg pay-error"></span>
+                        </div>
+                        <input type="hidden" class="input" name="paymode" id="paymode" value="1" readonly="">
+                        <div class="pay_mamount">
+                            Minimum : 2000 Maximum : 98000
+
+                        </div>
+
+                        <div class="flex-btn-group">
+                            <button type="button" class="btn payment-button"
+                                id="confirmWithdrawalTransaction">Withdrawal</button>
+                            <button type="button" class="btn payment-button" id="confirmFastWithdrawal"
+                                data-toggle="modal" data-target="#myModal">Fast Withdrawal</button>
+                        </div>
+
+                        <!--<p class="mt-5 mb-5">Withdrawal Amount</p>							
+                   <h3 id="changeAmount"> </h3> -->
+                    </form>
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+<div id="paymentnetPopup" class="modal fade paymentnetPopup commonpopup" role="dialog" aria-hidden="true"
+    style="display: none;">
+    <div class="modal-dialog">
+        <!-- Modal content-->
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">
+                    <svg version="1.1" id="Capa_1" xmlns="http://www.w3.org/2000/svg"
+                        xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" viewBox="0 0 384 384"
+                        style="enable-background:new 0 0 384 384;" xml:space="preserve">
+                        <g>
+                            <g>
+                                <polygon points="384,170.667 81.707,170.667 158.187,94.187 128,64 0,192 128,320 158.187,289.813 81.707,213.333 384,213.333 		
+                        "></polygon>
+                            </g>
+                        </g>
+                        <g>
+                        </g>
+                        <g>
+                        </g>
+                        <g>
+                        </g>
+                        <g>
+                        </g>
+                        <g>
+                        </g>
+                        <g>
+                        </g>
+                        <g>
+                        </g>
+                        <g>
+                        </g>
+                        <g>
+                        </g>
+                        <g>
+                        </g>
+                        <g>
+                        </g>
+                        <g>
+                        </g>
+                        <g>
+                        </g>
+                        <g>
+                        </g>
+                        <g>
+                        </g>
+                    </svg>
+                </button>
+            </div>
+
+            <div class="modal-body">
+                <form class="paytmform form-horizontal" id="withdrawal_paytm">
+                    <h2 class="bank_detail_heading">
+                        <span>Your Detail </span>
+                        <div class="payment-logo">
+
+                            <img src="assets/images/paytm.png" alt="Paytm Number">
+                        </div>
+                    </h2>
+                    <input type="hidden" id="min_withdrawal_limit" value="2000">
+
+                    <input type="hidden" id="max_withdrawal_limit" value="98000">
+
+                    <div class="bank_detail_area">
+                        <input type="hidden" name="is_fast" id="is_fast" value="0">
+                        <input type="hidden" name="user_id" value="30749">
+                        <input type="hidden" name="withdrawal_id" id="withdrawal_id" value="0">
+                        <div class="amount-detail">
+                            <label>Account No</label>
+                            <input name="paytm_no" id="paytm_no" value="" class="form-control" minlength="10"
+                                maxlength="16" placeholder="Paytm Number" type="text" required="">
+                            <span id="paytm_noN" class="errMsg pay-error"></span>
+                        </div>
+
+                        <div class="amount-detail">
+                            <label>Account Name</label>
+                            <input name="message" id="message" value="" class="form-control" placeholder="Name"
+                                type="text" required="">
+                            <span id="messageN" class="errMsg pay-error"></span>
+                        </div>
+                    </div>
+
+                    <input type="hidden" id="bal" value="-146">
+                    <div class="">
+                        <input type="hidden" name="typ" id="typ" value="1">
+
+                        <input name="amount" id="amount" class="form-control amount-input" placeholder="Amount"
+                            type="text" required="">
+                        <span id="errmsg1"></span>
+                        <span id="amountN" class="errMsg pay-error"></span>
+                    </div>
+                    <input type="hidden" class="input" name="paymode" id="paymode" value="1" readonly="">
+                    <div class="pay_mamount">
+                        Minimum : 2000 Maximum : 98000
+
+                    </div>
+
+                    <div class="flex-btn-group">
+                        <button type="button" class="btn payment-button"
+                            id="confirmWithdrawalTransaction">Withdrawal</button>
+                        <button type="button" class="btn payment-button" id="confirmFastWithdrawal"
+                            data-toggle="modal" data-target="#myModal">Fast Withdrawal</button>
+                    </div>
+
+                    <!--<p class="mt-5 mb-5">Withdrawal Amount</p>							
+               <h3 id="changeAmount"> </h3> -->
+                </form>
+            </div>
+
+        </div>
+    </div>
+</div>    
+
+    <!-- Modal -->
+    <!-- <div id="FastWithdrawalModal" class="modal fade" role="dialog">
+        <div class="modal-dialog"> -->
+            <!-- Modal content-->
+            <!-- <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal">×</button>
+                    <h4 class="modal-title">Terms and Conditions</h4>
+                </div>
+                <div class="clearfix"></div>
+                <div class="modal-body">
+                    <p class="message-payment">Fast Withdrawal 4% charge.
+                        Withdrawal timing within 1 hour.</p>
+                    <div class="form-check form-group">
+                        <input type="checkbox" class="form-check-input" id="is_accept_term" value="1">Check me out
+                    </div>
+                    <div class="form-check form-group">
+                        <span id="acceptTerms" class="errMsg"> </span>
+                    </div>
+                    <div class="flex-btn-group">
+                        <button type="button" class="btn btn-default" id="submitFastWithdrawal"> Withdrawal </button>
+                    </div>
+                </div>
+            </div> -->
+        <!-- </div>
+    </div> -->
+    <!-- <script>
+        $("#amount").keypress(function (e) {
+
+            if (e.which != 8 && e.which != 0 && (e.which < 48 || e.which > 57)) {
+                $("#amountN").html("Digits Only").show().fadeOut(3000);
+                return false;
+            }
+
+        });
+        $("#paytm_no").keypress(function (e) {
+            if ($("#paymode").val() == 1) {
+                if (e.which != 8 && e.which != 0 && (e.which < 48 || e.which > 57)) {
+                    $("#paytm_noN").html("Digits Only").show().fadeOut(3000);
+                    return false;
+                }
+            }
+        });
+        $("#amount").keyup(function (e) {
+            $("#changeAmount").text($("#amount").val())
+        });
+        $('#message').keypress(function (e) {
+            var regex = new RegExp("^[a-zA-Z]+$");
+            var strigChar = String.fromCharCode(!e.charCode ? e.which : e.charCode);
+            if (regex.test(strigChar)) {
+                return true;
+            }
+            return false;
+        }); 
+    </script> -->
+</div>

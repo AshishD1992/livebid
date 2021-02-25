@@ -1,0 +1,49 @@
+<div class="tabbable">
+    <div class="sport-tab-main">
+       <div class="report-header">My Market</div>
+       <div id="divLoading"> </div>
+       <div class="scroll-table padding-table" id="filterdata">
+          <table class="table mymarkettable">
+            <thead>
+                <tr>
+                    <th>Match Id</th>
+                    <th>Market Start Time</th>
+                    <th class="reload-container">
+                        <span class="col-name">Match Name</span>
+                        <!-- <button class="btn btn-info  info">
+                            <span style="padding-right: 7px;">
+                                <fa-icon [icon]="faSync"></fa-icon>
+                            </span>
+                            Reload
+                        </button> -->
+                    </th>
+                    <th>Liability</th>
+                    
+                </tr>
+            </thead>
+            
+            <tbody>
+               <tr *ngFor="let data of dataa">
+                   <th>{{data.matchId}}</th>
+                   <th>--</th>
+                   <th class="reload-container">
+                       <span class="col-name">{{data.matchName}}</span>
+                       <!-- <button class="btn btn-info  info">
+                           <span style="padding-right: 7px;">
+                               <fa-icon [icon]="faSync"></fa-icon>
+                           </span>
+                           Reload
+                       </button> -->
+                   </th>
+                   <th>{{data.liability}}</th>
+                   
+               </tr>
+               <tr *ngIf="dataa.length <= 0" >
+                   <td class="text-center" colspan="5"><strong>No records
+                   found</strong></td>
+                   </tr>
+           </tbody>
+          </table>
+       </div>
+    </div>
+ </div>

@@ -1,0 +1,141 @@
+<div class="report-outer">
+    <div id="addUser">
+        <div id="addUserMsg"></div>
+        <form action="" [formGroup]="editForm" (ngSubmit)="SaveBetStakeSetting()">
+            <div class="col-md-4 col-md-offset-4">
+                <div class="color-bg">
+                    <div class="row">
+                        <span id="msg_error"></span><span id="errMsg"></span><input type="hidden" name="ChipUserID"
+                            id="ChipUserID" value="">
+                        <div class="col-md-6 col-xs-6">
+                            <div class="form-group">
+                                <label for="email">Chips Name 1:</label>
+                                <input type="text" name="Name1" class="form-control" id="Name1" value="100"
+                                    formControlName="stake1" [ngClass]="{ 'is-invalid': submitted && f.stake1.errors }">
+                                <div *ngIf="submitted && f.stake1.errors" class="invalid-feedback">
+                                    <div *ngIf="f.stake1.errors.required">Stake1 is required</div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-6 col-xs-6">
+                            <div class="form-group">
+                                <label for="pwd">Chip Value 1:</label>
+                                <input type="text" name="Value1" class="form-control" id="Value1" value="100"
+                                    formControlName="stake1" [ngClass]="{ 'is-invalid': submitted && f.stake1.errors }">
+                                <div *ngIf="submitted && f.stake1.errors" class="invalid-feedback">
+                                    <div *ngIf="f.stake1.errors.required">Stake1 is required</div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-6 col-xs-6">
+                            <div class="form-group">
+                                <label for="email">Chips Name 2:</label>
+                                <input type="text" name="Name2" class="form-control" id="Name2" value="200"
+                                    formControlName="stake2" [ngClass]="{ 'is-invalid': submitted && f.stake2.errors }">
+                                <div *ngIf="submitted && f.stake2.errors" class="invalid-feedback">
+                                    <div *ngIf="f.stake2.errors.required">Stake2 is required</div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-6 col-xs-6">
+                            <div class="form-group">
+                                <label for="pwd">Chip Value 2:</label>
+                                <input type="text" name="Value2" class="form-control" id="Value2" value="200"
+                                    formControlName="stake2" [ngClass]="{ 'is-invalid': submitted && f.stake2.errors }">
+                                <div *ngIf="submitted && f.stake2.errors" class="invalid-feedback">
+                                    <div *ngIf="f.stake2.errors.required">Stake2 is required</div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-6 col-xs-6">
+                            <div class="form-group">
+                                <label for="email">Chips Name 3:</label>
+                                <input type="text" name="Name3" class="form-control" id="Name3" value="500"
+                                    formControlName="stake3" [ngClass]="{ 'is-invalid': submitted && f.stake3.errors }">
+                                <div *ngIf="submitted && f.stake3.errors" class="invalid-feedback">
+                                    <div *ngIf="f.stake3.errors.required">Stake3 is required</div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-6 col-xs-6">
+                            <div class="form-group">
+                                <label for="pwd">Chip Value 3:</label>
+                                <input type="text" name="Value3" class="form-control" id="Value3" value="500"
+                                    formControlName="stake3" [ngClass]="{ 'is-invalid': submitted && f.stake3.errors }">
+                                <div *ngIf="submitted && f.stake3.errors" class="invalid-feedback">
+                                    <div *ngIf="f.stake3.errors.required">Stake3 is required</div>
+                                </div>
+
+                            </div>
+                        </div>
+                        <div class="col-md-6 col-xs-6">
+                            <div class="form-group">
+                                <label for="email">Chips Name 4:</label>
+                                <input type="text" name="Name4" class="form-control" id="Name4" value="1000"
+                                    formControlName="stake4" [ngClass]="{ 'is-invalid': submitted && f.stake4.errors }">
+                                    <div *ngIf="submitted && f.stake4.errors" class="invalid-feedback">
+                                        <div *ngIf="f.stake4.errors.required">Stake4 is required</div>
+                                    </div>
+                                </div>
+                        </div>
+                        <div class="col-md-6 col-xs-6">
+                            <div class="form-group">
+                                <label for="pwd">Chip Value 4:</label>
+                                <input type="text" name="Value4" class="form-control" id="Value4" value="1000"
+                                formControlName="stake4" [ngClass]="{ 'is-invalid': submitted && f.stake4.errors }">
+                                <div *ngIf="submitted && f.stake4.errors" class="invalid-feedback">
+                                    <div *ngIf="f.stake4.errors.required">Stake4 is required</div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-6 col-xs-6">
+                            <div class="form-group">
+                                <label for="email">Chips Name 5:</label>
+                                <input type="text" name="Name5" class="form-control" id="Name5" value="5000"
+                                formControlName="stake5" [ngClass]="{ 'is-invalid': submitted && f.stake5.errors }">
+                                <div *ngIf="submitted && f.stake5.errors" class="invalid-feedback">
+                                    <div *ngIf="f.stake5.errors.required">Stake5 is required</div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-6 col-xs-6">
+                            <div class="form-group">
+                                <label for="pwd">Chip Value 5:</label>
+                                <input type="text" name="Value5" class="form-control" id="Value5" value="5000"
+                                formControlName="stake5" [ngClass]="{ 'is-invalid': submitted && f.stake5.errors }">
+                                <div *ngIf="submitted && f.stake5.errors" class="invalid-feedback">
+                                    <div *ngIf="f.stake5.errors.required">Stake5 is required</div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="col-md-6 col-xs-6">
+                            <div class="form-group">
+                                <label for="email">Chips Name 6:</label>
+                                <input type="text" name="Name6" class="form-control" id="Name6" value="5000"
+                                formControlName="stake6" [ngClass]="{ 'is-invalid': submitted && f.stake6.errors }">
+                                <div *ngIf="submitted && f.stake6.errors" class="invalid-feedback">
+                                    <div *ngIf="f.stake6.errors.required">Stake6 is required</div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-6 col-xs-6">
+                            <div class="form-group">
+                                <label for="pwd">Chip Value 6:</label>
+                                <input type="text" name="Value5" class="form-control" id="Value6" value="5000"
+                                formControlName="stake6" [ngClass]="{ 'is-invalid': submitted && f.stake6.errors }">
+                                <div *ngIf="submitted && f.stake6.errors" class="invalid-feedback">
+                                    <div *ngIf="f.stake6.errors.required">Stake6 is required</div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="text-center" id="button_change">
+                            <button type="submit" class="payment-button btn" id="updateUserChip" (click)="SaveBetStakeSetting()"> Update Chip Setting
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>

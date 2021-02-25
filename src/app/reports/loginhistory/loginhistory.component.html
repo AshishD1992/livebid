@@ -1,0 +1,16 @@
+<table>
+    <thead>
+      <tr>
+        <th>Login Date & Time</th>
+        <th>Login Status</th>
+        <th>IP Adress</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr   *ngFor="let result of Data">
+        <td data-column="Login Date & Time">{{result.loginDatetime}}</td>
+        <td data-column="Login Status">{{result.loginStatus}}</td>
+        <td data-column="IP Adress">{{result.ipaddress}}</td>
+      </tr>
+    </tbody>
+  </table>

@@ -1,0 +1,50 @@
+<div class="tabbable">
+    <div class="sport-tab-main">
+        <div class="report-header">Bet History</div>
+        <div class="col-md-12 ">
+        </div>
+        <div class="report-outer normal-select">
+            <input type="hidden" name="ajaxUrl" id="ajaxUrl" value="bethistory">
+            <form method="get" class="form-horizontal form-label-left input_mask" id="formSubmit">
+                <input type="hidden" name="perpage" id="perpage" value="10">
+
+
+                <div class="row no-padding">
+                    <div class="col-xs-6">
+                        <select class="form-control" name="gameid"  [(ngModel)]="filter">
+                            <option value="5">All</option>
+                            <option value="4">Cricket</option>
+                            <option value="2">Tennis</option>
+                            <option value="1">Soccer</option>
+                            <option value="9">Teenpatti</option>
+                            <option value="0">Fancy</option>
+                        </select>
+                    </div>
+                    <div class="col-xs-6">
+                        <input type="hidden" name="pStatus" value="O">
+                        <div class="status-pending">
+                            <div class="pay-check">
+                                <label for="html">
+                                    <input type="checkbox" id="settledChkBox">
+                                    Settled</label>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <button type="submit" name="submit" id="submit_form_button" value="filter" data-attr="submit"
+                    class="btn btn-submit" style="width:100%; display: none;">Filter</button>
+            </form>
+            
+            <div id="divLoading"></div>
+            <div class="scroll-table appendAjaxTbl">
+                <div class="scroll-table appendAjaxTbl">
+                </div>
+                <div class="bethistroy_table ">
+
+                </div>
+                No record found
+
+            </div>
+        </div>
+    </div>
+</div>

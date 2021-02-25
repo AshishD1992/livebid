@@ -1,0 +1,53 @@
+
+@media screen and (min-width:766px) {
+
+.FullPopup .login-logo { margin-bottom:80px;}
+.FullPopup .login-logo img { width: 130px;}
+.sign-pop {
+	width:320px;
+	margin: auto;
+	position: absolute;
+	left: 50%;
+	top: 50%;
+	transform: translate(-50%, -50%);
+}
+}
+
+@media screen and (max-width:767px) 
+{.crypt-radio-boxed{width:47%;}
+
+.col-40 {width: 100%;    margin-left: 0;}	
+.col-80 {width: 100%;    margin-left: 0;}	
+#owl-demo2{margin-bottom: 20px;}
+#owl-demo4{margin-bottom: 20px;}
+.footer-menu {padding-left: 0;}
+.owl-theme .owl-controls .owl-page span{width: 10px !important;height: 10px !important;margin: 5px 3px !important;}
+.slider_buttons{bottom: 0;}
+.btn.greenbtn{font-size: 16px;}
+.footer-menu ul h2{    font-size: 15px;}
+.footer-menu ul li a{    font-size: 16px;}
+.footer-menu.text-right{text-align:center;}
+.casino-game-inner img {height: 127px;}
+
+.table-responsive{border: 1px solid #454952; width: 98%;margin: 0 auto;}
+.col-md-2.p-5 {padding: 0px 2px;}
+.casino-game-inner{    margin-bottom: 2px;}
+.pt-pb {
+    padding: 5px 15px;
+}
+	
+}
+@media screen and (max-width:380px) {
+.betslipfoot1 p, {
+	font-size: 14px;
+	margin-bottom:5px;
+}
+.betslipfoot1 span {
+	font-size: 13px;
+	margin-bottom:5px;
+}
+.betslip-main .betslip1 {
+    padding: 15px 17px 10px 15px;
+}
+
+}

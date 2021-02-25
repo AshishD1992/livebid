@@ -1,0 +1,37 @@
+<div class="tabbable">
+    <div class="sport-tab-main">
+        <div class="col-md-12">
+        </div>
+        <div class="report-outer custom-selectbox">
+            <form id="formSubmit">
+                <input type="hidden" name="ajaxUrl" id="ajaxUrl" value="acStatement">
+                <div class="select">
+                    <select name="fltrselct" id="slct">
+                        <option value="0" selected="">All</option>
+                        <option value="1">Chips in/out</option>
+                        <option value="3">Profit Loss</option>
+                        <option value="4">Statement</option>
+                    </select>
+                </div>
+
+                <button type="submit" style="display:none;" name="submit" id="submit_form_button" class="blue_button"
+                    data-attr="submit">Filter</button>
+            </form>
+            <div id="divLoading"> </div>
+            <div class="scroll-table appendAjaxTbl" >
+                <table>
+                    <thead>
+                      <tr>
+                        <th scope="col">Round ID </th>
+                        <th scope="col">Winner</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <tr *ngFor="let result of Data">
+                        <td data-label="Round ID "> {{result.roundId}}</td>
+                              <td data-label="Winner"> {{result.result}}</td>
+                  
+                      </tr>
+                    </tbody>
+                  </table>
+                  </div>

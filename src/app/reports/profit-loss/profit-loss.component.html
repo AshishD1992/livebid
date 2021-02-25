@@ -1,0 +1,60 @@
+<div class="tabbable">
+    <div class="sport-tab-main">
+        <div class="report-outer custom-selectbox">
+            <form method="get" id="formSubmit">
+                <input type="hidden" name="ajaxUrl" id="ajaxUrl" value="profitloss">
+                <input type="hidden" name="user_id" value="">
+                <input type="hidden" name="perpage" id="perpage" value="10">
+                <div class="select">
+                    <select name="sportid">
+                        <option value="5" selected="">All</option>
+                        <option value="4">Cricket</option>
+                        <option value="1">Soccer</option>
+                        <option value="2">Tennis</option>
+                        <option value="7">Horse Riding</option>
+                        <option value="11">Live teenpatti</option>
+                        <option value="12">Live Casino</option>
+                        <option value="0">Fancy</option>
+                    </select>
+                </div>
+                <button type="submit" style="display:none" class="blue_button" id="submit_form_button" value="filter"
+                    data-attr="submit">Filter</button>
+            </form>
+            <div id="divLoading"> </div>
+            <div class="appendAjaxTbl">
+               
+
+                <table class="table   table-sm">
+
+
+                    <thead>
+                        <tr>
+                            <th>Settled</th>
+                            <th> Market Name</th>
+                            <th>Profit/Loss</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                <tr *ngFor="let d of dataa">
+                   <td>{{d.settleDate}}</td>
+                   <td>{{d.market}}</td>
+                   <td>{{d.pnl}}</td>
+                </tr>  
+
+
+                    </tbody>
+                </table>
+                <!-- <ag-grid-angular style="width:100%; height: 300px;" class="ag-theme-balham" 
+                [rowData]="rowData"
+                [columnDefs]="columnDefs" 
+                [pagination]="true"
+                [paginationPageSize]="10"
+                [gridOptions]="gridOptions">
+            </ag-grid-angular> -->
+            </div>
+
+
+
+        </div>
+    </div>
+</div>

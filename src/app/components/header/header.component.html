@@ -1,0 +1,226 @@
+<div class="overlay" (click)="closeNav();closeUserDash()"></div>
+<header>
+    <div class="container container-login">
+        <div class="ho-top">
+            <div class="ho-t-r">
+                <a (click)="openNav()" class="bars" id="toggled">
+                    <div class="menu-icon">
+                        <i class="fas fa-bars"></i>
+                    </div>
+                </a>
+            </div>
+            <div class="ho-t-l">
+                <div class="logo-head">
+                    <a routerLink="/dashboard" class="logo-main">
+                        <img src="assets/images/logo1.png">
+                    </a>
+                    <div class="marquee hidden-xs">
+                        <app-marquee></app-marquee>
+                    </div>
+                </div>
+                <div class="support-chat dropdown">
+                    <a class="dropdown-toggle log-chat" data-toggle="dropdown">
+                        <span class="blink"><i class="fas fa-comments"></i> Live chat</span>
+                    </a>
+                    <ul class="dropdown-menu">
+                        <li>
+                            <a target="blank"><i class="fab fa-telegram-plane"></i>
+                                Teligram Chat
+                            </a>
+                        </li>
+                        <li>
+                            <a id="status" target="blank"><a href="javascript:void(Tawk_API.toggle())"><i
+                                        class="fas fa-comments"></i>
+                                    Live chat</a></a>
+                        </li>
+                    </ul>
+                </div>
+                <button class="btn login-btn" data-toggle="modal" data-target="#loginpopup">Login</button>
+                <!-- <button class="btn login-btn user-information" data-toggle="modal"
+                    data-target="#signuppopup">Register</button> -->
+
+                <a [routerLink]="['/payment/deposit']" class="btn login-btn">Deposit</a>
+                <button class="btn login-btn user-bal" id="user-dash" (click)="openUserDash()">
+                    <svg version="1.1" id="Capa_1" xmlns="http://www.w3.org/2000/svg"
+                        xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" viewBox="0 0 485.231 485.231"
+                        style="enable-background:new 0 0 485.231 485.231;" xml:space="preserve">
+                        <g>
+                            <g>
+                                <g>
+                                    <g>
+                                        <path d="M440.831,176.681h-252c-24.4,0-44.4,20-44.4,44.4v159.6c0,24.4,20,44.4,44.4,44.4h252c24.4,0,44.4-20,44.4-44.4v-159.6
+                                          C485.331,196.581,465.231,176.681,440.831,176.681z M461.331,381.281c0,8.8-7.2,16.1-16.1,16.1h-256.9
+                                          c-8.8,0-16.1-7.2-16.1-16.1v-112.3h289.1V381.281z M461.331,226.681h-289.1v-6.1c0-8.8,7.2-16.1,16.1-16.1h256.9
+                                          c8.8,0,16.1,7.2,16.1,16.1V226.681z"></path>
+                                    </g>
+                                </g>
+                                <g>
+                                    <path
+                                        d="M185.631,149.281h156.3l-31.8-64.4c-10.9-22-37.6-31-59.6-20.1l-225.8,111.6c-22,10.9-31,37.6-20.1,59.6l70.8,143.1
+                                       c9.5,19.3,31.4,28.7,51.5,23.2c-6-10.1-9.4-21.8-9.4-34.3v-150.5C117.431,179.981,148.131,149.281,185.631,149.281z">
+                                    </path>
+                                </g>
+                                <g>
+                                    <path d="M217.731,380.081c8.7,0,16.6-3.9,21.8-10.1c5.3,6.2,13.1,10.1,21.8,10.1c15.9,0,28.8-12.9,28.8-28.8
+                                       s-12.9-28.8-28.8-28.8c-8.7,0-16.6,3.9-21.8,10.1c-5.3-6.2-13.1-10.1-21.8-10.1c-15.9,0-28.8,12.9-28.8,28.8
+                                       S201.831,380.081,217.731,380.081z"></path>
+                                </g>
+                            </g>
+                        </g>
+                        <g></g>
+                        <g></g>
+                        <g></g>
+                        <g></g>
+                        <g></g>
+                        <g></g>
+                        <g></g>
+                        <g></g>
+                        <g></g>
+                        <g></g>
+                        <g></g>
+                        <g></g>
+                        <g></g>
+                        <g></g>
+                        <g></g>
+                    </svg>
+                    <span class="user_names hidden-lg">{{username}}</span>
+                </button>
+            </div>
+        </div>
+    </div>
+</header>
+<div class="marquee hidden-md hidden-lg">
+    <app-marquee></app-marquee>
+</div>
+<!--user-dashboard-->
+<div class="user-dashboard">
+    <button class="dashclose" (click)="closeUserDash()">
+        <svg version="1.1" id="Capa_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+            x="0px" y="0px" viewBox="0 0 512 512" style="enable-background:new 0 0 512 512;" xml:space="preserve">
+            <g>
+                <g>
+                    <path d="M436.812,75.188C388.327,26.702,324.113,0,256,0S123.673,26.702,75.188,75.188C26.702,123.673,0,187.887,0,256
+                   s26.702,132.327,75.188,180.812C123.673,485.298,187.887,512,256,512s132.327-26.702,180.812-75.188
+                   C485.298,388.327,512,324.113,512,256S485.298,123.673,436.812,75.188z M256,482C131.383,482,30,380.617,30,256S131.383,30,256,30
+                   s226,101.383,226,226S380.617,482,256,482z"></path>
+                </g>
+            </g>
+            <g>
+                <g>
+                    <path d="M404.493,171.147l-63.64-63.639L256,192.36l-84.853-84.853l-63.64,63.64L192.36,256l-84.853,84.853l63.64,63.64
+                   L256,319.64l84.853,84.853l63.64-63.64L319.64,256L404.493,171.147z M362.066,340.853l-21.213,21.213L256,277.213l-84.853,84.853
+                   l-21.213-21.213L234.787,256l-84.853-84.853l21.213-21.213L256,234.787l84.853-84.853l21.213,21.213L277.213,256L362.066,340.853z
+                   "></path>
+                </g>
+            </g>
+            <g></g>
+            <g></g>
+            <g></g>
+            <g></g>
+            <g></g>
+            <g></g>
+            <g></g>
+            <g></g>
+            <g></g>
+            <g></g>
+            <g></g>
+            <g></g>
+            <g></g>
+            <g></g>
+            <g></g>
+        </svg>
+    </button>
+    <h2>
+        <svg version="1.1" id="Capa_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+            x="0px" y="0px" viewBox="0 0 403.795 403.795" style="enable-background:new 0 0 403.795 403.795;"
+            xml:space="preserve">
+            <g>
+                <g>
+                    <rect x="311.897" y="144.795" width="35" height="160"></rect>
+                </g>
+            </g>
+            <g>
+                <g>
+                    <rect x="209.897" y="144.795" width="35" height="160"></rect>
+                </g>
+            </g>
+            <g>
+                <g>
+                    <rect x="260.897" y="144.795" width="35" height="160"></rect>
+                </g>
+            </g>
+            <g>
+                <g>
+                    <path d="M201.897,0L41.223,128.795h50.761h270.589L201.897,0z M209.898,108.969v2.726c0,4.418-3.582,8-8,8s-8-3.582-8-8v-2.723 c-9.676-3.406-16.154-12.542-16.166-22.8c0-4.418,3.582-8,8-8s8,3.582,8,8c0.001,4.51,3.657,8.166,8.167,8.165
+                   s8.166-3.657,8.165-8.167c0-4.51-3.656-8.165-8.166-8.165h0c-13.345,0.003-24.165-10.813-24.168-24.158 c-0.002-10.265,6.481-19.411,16.168-22.807v-3.345c0-4.418,3.582-8,8-8s8,3.582,8,8v3.348c9.676,3.406,16.154,12.542,16.166,22.8  c0,4.418-3.582,8-8,8s-8-3.582-8-8c-0.006-4.431-3.543-8.049-7.973-8.156c-0.065,0-0.128,0.009-0.193,0.009
+                   s-0.128-0.008-0.193-0.009c-4.505,0.163-8.024,3.947-7.861,8.452c0.158,4.35,3.701,7.811,8.054,7.866
+                   c13.345-0.001,24.164,10.816,24.165,24.161C226.064,96.428,219.582,105.572,209.898,108.969z"></path>
+                </g>
+            </g>
+            <g>
+                <g>
+                    <rect x="56.897" y="144.795" width="35" height="160"></rect>
+                </g>
+            </g>
+            <g>
+                <g>
+                    <polygon
+                        points="389.46,370.795 373.46,370.795 30.335,370.795 14.335,370.795 6.897,370.795 6.897,403.795 396.897,403.795 396.897,370.795">
+                    </polygon>
+                </g>
+            </g>
+            <g>
+                <g>
+                    <rect x="158.897" y="144.795" width="35" height="160"></rect>
+                </g>
+            </g>
+            <g>
+                <g>
+                    <polygon
+                        points="362.769,320.795 346.769,320.795 311.811,320.795 295.811,320.795 260.855,320.795 244.855,320.795 
+                   209.897,320.795 193.897,320.795 158.941,320.795 142.941,320.795 107.983,320.795 91.983,320.795 57.027,320.795 41.027,320.795 29.897,320.795 29.897,354.795 373.897,354.795 373.897,320.795">
+                    </polygon>
+                </g>
+            </g>
+            <g>
+                <g>
+                    <rect x="107.897" y="144.795" width="35" height="160"></rect>
+                </g>
+            </g>
+            <g></g>
+            <g></g>
+            <g></g>
+            <g></g>
+            <g></g>
+            <g></g>
+            <g></g>
+            <g></g>
+            <g></g>
+            <g></g>
+            <g></g>
+            <g></g>
+            <g></g>
+            <g></g>
+            <g></g>
+        </svg>
+        Balance Information
+    </h2>
+    <ul>
+        <li><span id="Wallet">Balance:</span> <span>{{Data?.availBal}}</span></li>
+        <li><span id="Bonus">Bonus: </span> <span>{{Data?.credit}}</span></li>
+        <li><span id="WdBal">Withdrawl:</span> <span>0.00</span></li>
+        <li><span id="UserLiability">Risk:</span> <span style="color: red;">{{Data?.exposure}}</span></li>
+    </ul>
+    <div class="side_payment">
+        <a routerLink="/payment/deposit" (click)="closeUserDash()" class="ani-box"> Deposit </a>
+        <a routerLink="/payment/withdrawal" (click)="closeUserDash()" class="ani-box"> Close Account</a>
+        <a routerLink="/payment/withdrawal" (click)="closeUserDash()" class="ani-box"> Withdrawal</a>
+
+    </div>
+    <div class="side_payment">
+        <a routerLink="/payment/withdrawal" (click)="closeUserDash()" class="ani-box"> Fast Withdrawal</a>
+
+        <a routerLink="/payment/payment-request" (click)="closeUserDash()" class="ani-box"> Payments History</a>
+    </div>
+</div>
+<!--user-dashboard-->

@@ -1,0 +1,275 @@
+.videoCards {
+  position: absolute;
+  content: "";
+  z-index: 1;
+  padding: 4px;
+  background: rgba(0, 0, 0, 0.4);
+  color: #fff;
+}
+.videoCards h6 {
+  font-size: 11px;
+  margin-bottom: 1px;
+}
+.videoCards img {
+  width: 23px;
+  height: auto;
+  margin-right: 1px;
+  margin-left: 1px;
+  border-radius: 4px;
+}
+.teenpatti-wrapper .rules-title, .teenpatti-wrapper .last-result-title, .worli-matka .rules-title, .worli-matka .last-result-title {
+  padding: 12px 12px;
+  color: #fff;
+  background-color: #171717;
+  border-bottom: 2px solid black;
+
+}
+.float-right {
+  float: right;
+  font-size: 15px;
+}
+.fancy-marker-title h4 {
+  padding: 10px;
+  background-color: #171717;
+  color: #fff;
+  font-size: 14px;
+}
+
+h4{
+  margin-bottom: .5rem;
+  font-weight: 500;
+  line-height: 1.2;
+}
+.result-view-all {
+  font-size: 14px;
+  float: right;
+  color: #fff;
+}
+.ball-runs {
+  height: 30px;
+  width: 30px;
+  border-radius: 50%;
+  display: inline-block;
+  line-height: 30px;
+  text-align: center;
+  font-weight: 700;
+}
+.ball-runs.playerb {
+  background: #355e3b;
+  color: #ff3;
+}
+.ball-runs.playera {
+  background: #355e3b;
+  color: #ff4500;
+}
+
+td{
+  padding: 5px;
+}
+
+button.back.back-1 {
+  background-color: #a0d1f4;
+  border: 1px solid #72bbef;
+  color: #313131;
+  border-radius: 3%;
+}
+button.lay.lay-1 {
+    background-color: #fdd9e1;
+    border: 1px solid #faa9ba;
+    color: #313131;
+    border-radius: 3%;
+
+}
+  .event-time{
+    border-top: 1px solid black;
+    border-bottom: 1px solid black;
+}
+
+.teams{
+  display: flex;
+  align-items: center;
+  padding: 8px;
+}
+.h5, h5 {
+  font-size: 15px;
+}
+.h5 {
+  margin-bottom: .5rem;
+  font-weight: 500;
+  line-height: 1.2;
+}
+.teams {
+  justify-content: center;
+}
+.odds-container tr {
+  border-bottom: 1px solid black;
+  background: #0e0e0e;
+  color: white;
+  font-weight: bold;
+}
+
+.odds-container th {
+  border-bottom: 1px solid black;
+  background: #18171d;
+  color: white;
+  font-weight: bold;
+  padding: 5px;
+
+}
+
+button, input, optgroup, select, textarea {
+  margin: 0;
+  font-family: inherit;
+  font-size: inherit;
+  line-height: inherit;
+}
+button.back,
+button.lay {
+  border: 0;
+  background-color: #3333334a;
+  outline: none;
+  height: 50px;
+  // max-width: 60px;
+  display: inline-flex;
+  flex-flow: column;
+  align-items: center;
+  justify-content: center;
+  flex: 1;
+  background-color: rgba($color: #000000, $alpha: 0.05);
+  min-width: 70px;
+  .price {
+    font-size: 0.8em;
+  }
+  .rate {
+    font-weight: 700;
+  }
+  &:hover {
+    background-color: rgba($color: #000000, $alpha: 0.1);
+  }
+}
+.last-result {
+  cursor: pointer;
+  margin: 0px 2px 2px 0px;
+  float: right;
+}
+.results {
+  flex: 1;
+}
+ .teams{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 10px;
+}
+
+.date-time{
+  font-size: 15px;
+}
+.suspended {
+  justify-content: center;
+  background-color: rgba(255, 255, 255, .8);
+  color: #b71212;
+  font-weight: 700;
+  position: absolute;
+  z-index: 2;
+  height: 100%;
+  position: relative;
+  // width: 69%;
+  width: 100%;
+  text-align: center;
+  // margin-left: 31%;
+  padding: 10px 0;
+}
+
+// .suspended1:after {
+//   position: absolute;
+//   display: flex;
+//   justify-content: center;
+//   align-items: center;
+//   height: 73%;
+//   width: 100%;
+//   right: 0;
+//   background-color: rgba(0, 0, 0, 0.6);
+//   color: #fff;
+//   text-transform: uppercase;
+//   font-family: FontAwesome;
+//   content: "suspended";
+//   font-weight: 900;
+//   font-size: 13px;
+//   top: 10px;
+// }
+.back-buttons,
+.lay-buttons {
+  display: flex;
+}
+
+.header .back-buttons {
+  text-align: right;
+  font-size: 0.9em;
+  padding-right: 20px;
+ padding-top: 5px;
+  padding-bottom: 5px;
+}
+
+.header .lay-buttons {
+  text-align: right;
+ padding-top: 5px;
+  padding-bottom: 5px;
+}
+.header .lay-buttons {
+  font-size: 0.9em;
+  padding-left: 20px;
+}
+
+.back-buttons {
+  justify-content: flex-end;
+}
+.clock2digit {
+  max-width: 300px;
+  bottom: -25px;
+  position: absolute !important;
+  right: -25px;
+  width: auto !important;
+  transform: scale(0.5);
+  }
+
+  .video-image{
+    position: relative;
+  }
+
+  .runner-label{
+    padding-bottom: 5px;
+  }
+
+    @media screen and (max-width: 1000px) {
+      .float-right {
+        float: inherit;
+       }
+       .clock2digit {
+        bottom: -30px;
+        right: -30px;
+    }
+  
+    
+}
+
+.in-play {
+  color: #1ec140;
+}
+.in-play, .up-coming {
+  display: inline-flex;
+  align-items: center;
+}
+
+.event-time{
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 8px;
+  background-color: #171717;
+}
+.fa-circle:before {
+  content: "\f111";
+  font-size: 13px;
+  padding: 4px;
+}

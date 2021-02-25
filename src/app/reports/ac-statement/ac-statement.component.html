@@ -1,0 +1,614 @@
+<div class="tabbable">
+    <div class="sport-tab-main">
+        <div class="col-md-12">
+        </div>
+        <div class="report-outer custom-selectbox">
+            <form id="formSubmit">
+                <input type="hidden" name="ajaxUrl" id="ajaxUrl" value="acStatement">
+                <div class="select">
+                    <select name="fltrselct" id="slct" [(ngModel)]="filter">
+                        <option value="0" selected="">All</option>
+                        <option value="1">Chips in/out</option>
+                        <option value="3">Profit Loss</option>
+                        <option value="4">Statement</option>
+                    </select>
+                </div>
+
+                <button type="submit" style="display:none;" name="submit" id="submit_form_button" class="blue_button"
+                    data-attr="submit">Filter</button>
+            </form>
+            <div id="divLoading"> </div>
+            <div class="scroll-table appendAjaxTbl">
+
+
+
+                <div class="report_odds" *ngFor="let result of Data">
+
+                    <div class="report_flex">
+                        <div class="sr_date">
+
+                            <div class="num">1</div>
+
+
+                            <div class="box_date_dex">
+                                <div class="date_des">
+
+                                    <span>
+                                        <a title="show bet">
+                                            {{result.description}} </a>
+
+                                    </span>
+                                    <span class="title_small_size"> </span>
+                                </div>
+                            </div>
+
+
+                        </div>
+
+
+                        <div class="dr_cr">
+                            <span class="title_small_size">
+                                {{result.date}}
+
+                            </span>
+                            <div class="dr_cr_bal">
+
+                                <span class="red">{{result.dr}}</span>
+                            </div>
+
+                        </div>
+
+                    </div>
+
+
+                    <div class="box_bal">
+                        <div class="balance_report">
+
+
+                            <span class="green">{{result.cr}} </span>
+
+
+
+
+                        </div>
+                    </div>
+
+                </div>
+
+
+
+
+
+
+
+
+
+
+
+
+                <!-- <div class="report_odds">
+
+                    <div class="report_flex">
+                        <div class="sr_date">
+
+                            <div class="num">2</div>
+
+
+                            <div class="box_date_dex">
+                                <div class="date_des">
+
+                                    <span>
+                                        <a title="show bet">
+                                            Live game-LiveGame-1595735341 </a>
+
+                                    </span>
+                                    <span class="title_small_size"> </span>
+                                </div>
+                            </div>
+
+
+                        </div>
+
+
+                        <div class="dr_cr">
+                            <span class="title_small_size">
+                                2020-07-26 09:19:01
+
+                            </span>
+                            <div class="dr_cr_bal">
+
+                                <span class="red">Dr.3000 </span>
+                            </div>
+
+                        </div>
+
+                    </div>
+
+
+                    <div class="box_bal">
+                        <div class="balance_report">
+
+
+                            <span class="green">14.05 </span>
+
+
+
+
+                        </div>
+                    </div>
+
+                </div>
+
+
+
+
+
+
+
+
+
+
+
+
+                <div class="report_odds">
+
+                    <div class="report_flex">
+                        <div class="sr_date">
+
+                            <div class="num">3</div>
+
+
+                            <div class="box_date_dex">
+                                <div class="date_des">
+
+                                    <span>
+                                        Amaresh Received From Parent
+
+                                    </span>
+                                    <span class="title_small_size"> </span>
+                                </div>
+                            </div>
+
+
+                        </div>
+
+
+                        <div class="dr_cr">
+                            <span class="title_small_size">
+                                2020-07-26 08:46:09
+
+                            </span>
+                            <div class="dr_cr_bal">
+
+                                <span class="green">Cr.3005</span>
+                            </div>
+
+                        </div>
+
+                    </div>
+
+
+                    <div class="box_bal">
+                        <div class="balance_report">
+
+
+                            <span class="green">3014.05 </span>
+
+
+
+
+                        </div>
+                    </div>
+
+                </div>
+
+
+
+
+
+
+
+
+
+
+
+
+                <div class="report_odds">
+
+                    <div class="report_flex">
+                        <div class="sr_date">
+
+                            <div class="num">4</div>
+
+
+                            <div class="box_date_dex">
+                                <div class="date_des">
+
+                                    <span>
+                                        Parent Withdraw From Amaresh
+
+                                    </span>
+                                    <span class="title_small_size"> </span>
+                                </div>
+                            </div>
+
+
+                        </div>
+
+
+                        <div class="dr_cr">
+                            <span class="title_small_size">
+                                2020-07-25 23:05:50
+
+                            </span>
+                            <div class="dr_cr_bal">
+
+                                <span class="red">Dr.5000 </span>
+                            </div>
+
+                        </div>
+
+                    </div>
+
+
+                    <div class="box_bal">
+                        <div class="balance_report">
+
+
+                            <span class="green">9.05 </span>
+
+
+
+
+                        </div>
+                    </div>
+
+                </div>
+
+
+
+
+
+
+
+
+
+
+
+
+                <div class="report_odds">
+
+                    <div class="report_flex">
+                        <div class="sr_date">
+
+                            <div class="num">5</div>
+
+
+                            <div class="box_date_dex">
+                                <div class="date_des">
+
+                                    <span>
+                                        <a title="show bet" >
+                                            Live game-LiveGame-1595689681 </a>
+
+                                    </span>
+                                    <span class="title_small_size"> </span>
+                                </div>
+                            </div>
+
+
+                        </div>
+
+
+                        <div class="dr_cr">
+                            <span class="title_small_size">
+                                2020-07-25 20:38:02
+
+                            </span>
+                            <div class="dr_cr_bal">
+
+                                <span class="red">Dr.4695 </span>
+                            </div>
+
+                        </div>
+
+                    </div>
+
+
+                    <div class="box_bal">
+                        <div class="balance_report">
+
+
+                            <span class="green">5009.05 </span>
+
+
+
+
+                        </div>
+                    </div>
+
+                </div>
+
+
+                <div class="report_odds">
+
+                    <div class="report_flex">
+                        <div class="sr_date">
+
+                            <div class="num">6</div>
+
+
+                            <div class="box_date_dex">
+                                <div class="date_des">
+
+                                    <span>
+                                        <a title="show bet" >
+                                            Live game-LiveGame-1595688541 </a>
+
+                                    </span>
+                                    <span class="title_small_size"> </span>
+                                </div>
+                            </div>
+
+
+                        </div>
+
+
+                        <div class="dr_cr">
+                            <span class="title_small_size">
+                                2020-07-25 20:19:01
+
+                            </span>
+                            <div class="dr_cr_bal">
+
+                                <span class="green">Cr.6158</span>
+                            </div>
+
+                        </div>
+
+                    </div>
+
+
+                    <div class="box_bal">
+                        <div class="balance_report">
+
+
+                            <span class="green">9704.05 </span>
+
+
+
+
+                        </div>
+                    </div>
+
+                </div>
+
+
+                <div class="report_odds">
+
+                    <div class="report_flex">
+                        <div class="sr_date">
+
+                            <div class="num">7</div>
+
+
+                            <div class="box_date_dex">
+                                <div class="date_des">
+
+                                    <span>
+                                        <a title="show bet" >
+                                            Live game-LiveGame-1595687221 </a>
+
+                                    </span>
+                                    <span class="title_small_size"> </span>
+                                </div>
+                            </div>
+
+
+                        </div>
+
+
+                        <div class="dr_cr">
+                            <span class="title_small_size">
+                                2020-07-25 19:57:02
+
+                            </span>
+                            <div class="dr_cr_bal">
+
+                                <span class="green">Cr.490</span>
+                            </div>
+
+                        </div>
+
+                    </div>
+
+
+                    <div class="box_bal">
+                        <div class="balance_report">
+
+
+                            <span class="green">3546.05 </span>
+
+
+
+
+                        </div>
+                    </div>
+
+                </div>
+
+                <div class="report_odds">
+
+                    <div class="report_flex">
+                        <div class="sr_date">
+
+                            <div class="num">8</div>
+
+
+                            <div class="box_date_dex">
+                                <div class="date_des">
+
+                                    <span>
+                                        Amaresh Received From Parent
+
+                                    </span>
+                                    <span class="title_small_size"> </span>
+                                </div>
+                            </div>
+
+
+                        </div>
+
+
+                        <div class="dr_cr">
+                            <span class="title_small_size">
+                                2020-07-25 19:52:12
+
+                            </span>
+                            <div class="dr_cr_bal">
+
+                                <span class="green">Cr.3050</span>
+                            </div>
+
+                        </div>
+
+                    </div>
+
+
+                    <div class="box_bal">
+                        <div class="balance_report">
+
+
+                            <span class="green">3056.05 </span>
+
+
+
+
+                        </div>
+                    </div>
+
+                </div>
+
+
+                <div class="report_odds">
+
+                    <div class="report_flex">
+                        <div class="sr_date">
+
+                            <div class="num">9</div>
+
+
+                            <div class="box_date_dex">
+                                <div class="date_des">
+
+                                    <span>
+                                        <a title="show bet" >
+                                            Live game-LiveGame-1595611621 </a>
+
+                                    </span>
+                                    <span class="title_small_size"> </span>
+                                </div>
+                            </div>
+
+
+                        </div>
+
+
+                        <div class="dr_cr">
+                            <span class="title_small_size">
+                                2020-07-24 22:57:03
+
+                            </span>
+                            <div class="dr_cr_bal">
+
+                                <span class="red">Dr.3500 </span>
+                            </div>
+
+                        </div>
+
+                    </div>
+
+
+                    <div class="box_bal">
+                        <div class="balance_report">
+
+
+                            <span class="green">6.05 </span>
+
+
+
+
+                        </div>
+                    </div>
+
+                </div>
+
+
+                <div class="report_odds">
+
+                    <div class="report_flex">
+                        <div class="sr_date">
+
+                            <div class="num">10</div>
+
+
+                            <div class="box_date_dex">
+                                <div class="date_des">
+
+                                    <span>
+                                        <a title="show bet">
+                                            Roulette-ROULETTE-1595611261 </a>
+
+                                    </span>
+                                    <span class="title_small_size"> </span>
+                                </div>
+                            </div>
+
+
+                        </div>
+
+
+                        <div class="dr_cr">
+                            <span class="title_small_size">
+                                2020-07-24 22:51:01
+
+                            </span>
+                            <div class="dr_cr_bal">
+
+                                <span class="red">Dr.80 </span>
+                            </div>
+
+                        </div>
+
+                    </div>
+
+
+                    <div class="box_bal">
+                        <div class="balance_report">
+
+
+                            <span class="green">3506.05 </span>
+
+
+
+
+                        </div>
+                    </div>
+
+                </div> -->
+
+<!-- 
+
+                <p>Showing 1 to 10 of 78 entries </p>
+                <p id="paginateClick" class="pagination-row dataTables_paginate paging_simple_numbers">
+                    <strong>1</strong><a data-ci-pagination-page="2">2</a><a data-ci-pagination-page="3">3</a><a
+                        data-ci-pagination-page="4">4</a><a data-ci-pagination-page="5">5</a><a
+                        data-ci-pagination-page="6">6</a><a data-ci-pagination-page="2" rel="next">&gt;</a><a
+                        data-ci-pagination-page="8">Last ›</a> </p> -->
+            </div>
+
+
+
+        </div>
+    </div>
+</div>
