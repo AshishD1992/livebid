@@ -1,0 +1,102 @@
+
+<div class="chart-body-heading-block hide-device" *ngIf="first || header">
+    <div class="chart-body-heading">
+      <div class="d-flex justify-content-between flex-row">
+        <h6 class="chart-body-heading chart-body-main-heading"><span>Events</span></h6>
+        <div class="chart-body-heading-details" style="width: 341px; margin-right: 35px;">
+          <div class="d-flex flex-row justify-content-between">
+            <div class="chart-body-heading chart-body-heading-outer-two chart-body-heading-outer d-flex flex-row">
+              <div class="chart-body-heading-two"><span>H</span></div>
+            </div>
+            <div class="chart-body-heading chart-body-heading-outer-two chart-body-heading-outer d-flex flex-row">
+              <div class="chart-body-heading-two"><span>D</span></div>
+            </div>
+            <div class="chart-body-heading chart-body-heading-outer-two chart-body-heading-outer d-flex flex-row">
+              <div class="chart-body-heading-two"><span>A</span></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="chart-main-block-outer row no-gutters" >
+    <div class="chart-main-block"  *ngFor="let sportData of sportsList;trackBy: trackById">
+      <div class="chart-heading-block">
+        <div class="d-flex flex-row justify-content-between">
+          <div class="d-flex flex-row">
+            <div *ngIf="sportData.inPlay==1 && sportData.sportBfId!='2000'" class="chart-icon in-play-active"><i class="glyph-icon flaticon-{{sportData.sportName | lowercase}}"></i></div>
+            <div *ngIf="sportData.inPlay==1 && sportData.sportBfId=='2000'" class="chart-icon in-play-active"><i class="glyph-icon flaticon-live-teenpatti"></i></div>
+            <div *ngIf="sportData.inPlay!=1 && sportData.sportBfId!='2000'" class="chart-icon"><i class="glyph-icon flaticon-{{sportData.sportName | lowercase}}"></i></div>
+            <div *ngIf="sportData.inPlay!=1 && sportData.sportBfId=='2000'" class="chart-icon"><i class="glyph-icon flaticon-live-teenpatti"></i></div>
+            <div class="chart-heading-body">
+              <div class="chart-subheading">
+                <ng-container *ngIf="sportData.inPlay==1">
+                <img src="https://bullexch.com/images/timer.png" width="16px"
+                  class="img-fluid"> <span class="text-success">INPLAY</span> <span>|</span>
+                </ng-container>
+                  {{sportData.matchDate}} |
+                <a [routerLink]="['/events', sportData.sportBfId,sportData.tourBfId]" class="">
+                  <a href="" title="{{sportData.tourName}}">{{sportData.tourName}}</a></a></div>
+              <h4 class="chart-heading">
+                <a [routerLink]="['/events', sportData.sportBfId,sportData.tourBfId,sportData.matchBfId,sportData.matchId,sportData.marketId]" class="">
+                  <a href="" title="{{sportData.matchName}}">{{sportData.matchName}}</a></a></h4>
+            </div>
+          </div>
+          <div class="d-flex flex-row">
+            <div class="chart-fav-block text-center">
+
+            </div>
+            <div class="stack-limit" *ngIf="sportData.settings">
+              <div class="match-odds-outer d-flex flex-row min-max-text"
+                style="left: -16%; margin-top: 12px; position: relative;">
+                Min: {{sportData.settings.minStake}} |&nbsp;
+                <span>
+                  Max: {{sportData.settings.maxStake}}
+                </span></div>
+            </div>
+            <div class="chart-fav-block text-right d-lg-flex flex-row">
+              <div class="markets-relative">
+                <div data-content="suspended" class="chart-body" style="padding: 0px;">
+                  <div>
+                    <div class="chart-heading-body pt-2" style="display: inline-flex;"><a title="price"
+                        class="price-odds-block lightblue index-odds-align">
+                        <h5 class="price-odd-title">
+                          {{sportData.runnerData.runner1Back || "-"}}
+                        </h5>
+                      </a> <a title="price" class="price-odds-block purple index-odds-align">
+                        <h5 class="price-odd-title">
+                          {{sportData.runnerData.runner1Lay || "-"}}
+                        </h5>
+                      </a> <a title="price" class="price-odds-block lightblue index-odds-align">
+                        <h5 class="price-odd-title">
+                          {{sportData.runnerData.runner3Back || "-"}}
+                        </h5>
+                      </a> <a title="price" class="price-odds-block purple index-odds-align">
+                        <h5 class="price-odd-title">
+                          {{sportData.runnerData.runner3Lay || "-"}}
+                        </h5>
+                      </a> <a title="price" class="price-odds-block lightblue index-odds-align">
+                        <h5 class="price-odd-title">
+                          {{sportData.runnerData.runner2Back || "-"}}
+                        </h5>
+                      </a> <a title="price" class="price-odds-block purple index-odds-align">
+                        <h5 class="price-odd-title">
+                          {{sportData.runnerData.runner2Lay || "-"}}
+                        </h5>
+                      </a></div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="chart-fav-block text-right d-lg-flex flex-row">
+              <div class="float-right favorite material-icons fav"><i class="material-icons"
+                  style="visibility: hidden;">star_border</i></div>
+
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+

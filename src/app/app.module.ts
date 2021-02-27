@@ -21,11 +21,12 @@ import { EditStakeComponent } from './components/edit-stake/edit-stake.component
 import { ReviewComponent } from './components/review/review.component';
 import { ChangePasswordComponent } from './components/change-password/change-password.component';
 import { ViewProfileComponent } from './components/view-profile/view-profile.component';
-import { TeenpattiComponent } from './teenpatti/teenpatti.component';
-import { TwentyteenpattiComponent } from './twentyteenpatti/twentyteenpatti.component';
-import { ThreecardjudgeComponent } from './threecardjudge/threecardjudge.component';
-import { AndarbaharComponent } from './andarbahar/andarbahar.component';
-import { Lucky7Component } from './lucky7/lucky7.component';
+import{TeenpattiModule} from './teenpatti/teenpatti.module'
+// import { TeenpattiComponent } from './teenpatti/teenpatti.component';
+// import { TwentyteenpattiComponent } from './teenpatti/twentyteenpatti/twentyteenpatti.component';
+// import { ThreecardjudgeComponent } from './teenpatti/threecardjudge/threecardjudge.component';
+// import { AndarbaharComponent } from './andarbahar/andarbahar.component';
+// import { Lucky7Component } from './lucky7/lucky7.component';
 // import { HttpClientModule } from '@angular/common/http';
 
 @NgModule({
@@ -42,11 +43,11 @@ import { Lucky7Component } from './lucky7/lucky7.component';
     ReviewComponent,
     ChangePasswordComponent,
     ViewProfileComponent,
-    TeenpattiComponent,
-    TwentyteenpattiComponent,
-    ThreecardjudgeComponent,
-    AndarbaharComponent,
-    Lucky7Component,
+    // TeenpattiComponent,
+    // TwentyteenpattiComponent,
+    // ThreecardjudgeComponent,
+    // AndarbaharComponent,
+    // Lucky7Component,
   ],
   imports: [
     BrowserModule,
@@ -54,7 +55,8 @@ import { Lucky7Component } from './lucky7/lucky7.component';
     HeaderModule,
     FormsModule,
     ReactiveFormsModule,
-    HttpClientModule,
+    // HttpClientModule,
+    TeenpattiModule,
     BrowserAnimationsModule ,
     AgGridModule.withComponents([]),
     ToastrModule.forRoot()

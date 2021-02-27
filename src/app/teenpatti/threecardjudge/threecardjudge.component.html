@@ -1,19 +1,19 @@
 <div class="odds-outer">
 
-    <div id="MatchOddInfo"  class="card ng-star-inserted">
+    <div id="MatchOddInfo" class="card ng-star-inserted">
         <div class="card-body">
             <div class="header">
-            <div class="teams">
-                <h5>20 20 Teenpatti</h5>
+                <div class="teams">
+                    <h5>3 card judgement</h5>
+                </div>
+                <div class="event-time">
+                    <div class="date-time"> Sep 14, 2020, 12:13:21 PM </div>
+                    <div class="event-status"><span class="in-play">
+                            <i class="fa fa-circle" aria-hidden="true"></i>
+                            In-Play
+                        </span></div>
+                </div>
             </div>
-            <div class="event-time">
-                <div class="date-time"> Sep 14, 2020, 12:13:21 PM </div>
-                <div class="event-status"><span class="in-play">
-                    <i class="fa fa-circle" aria-hidden="true"></i>
-                        In-Play
-                    </span></div>
-            </div>
-        </div>
             <div td width class="teenpatti-wrapper teenpatti-twenty bets-wrap ng-star-inserted">
                 <div td width class="video-image">
                     <div td width class="videoCards">
@@ -84,70 +84,58 @@
                 </div>
                 <div td width class="rules-title"><a td width class="theme1font"><span td width role="button"
                             class="teenpatti-rulesList"><u td width>Rules</u></span></a><span td width
-                        class="float-right round theme1font"> Min : <span td width class="ng-binding"> 100
-                            &nbsp;|</span> Max : <span td width class="ng-binding"> 500000 &nbsp;|</span>
-                        Round ID: <span td width> 201409121055 </span></span></div>
-                <div td width class="odds-container">
-                    <table td width>
-                        <thead td width>
-                            <tr td width class="header">
-                                <th td width></th>
-                                <th td width>
-                                    <div td width class="back-buttons"><span td width>Back</span></div>
-                                </th>
-                                <th td width>
-                                    <div td width class="lay-buttons"><span td width>Lay</span></div>
-                                </th>
-                            </tr>
-                        </thead>
-                        <tbody td width>
-                            <tr td width class="ng-star-inserted">
-                                <td td width width="99%" class="runnerName">
-                                    <div td width class="runner-label"> Player A </div><span td width
-                                        id="Tp_201409121055_Player_A">0</span>
-                                </td>
-                                <td td width>
-                                    <div td width class="back-buttons suspended1">
+                        class="float-right round theme1font">
+                         <!-- Min : <span td width class="ng-binding"> 100
+                            &nbsp;|</span> Max : <span td width class="ng-binding"> 500000 &nbsp;|</span> -->
+                        Round ID: <span td width> {{tpData.mid}}</span></span></div>
+            </div>
+            <div class="list-body distinct tpjudgement">
+                <div id="{{tpData.mid}}">
+                    <div class="andar-bx back">
+                        <div class="ab-title"><b>Yes - {{tpMarket[0].rate}}</b><span class="float-right"><b id="Tp_{{tpMarket[0].mid}}_{{tpMarket[0].nat}}"
+                                    class="win">0</b></span></div>
+                        <div class="text-center ab-content" [ngClass]="{'suspended':tpMarket[1].gstatus==0}">
+                            <div id="andar_div" class="owl-carousel owl-theme ab-slider">
+                                <div class="d-inline-block mr-1" *ngFor="let ab of andar_bahar;">
+                                    <img
+                                    (click)="tpMarket[0].gstatus=='0'?'':openTpBetSlip($event,'Back',tpMarket[0].rate,tpMarket[0].nat,tpMarket[0].sid,tpMarket[0].mid,subscriptionId,0,ab)"  
+                                     src="assets/images/andar_bahar/{{ab}}.jpg" 
+                                     [ngClass]="{'selected':selected3cardj(ab,'Back')}">
+                                </div>
+                               
 
-                                        <button td width class="back back-1">
-                                            <div td width class="rate"> 0 </div>
-                                            <div td width class="price"> 0 </div>
-                                        </button></div>
-                                </td>
-                                <td td width>
-                                    <div td width class="lay-buttons suspended1"><button td width class="lay lay-1">
-                                            <div td width class="rate"> 0 </div>
-                                            <div td width class="price"> 0 </div>
-                                        </button>
-
-                                    </div>
-                                </td>
-                            </tr>
-                            <tr td width class="ng-star-inserted">
-                                <td td width width="99%" class="runnerName">
-                                    <div td width class="runner-label"> Player B </div><span td width
-                                        id="Tp_201409121055_Player_B">0</span>
-                                </td>
-                                <td td width>
-                                    <div td width class="back-buttons">
-                                        <button td width class="back back-1">
-                                            <div td width class="rate"> 35 </div>
-                                            <div td width class="price"> 1000000 </div>
-                                        </button></div>
-                                </td>
-                                <td td width>
-                                    <div td width class="lay-buttons">
-                                        <button td width class="lay lay-1">
-                                            <div td width class="rate"> 38 </div>
-                                            <div td width class="price"> 1000000 </div>
-                                        </button>
-
-                                    </div>
-                                </td>
-                            </tr>
-
-                        </tbody>
-                    </table>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="remark text-right mt-1 pr-2">
+                        <marquee scrollamount="3">
+                            <p class="mb-0">Select any 3 card and you will win if you will get at least 1 card from the
+                                3 cards you have selected. </p>
+                        </marquee>
+                    </div>
+                    <div class="bahar-bx lay">
+                        <div class="ab-title"><b>No - {{tpMarket[1].rate}}</b><span class="float-right">
+                            <b id="Tp_{{tpMarket[1].mid}}_{{tpMarket[1].nat }}">0</b>
+                        </span>
+                    </div>
+                        <div class="text-center ab-content" [ngClass]="{'suspended':tpMarket[1].gstatus==0}" >
+                            <div id="bahar_div" class="owl-carousel owl-theme ab-slider">
+                                <div class="d-inline-block mr-1" *ngFor="let ab of andar_bahar;">
+                                    <img
+                                    (click)="tpMarket[1].gstatus=='0'?'':openTpBetSlip($event,'Lay',tpMarket[1].rate,tpMarket[1].nat,tpMarket[1].sid,tpMarket[1].mid,subscriptionId,1,ab)"   
+                                    src="assets/images/andar_bahar/{{ab}}.jpg" 
+                                    [ngClass]="{'selected':selected3cardj(ab,'Lay')}">
+                                </div>
+                               
+                            </div>
+                        </div>
+                    </div>
+                    <div class="remark text-right mt-1 pr-2">
+                        <marquee scrollamount="3">
+                            <p class="mb-0">Select any 3 card and you will win If you do not get any card from the 3
+                                cards you have selected. </p>
+                        </marquee>
+                    </div>
                 </div>
             </div>
 
@@ -159,17 +147,8 @@
             <div td width class="teenpatti-result-container ng-star-inserted">
                 <div td width class="label-result"><span td width></span></div>
                 <div td width class="results">
-                    <p td width id="last-result"><span td width
-                            class="ball-runs last-result playera ng-star-inserted">A</span><span td width
-                            class="ball-runs last-result playerb ng-star-inserted">B</span><span td width
-                            class="ball-runs last-result playerb ng-star-inserted">B</span><span td width
-                            class="ball-runs last-result playerb ng-star-inserted">B</span><span td width
-                            class="ball-runs last-result playera ng-star-inserted">A</span><span td width
-                            class="ball-runs last-result playerb ng-star-inserted">B</span><span td width
-                            class="ball-runs last-result playerb ng-star-inserted">B</span><span td width
-                            class="ball-runs last-result playerb ng-star-inserted">B</span><span td width
-                            class="ball-runs last-result playerb ng-star-inserted">B</span><span td width
-                            class="ball-runs last-result playerb ng-star-inserted">B</span>
+                    <p td width id="last-result"><span td width *ngFor="let result of results"
+                            class="ball-runs last-result playera ng-star-inserted">{{result.result}}</span>
 
                     </p>
                 </div>
@@ -177,7 +156,7 @@
 
         </div>
     </div>
-    <div id="mybet" class="betnav">
+    <!-- <div id="mybet" class="betnav">
         <a class="closebet" (click)="closebet()">×</a>
         <div class="matchBox">
             <div class="betSlipBox">
@@ -314,7 +293,7 @@
                             <a class="allbet" href="javascript:void(0);" onclick="getDataByType(this,'4');">All Bets
                                 <span id="cnt_row">(0)</span> </a>
                         </li>
-=
+
                     </ul>
                 </div>
             </div>
@@ -337,22 +316,23 @@
                             <td>Odds</td>
                             <td>Stack</td>
                             <td>Bet Type</td>
+                           
                         </tr>
                     </thead>
                     <tbody>
-                    <tr class="mark-back" 
-                    [ngClass]="{'back':result.type=='BACK' || result.type=='Back' ||result.type=='YES','lay':result.type=='LAY' || result.type=='Lay' || result.type=='NO'}" 
-                    *ngFor="let result of matchedbets">
-                        <td>{{result.betId}}</td>
-                        <td>{{result.selection}}</td>
-                        <td>{{result.odds}}</td>
-                        <td>{{result.matchedStake}}</td>
-                        <td>{{result.type}}</td>
-                    </tr>
-                </tbody>
+                        <tr class="mark-back"
+                            [ngClass]="{'back':result.type=='BACK' || result.type=='Back' ||result.type=='YES','lay':result.type=='LAY' || result.type=='Lay' || result.type=='NO'}"
+                            *ngFor="let result of matchedbets">
+                            <td>{{result.betId}}</td>
+                            <td>{{result.selection}}</td>
+                            <td>{{result.odds}}</td>
+                            <td>{{result.matchedStake}}</td>
+                            <td>{{result.type}}</td>
+                        </tr>
+                    </tbody>
                 </table>
             </div>
         </div>
-    </div>
+    </div> -->
 
 </div>

@@ -8,11 +8,11 @@ import { MarketAnalysisComponent } from './components/market-analysis/market-ana
 import { EditStakeComponent } from './components/edit-stake/edit-stake.component';
 import { ChangePasswordComponent } from './components/change-password/change-password.component';
 import { ViewProfileComponent } from './components/view-profile/view-profile.component';
-import { TeenpattiComponent } from './teenpatti/teenpatti.component';
-import { TwentyteenpattiComponent } from './twentyteenpatti/twentyteenpatti.component';
-import { ThreecardjudgeComponent } from './threecardjudge/threecardjudge.component';
-import { Lucky7Component } from './lucky7/lucky7.component';
-import { AndarbaharComponent } from './andarbahar/andarbahar.component';
+// import { TeenpattiComponent } from './teenpatti/teenpatti.component';
+// import { TwentyteenpattiComponent } from './teenpatti/twentyteenpatti/twentyteenpatti.component';
+// import { ThreecardjudgeComponent } from './teenpatti/threecardjudge/threecardjudge.component';
+// import { Lucky7Component } from './lucky7/lucky7.component';
+// import { AndarbaharComponent } from './andarbahar/andarbahar.component';
 
 
 
@@ -38,15 +38,17 @@ const routes: Routes = [
       { path: 'edit-stake', component: EditStakeComponent },
       { path: 'change-password', component: ChangePasswordComponent },
       { path: 'view-profile', component: ViewProfileComponent },
-      { path: 'teenpatti', component: TeenpattiComponent },
-      { path: 'twentyteenpatti', component: TwentyteenpattiComponent },
-      { path: 'threecardjudge', component: ThreecardjudgeComponent },
-      { path: 'andarbahar', component: AndarbaharComponent },
-      { path: 'lucky7', component: Lucky7Component },
+      // { path: 'teenpatti', component: TeenpattiComponent },
+      // { path: 'twentyteenpatti', component: TwentyteenpattiComponent },
+      // { path: 'threecardjudge', component: ThreecardjudgeComponent },
+      // { path: 'andarbahar', component: AndarbaharComponent },
+      // { path: 'lucky7', component: Lucky7Component },
 
-
-
-
+      {
+        path: 'events',
+        loadChildren: () =>
+          import('./fullmarket/fullmarket.module').then((m) => m.FullmarketModule),
+      },
 
       {
         path:'report',
@@ -56,6 +58,7 @@ const routes: Routes = [
         path:'payment',
         loadChildren:()=>import('./payments/payments.module').then((m) => m.PaymentsModule)
       }
+      
     ]
   }
 ];

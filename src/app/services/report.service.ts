@@ -27,7 +27,9 @@ export class ReportService {
     return this.http.get(`${this.BASEURL}/Reports/ActivityLog`);
   }
 
-
+  GetRecentGameResult(GAMETYPE: any): Observable<any> {
+    return this.http.get(`${this.BASEURL}/Reports/GetRecentGameResult?gametype=${GAMETYPE}`);
+  }
 
   GetProfitLoss(FROM: any, TO: any): Observable<any> {
     return this.http.get(`${this.BASEURL}/Reports/GetProfitLoss?from=${FROM}&to=${TO}`);

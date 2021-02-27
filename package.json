@@ -27,6 +27,7 @@
     "flipclock": "^0.10.8",
     "jquery": "^3.5.1",
     "ngx-cookie-service": "^10.0.1",
+    "ngx-device-detector": "^2.0.5",
     "ngx-toastr": "^13.0.0",
     "rxjs": "~6.5.5",
     "signalr": "^2.4.1",

@@ -1,0 +1,27 @@
+:host {
+  width: 100%;
+}
+@media (max-width: 1380px)
+{
+.event-new-test.content-body-sidebar-no-scroll.content-body-sidebar, .my-market-event-detail-page .content-body-sidebar-no-scroll.content-body-sidebar {
+    display: block;
+    width: 50%;
+}
+.hide-on-medium{
+  display: none;
+}
+}
+@media (max-width: 1099px)
+{
+  .hide-on-medium{
+    display: block;
+}
+.event-new-test.content-body-sidebar-no-scroll.content-body-sidebar{
+  display: none;
+}
+}
+.nav-tabs .nav-item {
+  border-left: none;
+}
+
+

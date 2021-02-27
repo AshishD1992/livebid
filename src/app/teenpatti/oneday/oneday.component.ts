@@ -1,19 +1,19 @@
 import { Component, OnInit, OnDestroy, AfterViewInit } from '@angular/core';
-import { TeenpattiSignalRService } from '../services/signalr/teenpatti.signalr';
+import { TeenpattiSignalRService } from '../../services/signalr/teenpatti.signalr';
 import { ActivatedRoute } from '@angular/router';
-import { TpMarket } from '../models/tpmarket.model'
+import { TpMarket } from '../../models/tpmarket.model'
 import * as _ from 'lodash';
 import { Subscription, from } from 'rxjs';
-import { ShareBetDataService } from '../service/share-bet-data.service';
-import { BetsService } from '../service/bets.service';
-import { SharedataService } from '../services/sharedata.service';
+import { ShareBetDataService } from '../../service/share-bet-data.service';
+import { BetsService } from '../../service/bets.service';
+import { SharedataService } from '../../services/sharedata.service';
 
 @Component({
-  selector: 'app-teenpatti',
-  templateUrl: './teenpatti.component.html',
-  styleUrls: ['./teenpatti.component.scss']
+  selector: 'app-oneday',
+  templateUrl: './oneday.component.html',
+  styleUrls: ['./oneday.component.scss']
 })
-export class TeenpattiComponent  implements OnInit,AfterViewInit ,OnDestroy{
+export class OnedayComponent  implements OnInit,AfterViewInit ,OnDestroy{
   clock: any;
   bodyElement: any;
   matchedbets: any;

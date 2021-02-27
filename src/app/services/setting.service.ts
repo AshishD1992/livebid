@@ -10,7 +10,9 @@ export class SettingService {
 
   constructor(private http: HttpClient) { }
 
-
+  GetSettings(): Observable<any> {
+    return this.http.get(`${this.BASEURL}/Settings/GetSettings`);
+  }
   GetBetStakeSetting(): Observable<any> {
     return this.http.get(`${this.BASEURL}/Settings/GetBetStakeSetting`);
   }

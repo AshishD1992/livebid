@@ -1,0 +1,35 @@
+
+   <div class="transaction-history-header mt-1 pad-0 event-management-header">
+      <div class="tab-container">
+        <tabset>
+          <tab>
+            <ng-template tabHeading>
+              <div class="img-block"  style="text-align: center;">
+                <div><i class="match-count">{{eventsCount.length}}</i></div>
+                <i class="material-icons">timer</i>
+              </div>Inplay
+            </ng-template>
+            <ng-container *ngFor="let sport of inplayListWise; trackBy: trackById; let first = first;">
+              <app-sport-list [sportsList]="sport.highlights" [first]="first"></app-sport-list>
+            </ng-container>
+          </tab>
+          <ng-container *ngFor="let sport of sportsData; trackBy: trackByIdx">
+          <tab>
+            <ng-template tabHeading>
+              <div class="img-block" style="text-align: center;">
+                <div><i class="match-count">{{getSportsList(sport).length}}</i></div>
+                <i class="glyph-icon flaticon-{{sport.name | lowercase}}"></i>
+                </div>
+                <div *ngIf="sport.bfId=='2000'" class="img-block" style="text-align: center;">
+                  <i class="glyph-icon flaticon-live-teenpatti"></i>
+                  </div>
+
+              {{sport.name}}</ng-template>
+            <app-sport-list [sportsList]="getSportsList(sport)" [header]="true" ></app-sport-list>
+          </tab>
+        </ng-container>
+        </tabset>
+      </div>
+    </div>
+
+
