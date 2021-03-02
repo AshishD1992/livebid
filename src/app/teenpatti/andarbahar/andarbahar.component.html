@@ -1,0 +1,349 @@
+<div class="site-main-content">
+   <div class="content-body-outer">
+<div class="odds-outer">
+    <div id="MatchOddInfo" class="card ng-star-inserted">
+       <div class="card-body">
+          <div class="header">
+             <div class="teams">
+                <h5>Andar Bahar</h5>
+             </div>
+             <div class="event-time">
+                <div class="date-time"> Sep 14, 2020, 12:13:21 PM </div>
+                <div class="event-status"><span class="in-play">
+                   <i class="fa fa-circle" aria-hidden="true"></i>
+                   In-Play
+                   </span>
+                </div>
+             </div>
+          </div>
+          <div td width class="teenpatti-wrapper teenpatti-twenty bets-wrap ng-star-inserted"  *ngIf="teentype==7">
+             <div td width class="video-image">
+                <div class="videoCards" style="width: 150px;">
+                   <div>
+                      <h6 class="text-white">ANDAR</h6>
+                      <div class="video-card-div"  id="APrev" *ngIf="Aallcards.length>=6">
+                         <div id="APrev" class="video-card-prev ng-star-inserted"><i
+                            class="fa fa-angle-double-left"></i></div>
+                         <div class="scrolling-wrapper" style="flex: 1;">
+                            <div class="video-card d-inline-block ng-star-inserted" *ngFor=" let andar of Aallcards ; trackBy:trackByIndex; index as index"><img
+                               src="https://dzm0kbaskt4pv.cloudfront.net/img/cards/{{andar}}.png">
+                              </div>
+                         </div>
+                         <div id="ANext" class="video-card-next ng-star-inserted" *ngIf="Aallcards.length>=6"><i
+                            class="fa fa-angle-double-right"></i></div>
+                      </div>
+                   </div>
+                   <div>
+                      <h6 class="text-white">BAHAR</h6>
+                      <div class="video-card-div">
+                         <div class="video-card-prev ng-star-inserted" *ngIf="Ballcards.length>=6"><i class="fa fa-angle-double-left"></i>
+                         </div>
+                         <div class="scrolling-wrapper" style="flex: 1;">
+                            <div class="video-card d-inline-block ng-star-inserted" *ngFor="let bahar of Ballcards"><img
+                               src="https://dzm0kbaskt4pv.cloudfront.net/img/cards/{{bahar}}.png">
+                              </div>
+                         </div>
+                         <div class="video-card-next ng-star-inserted" *ngIf="Ballcards.length>=6"><i class="fa fa-angle-double-right"></i>
+                         </div>
+                      </div>
+                   </div>
+                </div>
+                <iframe td width data-name="Oneday teenpatti" width="100%" height="350"
+                   src="http://shivexch.com/tp_tv_159/oneday/" style="border: 0px;"></iframe>
+                <div td width class="clock clock2digit flip-clock-wrapper">
+                   <ul class="flip play">
+                      <li class="flip-clock-before">
+                         <a href="#">
+                            <div class="up">
+                               <div class="shadow"></div>
+                               <div class="inn">4</div>
+                            </div>
+                            <div class="down">
+                               <div class="shadow"></div>
+                               <div class="inn">4</div>
+                            </div>
+                         </a>
+                      </li>
+                      <li class="flip-clock-active">
+                         <a href="#">
+                            <div class="up">
+                               <div class="shadow"></div>
+                               <div class="inn">3</div>
+                            </div>
+                            x
+                            <div class="down">
+                               <div class="shadow"></div>
+                               <div class="inn">3</div>
+                            </div>
+                         </a>
+                      </li>
+                   </ul>
+                   <ul class="flip play">
+                      <li class="flip-clock-before">
+                         <a href="#">
+                            <div class="up">
+                               <div class="shadow"></div>
+                               <div class="inn">5</div>
+                            </div>
+                            <div class="down">
+                               <div class="shadow"></div>
+                               <div class="inn">5</div>
+                            </div>
+                         </a>
+                      </li>
+                      <li class="flip-clock-active">
+                         <a href="#">
+                            <div class="up">
+                               <div class="shadow"></div>
+                               <div class="inn">3</div>
+                            </div>
+                            <div class="down">
+                               <div class="shadow"></div>
+                               <div class="inn">3</div>
+                            </div>
+                         </a>
+                      </li>
+                   </ul>
+                </div>
+             </div>
+             <div td width class="rules-title"><a td width class="theme1font"><span td width role="button"
+                class="teenpatti-rulesList"><u td width>Rules</u></span></a><span td width
+                class="float-right round theme1font"> Min : <span td width class="ng-binding"> {{tpData.min}}
+                &nbsp;|</span> Max : <span td width class="ng-binding"> {{tpData.max}} &nbsp;|</span>
+                Round ID: <span td width> {{tpData.mid}} </span></span>
+             </div>
+          </div>
+          <div>
+             <div class="rules-title ng-star-inserted"  *ngIf="AndarValues.length>0">
+                <span class="round theme1font"> ANDAR </span></div>
+             <div class="scrolling-wrapper">
+                <div class="card d-inline-block ng-star-inserted" *ngFor="let andar of AndarValues ; trackBy:trackByIndex; index as index">
+                  <ng-container *ngIf="AndarValues.length>0">
+                   <div class="card-andarbahar ng-star-inserted">
+                      <img *ngIf="andar.gstatus=='0'" 
+                      src="assets/images/lucky7/{{(Aresults.length>0)?Aresults[index]:'0'}}.jpg" class="ng-star-inserted">
+
+                      <img *ngIf="andar.gstatus=='1'"
+                             (click)="(andar.gstatus=='1')?openTpBetSlip($event,'Back',andar.rate,andar.nation,andar.sid,andar.mid,subscriptionId,0,null):''"
+                                 src="assets/images/lucky7/{{index+1}}.jpg">
+                   </div>
+                   <div class="ng-star-inserted">
+                      <div class="m-t-5 card-expo win" id="Tp_{{andar.mid}}_{{andar.nation }}">0</div>
+                   </div>
+                  </ng-container>
+                </div>
+             </div>
+
+             <div class="rules-title ng-star-inserted"><span class="round theme1font"> BAHAR </span></div>
+             <div class="scrolling-wrapper ng-star-inserted" *ngIf="BaharValues.length>0">
+                <div class="card d-inline-block ng-star-inserted" *ngFor=" let bahar of BaharValues ; trackBy:trackByIndex; index as index">
+                   <div class="card-andarbahar">
+                      <img *ngIf="bahar.gstatus=='0'"
+                       src="assets/images/lucky7/{{(Bresults.length>0 && Bresults[index]!='0') ? Bresults[index]-20 : '0'}}.jpg" class="ng-star-inserted">
+                       <img *ngIf="bahar.gstatus=='1'"
+                       (click)="(bahar.gstatus=='1')?openTpBetSlip($event,'Back',bahar.rate,bahar.nation,bahar.sid,bahar.mid,subscriptionId,1,null):''"
+                           src="assets/images/lucky7/{{index+1}}.jpg">
+                   </div>
+                   <div>
+                      <div class="m-t-5 card-expo win" id="Tp_{{bahar.mid}}_{{bahar.nation }}">0</div>
+                   </div>
+                </div>
+              
+                </div>
+             </div>
+          </div>
+          <div td width class="fancy-marker-title m-t-10 ng-star-inserted">
+             <h4 td width> Last Result <a td width target="_blank" class="result-view-all" ng-reflect-target="_blank"
+                routerLink="/reports/casino">View All</a></h4>
+          </div>
+          <div td width class="teenpatti-result-container ng-star-inserted">
+             <div td width class="label-result"><span td width></span></div>
+             <div td width class="results">
+                <p td width id="last-result">
+                   <span td width *ngFor="let result of results"
+                   class="ball-runs last-result playera ng-star-inserted" [ngClass]="{'playera':result.result=='A','playerb':result.result!='A'}">{{result.result}}</span>
+                 
+                </p>
+             </div>
+          </div>
+       </div>
+    </div>
+   </div>
+</div>
+    <!-- <div id="mybet" class="betnav">
+       <a class="closebet" (click)="closebet()">×</a>
+       <div class="matchBox">
+          <div class="betSlipBox">
+             <div class="betBox border-box" style="display: none;">
+                <div class="block_box">
+                   <div class="betslip">
+                      <div class="loader" style="display:none">
+                         <div class="mini-loader">
+                            <span></span>
+                            <span></span>
+                            <span></span>
+                         </div>
+                      </div>
+                      <form method="POST" id="placeBetSilp" style="background-color: rgb(167, 216, 253);">
+                         <div class="fancy-temaname" id="ShowRunnderName">Lokomotiv</div>
+                         <span class="close-betslip">
+                            <svg version="1.1" id="Capa_1"
+                               xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+                               x="0px" y="0px" viewBox="0 0 512 512" style="enable-background:new 0 0 512 512;"
+                               xml:space="preserve">
+                               <g>
+                                  <g>
+                                     <path d="M436.812,75.188C388.327,26.702,324.113,0,256,0S123.673,26.702,75.188,75.188C26.702,123.673,0,187.887,0,256
+                                        s26.702,132.327,75.188,180.812C123.673,485.298,187.887,512,256,512s132.327-26.702,180.812-75.188
+                                        C485.298,388.327,512,324.113,512,256S485.298,123.673,436.812,75.188z M256,482C131.383,482,30,380.617,30,256S131.383,30,256,30
+                                        s226,101.383,226,226S380.617,482,256,482z"></path>
+                                  </g>
+                               </g>
+                               <g>
+                                  <g>
+                                     <path d="M404.493,171.147l-63.64-63.639L256,192.36l-84.853-84.853l-63.64,63.64L192.36,256l-84.853,84.853l63.64,63.64
+                                        L256,319.64l84.853,84.853l63.64-63.64L319.64,256L404.493,171.147z M362.066,340.853l-21.213,21.213L256,277.213l-84.853,84.853
+                                        l-21.213-21.213L234.787,256l-84.853-84.853l21.213-21.213L256,234.787l84.853-84.853l21.213,21.213L277.213,256L362.066,340.853z
+                                        "></path>
+                                  </g>
+                               </g>
+                               <g>
+                               </g>
+                               <g>
+                               </g>
+                               <g>
+                               </g>
+                               <g>
+                               </g>
+                               <g>
+                               </g>
+                               <g>
+                               </g>
+                               <g>
+                               </g>
+                               <g>
+                               </g>
+                               <g>
+                               </g>
+                               <g>
+                               </g>
+                               <g>
+                               </g>
+                               <g>
+                               </g>
+                               <g>
+                               </g>
+                               <g>
+                               </g>
+                               <g>
+                               </g>
+                            </svg>
+                         </span>
+                         <div class="odds-stake-fild">
+                            <div class="item-slip input-odds">
+                               <input type="number" step="0.01" id="ShowBetPrice"
+                                  class="calProfitLoss form-control">
+                               <div class="inc plus_btn">+</div>
+                               <div class="dec plus_btn">-</div>
+                            </div>
+                            <div class="item-slip input-stake">
+                               <input type="number" pattern="[0-9]*" step="1" id="stakeValue"
+                                  class="calProfitLoss form-control">
+                               <input type="hidden" name="selectionId" id="selectionId" value="214365"
+                                  class="form-control">
+                               <input type="hidden" name="matchId" id="matchId" value="29974943"
+                                  class="form-control">
+                               <input type="hidden" name="isback" id="isback" value="0" class="form-control">
+                               <input type="hidden" name="MarketId" id="MarketId" value="1.172356008"
+                                  class="form-control">
+                               <input type="hidden" name="placeName" id="placeName" value="Lokomotiv"
+                                  class="form-control">
+                               <input type="hidden" name="text" id="stackcount" value="0" class="form-control">
+                               <input type="hidden" name="text" id="isfancy" value="0" class="form-control">
+                               <div class="inc plus_btn">+</div>
+                               <div class="dec plus_btn">-</div>
+                            </div>
+                         </div>
+                         <div class="betslip-footer">
+                            <div class="odds-btn-value">
+                               <div class="fancy-btngroup">
+                                  <button class="btn btn-default  chipName1" type="button" value="1000"
+                                     onclick="StaKeAmount(this);">1000</button><button
+                                     class="btn btn-default  chipName2" type="button" value="2000"
+                                     onclick="StaKeAmount(this);">2000</button><button
+                                     class="btn btn-default  chipName3" type="button" value="5000"
+                                     onclick="StaKeAmount(this);">5000</button><button
+                                     class="btn btn-default  chipName4" type="button" value="25000"
+                                     onclick="StaKeAmount(this);">25000</button><button
+                                     class="btn btn-default  chipName5" type="button" value="50000"
+                                     onclick="StaKeAmount(this);">50000</button><button
+                                     class="btn btn-default  chipName6" type="button" value="100000"
+                                     onclick="StaKeAmount(this);">1000000</button> 
+                               </div>
+                            </div>
+                            <div class="odds-btn-clear">
+                               <button class="btn btn-default" type="button" onclick="ClearStack( );"><i
+                                  class="fas fa-backspace"></i></button>
+                            </div>
+                         </div>
+                         <div class="place-bet-div">
+                            <button class="btn btn-Cancel" type="button"
+                               onclick="ClearAllSelection();">Cancel</button>
+                            <button class="btn btn-placebet placebet" type="button" onclick="PlaceBet();">Place
+                            Bet</button>
+                            <button class="btn btn-placebet placefancy" type="button" onclick="PlaceFancy();"
+                               style="display:none">Place Bet</button>
+                         </div>
+                         <div class="proft-loss-slip">
+                            <span>Profit or Liability</span>
+                            <span id="profitData" class="green">144000</span>
+                            <span id="LossData" class="red">8000</span>
+                         </div>
+                      </form>
+                   </div>
+                </div>
+             </div>
+             <div class="odds-tabs tab_bets">
+                <ul class="nav nav-tabs match-bets">
+                   <li class="nav-item betdata active-all active">
+                      <a class="allbet" href="javascript:void(0);" onclick="getDataByType(this,'4');">All Bets
+                      <span id="cnt_row">(0)</span> </a>
+                   </li>
+                </ul>
+             </div>
+          </div>
+       </div>
+       <div class="" id="MatchUnMatchBetaData">
+          <style>
+             .searchbtnn {
+             margin-right: 20px;
+             }
+          </style>
+          <span id="msg_error"></span>
+          <div class="scroll-table match_bets MachShowHide">
+             <table class="table">
+                <thead class="head">
+                   <tr class="headings">
+                      <td>Bet ID</td>
+                      <td>Runner</td>
+                      <td>Odds</td>
+                      <td>Stack</td>
+                      <td>Bet Type</td>
+                   </tr>
+                </thead>
+                <tbody>
+                   <tr class="mark-back"
+                   [ngClass]="{'back':result.type=='BACK' || result.type=='Back' ||result.type=='YES','lay':result.type=='LAY' || result.type=='Lay' || result.type=='NO'}"
+                   *ngFor="let result of matchedbets">
+                   <td>{{result.betId}}</td>
+                   <td>{{result.selection}}</td>
+                   <td>{{result.odds}}</td>
+                   <td>{{result.matchedStake}}</td>
+                   <td>{{result.type}}</td>
+                   </tr>
+                </tbody>
+             </table>
+          </div>
+       </div>
+    </div> -->
+

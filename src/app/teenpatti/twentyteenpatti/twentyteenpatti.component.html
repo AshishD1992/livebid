@@ -14,28 +14,28 @@
                     </span></div>
             </div>
         </div>
-            <div td width class="teenpatti-wrapper teenpatti-twenty bets-wrap ng-star-inserted">
-                <div td width class="video-image">
-                    <div td width class="videoCards">
-                        <div td width>
-                            <h6 td width>PLAYER A</h6>
-                            <div td width><img td width
-                                    src="https://dzm0kbaskt4pv.cloudfront.net/img/cards/6SS.png"><img td width
-                                    src="https://dzm0kbaskt4pv.cloudfront.net/img/cards/1.png"><img td width
-                                    src="https://dzm0kbaskt4pv.cloudfront.net/img/cards/1.png">
+            <div class="teenpatti-wrapper teenpatti-twenty bets-wrap ng-star-inserted" *ngIf="teentype==1">
+                <div class="video-image">
+                    <div class="videoCards">
+                        <div>
+                            <h6>PLAYER A</h6>
+                            <div><img
+                                    src="https://dzm0kbaskt4pv.cloudfront.net/img/cards/{{tpData.C1}}.png"><img
+                                    src="https://dzm0kbaskt4pv.cloudfront.net/img/cards/{{tpData.C2}}.png"><img
+                                    src="https://dzm0kbaskt4pv.cloudfront.net/img/cards/{{tpData.C3}}.png">
                             </div>
                         </div>
-                        <div td width>
-                            <h6 td width>PLAYER B</h6>
-                            <div td width><img td width
-                                    src="https://dzm0kbaskt4pv.cloudfront.net/img/cards/ASS.png"><img td width
-                                    src="https://dzm0kbaskt4pv.cloudfront.net/img/cards/1.png"><img td width
-                                    src="https://dzm0kbaskt4pv.cloudfront.net/img/cards/1.png">
+                        <div>
+                            <h6>PLAYER B</h6>
+                            <div><img
+                                    src="https://dzm0kbaskt4pv.cloudfront.net/img/cards/{{tpData.C4}}.png"><img
+                                    src="https://dzm0kbaskt4pv.cloudfront.net/img/cards/{{tpData.C5}}.png"><img
+                                    src="https://dzm0kbaskt4pv.cloudfront.net/img/cards/{{tpData.C6}}.png">
                             </div>
                         </div>
-                    </div><iframe td width data-name="Oneday teenpatti" width="100%" height="350"
+                    </div><iframe data-name="Oneday teenpatti" width="100%" height="350"
                         src="http://shivexch.com/tp_tv_159/oneday/" style="border: 0px;"></iframe>
-                    <div td width class="clock clock2digit flip-clock-wrapper">
+                    <div class="clock clock2digit flip-clock-wrapper">
                         <ul class="flip play">
                             <li class="flip-clock-before"><a href="#">
                                     <div class="up">
@@ -82,45 +82,48 @@
                         </ul>
                     </div>
                 </div>
-                <div td width class="rules-title"><a td width class="theme1font"><span td width role="button"
-                            class="teenpatti-rulesList"><u td width>Rules</u></span></a><span td width
-                        class="float-right round theme1font"> Min : <span td width class="ng-binding"> {{tpData.min}}
-                            &nbsp;|</span> Max : <span td width class="ng-binding"> {{tpData.max}}&nbsp;|</span>
-                        Round ID: <span td width> {{tpData.mid}}   {{tpData.roundId}}</span></span></div>
-                <div td width class="odds-container">
-                    <table td width>
-                        <thead td width>
-                            <tr td width class="header">
-                                <th td width></th>
-                                <th td width>
-                                    <div td width class="back-buttons"><span td width>Back</span></div>
+                <div class="rules-title"><a class="theme1font"><span role="button"
+                            class="teenpatti-rulesList"><u>Rules</u></span></a>
+                            <span  class="float-right round theme1font">
+                                 Min : <span class="ng-binding"> {{tpData.min}}
+                            &nbsp;|</span> Max : <span class="ng-binding"> {{tpData.max}}&nbsp;|</span>
+                        Round ID: 
+                        <span> {{tpData.mid}}   {{tpData.roundId}}</span></span>
+                    </div>
+                <div class="odds-container">
+                    <table>
+                        <thead>
+                            <tr class="header">
+                                <th></th>
+                                <th>
+                                    <div class="back-buttons"><span>Back</span></div>
                                 </th>
-                                <th td width>
-                                    <div td width class="lay-buttons"><span td width>Lay</span></div>
+                                <th>
+                                    <div class="lay-buttons"><span>Lay</span></div>
                                 </th>
                             </tr>
                         </thead>
-                        <tbody td width>
+                        <tbody>
                             <ng-container *ngFor="let runner of tpMarket;trackBy:trackByIndex; index as index">
-                            <tr *ngIf="index==0|| index==2" td width class="ng-star-inserted">
-                                <td td width width="99%" class="runnerName">
-                                    <div td width class="runner-label"> {{runner.nation}}</div>
-                                    <span td width id="Tp_{{tpData.mid}}_{{runner.nation}}">0</span>
+                            <tr *ngIf="index==0|| index==2" class="ng-star-inserted">
+                                <td width="99%" class="runnerName">
+                                    <div class="runner-label"> {{runner.nation}}</div>
+                                    <span id="Tp_{{tpData.mid}}_{{runner.nation}}">0</span>
                                 </td>
-                                <td td width>
-                                    <div td width class="back-buttons suspended1" [ngClass]="{'suspended1':runner.gstatus=='0'}">
+                                <td>
+                                    <div class="back-buttons suspended1" [ngClass]="{'suspended1':runner.gstatus=='0'}">
 
-                                        <button td width class="back back-1"
+                                        <button class="back back-1"
                                         (click)="openTpBetSlip($event,'Back',runner.rate,runner.nation,runner.sid,tpData.mid,subscriptionId,null,null)">
-                                            <div td width class="rate">  {{runner.rate}} </div>
-                                            <div td width class="price"> </div>
+                                            <div class="rate">  {{runner.rate}} </div>
+                                            <div class="price"> </div>
                                         </button></div>
                                 </td>
-                                <td td width>
-                                    <div td width class="lay-buttons suspended1" [ngClass]="{'suspended1':tpMarket[index+1].gstatus=='0'}">
-                                        <button td width class="lay lay-1">
-                                            <div td width class="rate">{{tpMarket[index+1].nation}}</div>
-                                            <div td width class="price"></div>
+                                <td>
+                                    <div class="lay-buttons suspended1" [ngClass]="{'suspended1':tpMarket[index+1].gstatus=='0'}">
+                                        <button class="lay lay-1">
+                                            <div class="rate">{{tpMarket[index+1].nation}}</div>
+                                            <div class="price"></div>
                                         </button>
 
                                     </div>
@@ -133,16 +136,16 @@
                 </div>
             </div>
 
-            <div td width class="fancy-marker-title m-t-10 ng-star-inserted">
-                <h4 td width> Last Result <a td width target="_blank" class="result-view-all" ng-reflect-target="_blank"
+            <div class="fancy-marker-title m-t-10 ng-star-inserted">
+                <h4> Last Result <a target="_blank" class="result-view-all" ng-reflect-target="_blank"
                         routerLink="/reports/casino">View All</a></h4>
             </div>
 
-            <div td width class="teenpatti-result-container ng-star-inserted">
-                <div td width class="label-result"><span td width></span></div>
-                <div td width class="results">
-                    <p td width id="last-result">
-                        <span *ngFor="let result of results" td width
+            <div class="teenpatti-result-container ng-star-inserted">
+                <div class="label-result"><span></span></div>
+                <div class="results">
+                    <p id="last-result">
+                        <span *ngFor="let result of results"
                             class="ball-runs last-result playera ng-star-inserted" [ngClass]="{'playera':result.result=='A','playerb':result.result!='A'}">{{result.result}}</span>
                             
 

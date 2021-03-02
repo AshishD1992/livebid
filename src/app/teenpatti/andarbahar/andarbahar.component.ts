@@ -11,11 +11,11 @@ import { ReportService } from '../../services/report.service';
 export const BET_TYPES = { MATCH_ODDS: 1, BOOK_MAKING: 2, FANCY: 3 };
 
 @Component({
-  selector: 'app-twentyteenpatti',
-  templateUrl: './twentyteenpatti.component.html',
-  styleUrls: ['./twentyteenpatti.component.scss']
+  selector: 'app-andarbahar',
+  templateUrl: './andarbahar.component.html',
+  styleUrls: ['./andarbahar.component.scss']
 })
-export class TwentyteenpattiComponent implements OnInit{
+export class AndarbaharComponent implements OnInit{
 
   clock: any;
   bodyElement: any;
@@ -31,7 +31,7 @@ export class TwentyteenpattiComponent implements OnInit{
   Ballcards = [];
   Aresults = [];
   Bresults: any;
-  matchBfId= "5000"
+  matchBfId= "5005"
   AndarValues: any = []
   BaharValues: any = []
   andar_bahar: any
@@ -89,7 +89,7 @@ if (this.subSink) {
             this.clock.setValue(this.tpData.autotime);
           }
           this.teenpattiId = this.tpData.mid;
-          this.T20ExposureBook(this.tpData.mid, null);
+
         }
 
         if (this.teentype == 2) {
@@ -100,7 +100,7 @@ if (this.subSink) {
           }
           this.teenpattiId = this.tpMarket[0].marketId;
 
-          this.T20ExposureBook(this.tpMarket[0].marketId, null);
+
         }
         if (this.teentype == 5) {
           this.tpData = data.data.t1[0];
@@ -120,6 +120,7 @@ if (this.subSink) {
           }
           this.tpMarket = data.data.t2;
           this.teenpattiId = this.tpData.mid;
+
 
 
         }
@@ -159,7 +160,7 @@ if (this.subSink) {
           }
           this.teenpattiId = this.tpData.mid;
 
-
+          this.AndarBaharExposureBook(this.tpData.mid, null);
         }
 
         this.shareData.shareMatchId(this.teenpattiId);
@@ -182,6 +183,7 @@ if (this.subSink) {
         }
       }
     });
+
     this.shareBetData.clearlBetSlip$.subscribe(data => {
       this.placeTPData = data;
       this.cards = [];
@@ -211,7 +213,7 @@ if (this.subSink) {
 
   }
   GetRecentGameResult() {
-    this.teentypee = "1"
+    this.teentypee = "7"
     this.reportsService.GetRecentGameResult(this.teentypee).subscribe(data=> {
 
       this.results = data.data;
@@ -279,7 +281,7 @@ if (this.subSink) {
   }
 
   openTpBetSlip(event: any, backlay: string, odds: string, runnerName: string, runnerId: number, gameId: number, gameType: number, runnerIndex: any, card: any) {
-    // console.log(event, backlay, odds, runnerName, runnerId, gameId, gameType, runnerIndex, card);
+    console.log(event, backlay, odds, runnerName, runnerId, gameId, gameType, runnerIndex, card);
     $('body').addClass('menu-is-toggled');
     $('.mybets').addClass('active');
     this.placeTPData = {
@@ -320,73 +322,31 @@ if (this.subSink) {
 
   }
 
-
-  T20ExposureBook(gameId: number, state: any) {
+  AndarBaharExposureBook(gameId: number, state: any) {
     if (gameId == 0) {
       return;
     }
     if (state != undefined) {
-      this.betsService.T20ExposureBook(gameId).subscribe((data: any) => {
+      this.betsService.AndarBaharExposureBook(gameId).subscribe((data: any) => {
         this.GetRecentGameResult();
         let tpExposure = data.data;
         this.displayExposure(tpExposure, gameId);
-        localStorage.setItem("T20Expo_" + gameId, JSON.stringify(tpExposure));
+        localStorage.setItem("AndarBaharExpo_" + gameId, JSON.stringify(tpExposure));
       });
     } else {
       let tpExposure: any;
-      tpExposure = localStorage.getItem("T20Expo_" + gameId);
+      tpExposure = localStorage.getItem("AndarBaharExpo_" + gameId);
       if (!tpExposure) {
-        this.T20ExposureBook(gameId, "1");
-      } else {
+        this.AndarBaharExposureBook(gameId, "1");
+        return;
+      }
+      else {
         tpExposure = JSON.parse(tpExposure);
         this.displayExposure(tpExposure, gameId);
       }
 
     }
   }
-  
-  ExposureBook(market: any) {
-    this.betService.ExposureBook(market.id).subscribe((resp: any) => {
-      market['pnl'] = resp.data;
-      // console.log(market);
-    }, err => {
-    })
-  }
-  getPnlValue(runner: any, Pnl: any) {
-    if (runner.runnerName == undefined) {
-      runner['runnerName'] = runner.name;
-    }
-    let pnl = "";
-    if (Pnl) {
-      _.forEach(Pnl, (value, index) => {
-        if (runner.runnerName == value.Key) {
-          pnl = value.Value;
-        }
-      })
-    }
-    return pnl;
-  }
-
-  getPnlClass(runner: any, Pnl: any) {
-    if (runner.runnerName == undefined) {
-      runner['runnerName'] = runner.name;
-    }
-    let pnlClass = "black";
-    if (Pnl) {
-      _.forEach(Pnl, (value, index) => {
-        if (runner.runnerName == value.Key) {
-          if (value.Value >= 0) {
-            pnlClass = 'positive'
-          }
-          if (value.Value < 0) {
-            pnlClass = 'negative';
-          }
-        }
-      })
-    }
-    return pnlClass;
-  }
-
 
 
   displayExposure(tpExposure: any, gameId: any) {
@@ -411,5 +371,4 @@ if (this.subSink) {
   trackByIndex(index: number) {
     return index;
   }
-
 }

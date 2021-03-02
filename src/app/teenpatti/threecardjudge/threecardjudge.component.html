@@ -1,7 +1,7 @@
 <div class="odds-outer">
 
     <div id="MatchOddInfo" class="card ng-star-inserted">
-        <div class="card-body">
+        <div class="card-body" *ngIf="teentype==6">
             <div class="header">
                 <div class="teams">
                     <h5>3 card judgement</h5>
@@ -19,18 +19,18 @@
                     <div td width class="videoCards">
                         <div td width>
                             <h6 td width>PLAYER A</h6>
-                            <div td width><img td width
-                                    src="https://dzm0kbaskt4pv.cloudfront.net/img/cards/6SS.png"><img td width
-                                    src="https://dzm0kbaskt4pv.cloudfront.net/img/cards/1.png"><img td width
-                                    src="https://dzm0kbaskt4pv.cloudfront.net/img/cards/1.png">
+                            <div td width *ngIf="tpData">
+                                   <img td width src="https://dzm0kbaskt4pv.cloudfront.net/img/cards/{{tpData.C1}}.png">
+                                    <img td width src="https://dzm0kbaskt4pv.cloudfront.net/img/cards/{{tpData.C2}}.png">
+                                    <img td width src="https://dzm0kbaskt4pv.cloudfront.net/img/cards/{{tpData.C3}}.png">
                             </div>
                         </div>
                         <div td width>
                             <h6 td width>PLAYER B</h6>
-                            <div td width><img td width
-                                    src="https://dzm0kbaskt4pv.cloudfront.net/img/cards/ASS.png"><img td width
-                                    src="https://dzm0kbaskt4pv.cloudfront.net/img/cards/1.png"><img td width
-                                    src="https://dzm0kbaskt4pv.cloudfront.net/img/cards/1.png">
+                            <div td width *ngIf="tpData"><img td width
+                                    src="https://dzm0kbaskt4pv.cloudfront.net/img/cards/{{tpData.C4}}.png"><img td width
+                                    src="https://dzm0kbaskt4pv.cloudfront.net/img/cards/{{tpData.C5}}.png"><img td width
+                                    src="https://dzm0kbaskt4pv.cloudfront.net/img/cards/{{tpData.C6}}.png">
                             </div>
                         </div>
                     </div><iframe td width data-name="Oneday teenpatti" width="100%" height="350"

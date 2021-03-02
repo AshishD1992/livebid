@@ -21,7 +21,7 @@ export class FancySignalRService {
   connectFancy(fancyHubAddress: string, matchid: number) {
     // console.log(this.fancyHubConn);
     // this.fancyHubAddress = fancyHubAddress;|
-    this.fancyHubAddress="http://173.249.21.26:13921";
+    this.fancyHubAddress="http://167.86.74.159:5111";
 
     // if(this.fancyHubConn==null){
     this.fancyConnection = (<any>$).hubConnection(this.fancyHubAddress);

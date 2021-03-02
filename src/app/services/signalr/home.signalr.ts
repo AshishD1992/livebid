@@ -7,7 +7,7 @@ import { UserData } from '../../shared/models/user-data.model';
   providedIn: 'root',
 })
 export class HomeSignalrService {
-  private readonly dataHubAddress: string = 'http://173.249.21.26:13922';
+  private readonly dataHubAddress: string = 'http://167.86.74.159:5133';
   private readonly proxyToken: string = '1937-789-123';
 
   homeConnection: any;
