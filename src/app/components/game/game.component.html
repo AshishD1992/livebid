@@ -45,7 +45,7 @@
                         <div class="teamandtv">
                             <div class="match-info">
                                 <span class="match_name">
-                                    St Lucia Zouks v Trinbago Knight Riders <input type="hidden"
+                                    {{matchName}} <input type="hidden"
                                         value="St Lucia Zouks v Trinbago Knight Riders" id="sportName_29968100">
                                 </span>
                                 <div class="matchTime">
@@ -142,7 +142,7 @@
                         <div class="MatchIndentB" >
                             <div class="1172400732 matchTable1172400732 " id="matchTable29968100">
                                 <div class="match-odds-section">
-                                    <div class="odds-head">
+                                    <div class="odds-head"  *ngIf="homeMarkets?.length>0">
                                         <div class="head-info">
                                             <span class="stake-info"><i class="fas fa-info-circle"
                                                     onclick="myFunction()"></i></span>
@@ -155,14 +155,14 @@
                                         </div>
                                     </div>
                                     <div id="user_row0" class="GameCell runner-row-8693552">
-
+                                        <ng-container *ngFor="let market of homeMarkets; trackBy: trackById">
                                         <div class="spotable">
                                             <div class="events-row odds-row">
-                                                <div class="team-events">
+                                                <div class="team-events" *ngFor="let runner of market.runnerData; trackBy: trackById">
                                                     <h2>
                                                         <input type="hidden" class="position_1172400732"
                                                             id="selection_0" data-id="8693552" value="0">
-                                                        St Lucia Zouks
+                                                            {{runner.runnerName}}
                                                     </h2>
                                                     <div class="volume-size color-green">
                                                         <i class="fas fa-angle-double-right"></i>
@@ -195,16 +195,17 @@
 
                                             </div>
                                         </div>
+                                        </ng-container>
                                     </div>
                                     <div id="user_row1" class="GameCell runner-row-11056084">
-
+                                        <ng-container *ngFor="let market of homeMarkets; trackBy: trackById">
                                         <div class="spotable">
                                             <div class="events-row odds-row">
-                                                <div class="team-events">
+                                                <div class="team-events" *ngFor="let runner of market.runnerData; trackBy: trackById">
                                                     <h2>
                                                         <input type="hidden" class="position_1172400732"
                                                             id="selection_0" data-id="11056084" value="0">
-                                                        Trinbago Knight Riders
+                                                            {{runner.runnerName}}
                                                     </h2>
                                                     <div class="volume-size color-green">
                                                         <i class="fas fa-angle-double-right"></i>
@@ -238,6 +239,7 @@
 
                                             </div>
                                         </div>
+                                        </ng-container>
                                     </div>
                                 </div>
                             </div>

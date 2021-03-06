@@ -2,23 +2,25 @@ import { Injectable } from '@angular/core';
 import { DataFormatService } from '../data-format.service';
 import { SharedataService } from '../sharedata.service';
 import { UserData } from '../../shared/models/user-data.model';
+import { TokenService } from '../token.service';
 
 @Injectable({
   providedIn: 'root',
 })
 export class HomeSignalrService {
-  private readonly dataHubAddress: string = 'http://167.86.74.159:5133';
-  private readonly proxyToken: string = '1937-789-123';
+  private clientHubAddress;
 
   homeConnection: any;
   homeProxy: any;
   constructor(
     private dataFormat: DataFormatService,
-    private shareData: SharedataService
+    private shareData: SharedataService,
+    private tokenService: TokenService
   ) {}
 
-  connectHome() {
-    this.homeConnection = (<any>$).hubConnection(this.dataHubAddress);
+  connectHome(clientHubAddress) {
+    this.clientHubAddress = clientHubAddress;
+    this.homeConnection = (<any>$).hubConnection(this.clientHubAddress);
 
     this.homeProxy = this.homeConnection.createHubProxy('DataHub');
 
@@ -26,7 +28,7 @@ export class HomeSignalrService {
       .start()
       .done((clientHubConn: any) => {
         console.log(`Connection Established to DataHub ${clientHubConn.state}`);
-        this.homeProxy.invoke('SubscribeData', this.proxyToken);
+        this.homeProxy.invoke('SubscribeData',this.tokenService.getToken());
       })
       .fail((err: any) => {
         console.error(`Connection failed ${err.state}`);
@@ -37,7 +39,7 @@ export class HomeSignalrService {
   }
 
   subscribeToHomeSignalR() {
-    this.homeProxy.invoke('SubscribeData', this.proxyToken);
+    this.homeProxy.invoke('SubscribeData', this.tokenService.getToken());
   }
 
   reconnect() {
@@ -75,7 +77,7 @@ export class HomeSignalrService {
 
   unSubscribeDataHub() {
     if (this.homeConnection && this.homeProxy) {
-      this.homeProxy.invoke('UnSubscribeData', this.proxyToken);
+      this.homeProxy.invoke('UnSubscribeData', this.tokenService.getToken());
       this.homeConnection.stop();
       this.homeConnection = null;
       this.homeProxy = null;

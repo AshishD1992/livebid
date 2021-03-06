@@ -1,23 +1,28 @@
-
-.back{
-	background-color: #daefff;
-    border-top: 1px solid #76a6c8;
-    color: #26252b;
-    font-weight: 500;
-
-}
-
-.lay{
-	background-color: #ffe3e3;
-    border-top: 1px solid #d39faa;
-    color: #26252b;
-    font-weight: 500;
-
-}
-
-.head{
-    background-color: #00ebb3;
-    color: #26252b;
-    font-weight: 500;
-
-}
+:host {
+    width: 100%;
+  }
+  @media (max-width: 1380px)
+  {
+  .event-new-test.content-body-sidebar-no-scroll.content-body-sidebar, .my-market-event-detail-page .content-body-sidebar-no-scroll.content-body-sidebar {
+      display: block;
+      width: 50%;
+  }
+  .hide-on-medium{
+    display: none;
+  }
+  }
+  @media (max-width: 1099px)
+  {
+    .hide-on-medium{
+      display: block;
+  }
+  .event-new-test.content-body-sidebar-no-scroll.content-body-sidebar{
+    display: none;
+  }
+  }
+  .nav-tabs .nav-item {
+    border-left: none;
+  }
+  
+  
+  
