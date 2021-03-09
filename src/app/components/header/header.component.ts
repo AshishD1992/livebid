@@ -1,7 +1,8 @@
 import { Component, OnInit, ElementRef, Renderer2 } from '@angular/core';
 import { AuthService } from 'src/app/services/auth.service';
 import { ReportService } from 'src/app/services/report.service';
-
+import { DataFormatService} from 'src/app/services/data-format.service';
+import { HomeSignalrService } from "../../services/signalr/home.signalr";
 @Component({
   selector: 'app-header',
   templateUrl: './header.component.html',
@@ -16,11 +17,15 @@ export class HeaderComponent implements OnInit {
 
 
 
-  constructor(private reportService: ReportService,private authService: AuthService,) { }
+  constructor(private reportService: ReportService,
+    private authService: AuthService,
+    private dfservice:DataFormatService,
+    private homeSignalR: HomeSignalrService,) { }
 
   ngOnInit(): void {
     this.authService.isLoggedIn$.subscribe((isLoggedIn: boolean) => {
       this.isLoggedIn = isLoggedIn;
+
     })
     this.Fund();
     this.userdescription()
@@ -36,7 +41,10 @@ export class HeaderComponent implements OnInit {
   }
   userdescription(){
     this.reportService.UserDescription().subscribe(data=>{
-      this.username=data.data.uName
+      this.username=data.data.uName;
+      this.dfservice.shareUserDescription(data.data);
+      this.homeSignalR.connectHome(data.data.add);
+
     })
   }
 

@@ -27,6 +27,9 @@ export class DataFormatService {
   private _currentNewsSub = new BehaviorSubject<any>(null);
   news$ = this._currentNewsSub.asObservable();
 
+  _currentUserDescription = <BehaviorSubject<any>>new BehaviorSubject(null);
+  userDescriptionSource$ = this._currentUserDescription.asObservable();
+
   constructor() { }
 
   shareNavigationData(data: any) {
@@ -44,6 +47,10 @@ export class DataFormatService {
 
   shareDateTime(date: Date) {
     this._currentDateTime.next(date);
+  }
+
+  shareUserDescription(data: any) {
+    this._currentUserDescription.next(data);
   }
   sportsDataById(sportsData: SportsData): SportsDataById {
     let sportObj: any = {};
@@ -474,5 +481,70 @@ export class DataFormatService {
       date = splitdate2[0] + '-' + splitdate[1] + '-' + splitdate[0] + ' ' + splitdate2[1]
     }
     return date.replace(/ /g, "T");
+  }
+
+  ToggleFavourite(mtBfId, remove) {
+    let favourite = this.GetFavourites();;
+
+    if (favourite == null) {
+      let matchArray = [];
+      matchArray.push(mtBfId)
+      this.SetFavourites(matchArray);
+    }
+    else {
+      let matchArray = JSON.parse(favourite);
+      let matchIndex = _.indexOf(matchArray, mtBfId);
+      if (matchIndex < 0) {
+        matchArray.push(mtBfId)
+        this.SetFavourites(matchArray);
+      }
+      else if (matchIndex > -1 && remove) {
+        matchArray.splice(matchIndex, 1)
+        this.SetFavourites(matchArray);
+      }
+    }
+  }
+
+  SetFavourites(matchArray) {
+    localStorage.setItem('favourite', JSON.stringify(matchArray));
+  }
+
+  GetFavourites() {
+    return localStorage.getItem('favourite');
+  }
+
+  RemoveFavourites() {
+    localStorage.setItem('favourite', JSON.stringify([]));
+  }
+  favouriteEventWise(sportsData) {
+    let groupedEvents = []
+    let favArray = localStorage.getItem('favourite');
+    if (favArray != null) {
+      favArray = JSON.parse(favArray);
+      _.forEach(sportsData, function (item, index) {
+        _.forEach(item.tournaments, function (item2, index2) {
+          _.forEach(item2.matches, function (item3, index3) {
+            // item3.markets.forEach(function (item4, index4) {
+            //   var runnerarray = [];
+            //   _.forEach(item4.runnerData1, function (runner, key) {
+            //     if (runner.Key != undefined) {
+            //       runnerarray.push(runner.Value);
+            //     } else {
+            //       runnerarray.push(runner);
+            //     }
+            //   });
+            //   // delete item4.runnerData;
+            //   item4['runners'] = runnerarray;
+            // });
+            let matchIndex = _.indexOf(favArray, item3.bfId);
+            if (matchIndex > -1) {
+              groupedEvents.push(item3);
+            }
+          })
+        })
+      })
+    }
+
+    return groupedEvents;
   }
 }

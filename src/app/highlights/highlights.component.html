@@ -421,7 +421,7 @@
         <div class="tab-pane fade active in" id="inplay">
           <!-- <app-inplay></app-inplay> -->
           <div class="prematch-matches" *ngFor="let inplay of inplayListWise">
-            
+
             <div class="sport-ta-head">
               <h2>
                 <svg id="Capa_1" enable-background="new 0 0 512.038 512.038" height="512" *ngIf="inplay.name=='Cricket'"
@@ -481,7 +481,7 @@
             </div>
             <div class="match-list" *ngFor="let high of inplay.highlights| sortByDate:'matchDate';trackBy:trackByIdx">
               <div class="spotable sportrow-4 matchrow-29968100 inplay-row" routerLink="/game"
-                onclick="MarketSelection('1.172400732','29968100');" title="Match OODS">
+              (click)="toggleFavourite(high)" title="Match OODS">
                 <div class="fooetr-bottom">
                   <span><i class="far fa-clock"></i> {{high.matchDate}}</span>
                   <span class="match-status">
@@ -513,17 +513,17 @@
 
         </div>
         <ng-container *ngFor="let sport of sportsData; trackBy: trackByIdx">
-         
-          
+
+
           <div class="tab-pane fade" id="{{sport.name}}">
-          
+
             <app-sport-list [sportsList]="getSportsList(sport)" [header]="true"></app-sport-list>
-  
-  
+
+
           </div>
         </ng-container>
-       
-      
+
+
 
       </div>
     </div>

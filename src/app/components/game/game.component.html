@@ -155,14 +155,14 @@
                                         </div>
                                     </div>
                                     <div id="user_row0" class="GameCell runner-row-8693552">
-                                       
+
                                         <div class="spotable">
                                             <div class="events-row odds-row">
                                                 <div class="team-events">
                                                     <h2>
                                                         <input type="hidden" class="position_1172400732"
                                                             id="selection_0" data-id="8693552" value="0">
-                                                            St Lucia Zouks 
+                                                            St Lucia Zouks
                                                     </h2>
                                                     <div class="volume-size color-green">
                                                         <i class="fas fa-angle-double-right"></i>
@@ -195,7 +195,7 @@
 
                                             </div>
                                         </div>
-                                   
+
                                     </div>
                                     <div id="user_row1" class="GameCell runner-row-11056084">
 
@@ -583,7 +583,7 @@
 
     </div>
     <div id="mybet" class="betnav">
-        <a href="javascript:void(0)" class="closebet" (click)="closebet()">×</a>
+        <a href="javascript:void(0)" class="closebet">×</a>
         <div class="matchBox">
             <div class="betSlipBox" >
                 <div class="betBox border-box" style="display: none;">
@@ -749,8 +749,8 @@
                         </tr>
                     </thead>
                     <tbody>
-                        <tr class="mark-back" 
-                        [ngClass]="{'back':result.type=='BACK' || result.type=='Back' ||result.type=='YES','lay':result.type=='LAY' || result.type=='Lay' || result.type=='NO'}" 
+                        <tr class="mark-back"
+                        [ngClass]="{'back':result.type=='BACK' || result.type=='Back' ||result.type=='YES','lay':result.type=='LAY' || result.type=='Lay' || result.type=='NO'}"
                         *ngFor="let result of matchedbets">
                             <td>{{result.betId}}</td>
                             <td>{{result.selection}}</td>

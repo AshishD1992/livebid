@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { HomeSignalrService } from "../../services/signalr/home.signalr";
+
 import { AuthService } from '../../services/auth.service';
 
 import {SharedataService} from '../../services/sharedata.service';
@@ -20,9 +20,9 @@ export class DashboardComponent implements OnInit {
   sportName!: string;
 
   constructor(
-    private homeSignalR: HomeSignalrService,
+
     private auth: AuthService,
-    private shareData:SharedataService, 
+    private shareData:SharedataService,
     private dataFormat: DataFormatService,
     private reportservice:ReportService
   ) {
@@ -33,14 +33,11 @@ export class DashboardComponent implements OnInit {
    }
 
   ngOnInit(): void {
-  
-    this.reportservice.UserDescription().subscribe((data)=>{
-      this.homeSignalR.connectHome(data.data.add);
 
-    })
+
 
     this.shareData.userData$.subscribe((userData) => {
-    
+
       if (userData) {
         this.sportsData = userData.sportsData;
         // console.log(this.sportsData)
@@ -51,7 +48,7 @@ export class DashboardComponent implements OnInit {
 
       }
     });
-    
+
   }
 
   getSportsList(sport: Sport) {

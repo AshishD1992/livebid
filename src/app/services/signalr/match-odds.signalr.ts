@@ -16,6 +16,9 @@ export class MatchOddsSignalRService {
   private _marketsData = new BehaviorSubject<any>(null);
   marketsData$ = this._marketsData.asObservable();
 
+  private _marketErrSource= new BehaviorSubject<any>(null);
+  currentMarketErr$=this._marketErrSource.asObservable();
+
   constructor() {
   }
 

@@ -26,7 +26,7 @@ export class HighlightsComponent implements OnInit {
   constructor(private dataFormat: DataFormatService, private shareData: SharedataService,) { }
 
   ngOnInit(): void {
-   
+
     this.subSink.add(
       this.shareData.userData$.subscribe((userData: UserData | null) => {
         if (userData) {
@@ -36,8 +36,8 @@ export class HighlightsComponent implements OnInit {
             highlights: Highlight[];
           }[] = [];
           this.eventsCount = [];
-          userData.sportsData.forEach((sport) => {    
-            console.log(sport)      
+          userData.sportsData.forEach((sport) => {
+            // console.log(sport)
             let highlight = this.dataFormat.inplaylistwise(sport);
             if (highlight.length) {
               inplayList.push({
@@ -53,7 +53,7 @@ export class HighlightsComponent implements OnInit {
         }
       })
     );
-  
+
   }
   getSportsList(sport: Sport) {
     if (sport.id === 1) {
@@ -68,6 +68,9 @@ export class HighlightsComponent implements OnInit {
     }
   }
 
+  toggleFavourite(event) {
+    this.dataFormat.ToggleFavourite(event.matchBfId, false);
+  }
   trackByIdx(index: number, item: any) {
     return item.id;
   }
