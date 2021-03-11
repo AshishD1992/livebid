@@ -33,6 +33,7 @@ import { SortByDatePipe } from './pipes/sort-by-date.pipe';
 import { OrderByPipe } from './pipes/order-by.pipe';
 import { ReversePipe } from './pipes/reverse.pipe';
 import { RemoveSpacePipe } from './pipes/remove-space.pipe';
+import { VideoLiveComponent } from './video-live/video-live.component';
 
 @NgModule({
   declarations: [
@@ -53,6 +54,7 @@ import { RemoveSpacePipe } from './pipes/remove-space.pipe';
     OrderByPipe,
     ReversePipe,
     RemoveSpacePipe,
+    VideoLiveComponent,
     // TeenpattiComponent,
     // TwentyteenpattiComponent,
     // ThreecardjudgeComponent,

@@ -34,6 +34,7 @@ export class DashboardComponent implements OnInit {
 
   ngOnInit(): void {
 
+    localStorage.removeItem("favourite");
 
 
     this.shareData.userData$.subscribe((userData) => {

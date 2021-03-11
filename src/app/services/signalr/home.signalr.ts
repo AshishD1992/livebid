@@ -67,7 +67,7 @@ export class HomeSignalrService {
       // console.log(data.sportsData);
 
       this.dataFormat.shareNavigationData(
-        this.dataFormat.navigationListFormat(data.sportsData)
+        this.dataFormat.NavigationFormat(data.sportsData, data.curTime )
       );
       this.shareData.shareuserData(data);
       this.dataFormat.shareEventData(data.sportsData);

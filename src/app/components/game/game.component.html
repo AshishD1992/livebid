@@ -26,7 +26,7 @@
         <!--scoreboardPopup-->
 
         <div class="matchBox_29968100 matchBoxs_1172400732" >
-            <div class="match_score_box">
+            <div class="match_score_box" *ngFor="let match of favouriteEvents; trackBy:trackByEvent">
 
 
 
@@ -37,7 +37,7 @@
                         <span class="match-colsed"> Closed </span>
                     </div>
                     <div class="matchTime">
-                        26/08/2020 07:30 PM </div>
+                        {{match.startDate}} </div>
                     <h1 class="match_off">Closed</h1>
                 </div>
                 <div class="tabbable sportrow-4 matchOpenBox_1172400732">
@@ -45,17 +45,17 @@
                         <div class="teamandtv">
                             <div class="match-info">
                                 <span class="match_name">
-                                    St Lucia Zouks v Trinbago Knight Riders <input type="hidden"
-                                        value="St Lucia Zouks v Trinbago Knight Riders" id="sportName_29968100">
+                                   {{match.name}} <input type="hidden"
+                                        value="{{match.name}}" id="sportName_29968100">
                                 </span>
                                 <div class="matchTime">
-                                    26/08/2020 07:30 PM </div>
+                                  {{match.startDate}} </div>
                             </div>
                             <div class="odds-tabs">
                                 <ul class="nav nav-tabs tv-tabs">
                                     <li class="active"><a data-toggle="tab" href="#livescore" aria-expanded="true">Live
                                             Score</a></li>
-                                    <li class=""><a data-toggle="tab" href="#livetv" aria-expanded="false">Live Tv</a>
+                                    <li class=""><a data-toggle="tab" href="#livetv" aria-expanded="false" (click)="openTv(match)">Live Tv</a>
                                     </li>
                                     <li><a data-toggle="tab" href="#animation">Score Animation</a></li>
                                 </ul>
@@ -64,71 +64,21 @@
                                         <div class="score_area  matchScore" id="matchScore_29968100">
                                             <div class="score_main">
                                                 <div class="cricket-score">
-                                                    <div class="row">
-                                                        <div class="col-md-4 col-xs-4 col">
-                                                            <div class="teamtype"> <img class="active"
-                                                                    src="assets/images/cricket-bat.svg">
-                                                                <p class="matchName">St Lucia Zouks</p>
-                                                            </div>
+                                                    <ng-container *ngIf="match.sportradar_url && !selectedMatch">
+                                                        <div>
+                                                          <iframe allowfullscreen="true" [src]="match.sportradar_url"
+                                                            style="border: none; width: 100%;height: 281px;"></iframe>
                                                         </div>
-                                                        <div class="col-md-4 col-xs-4 col">
-                                                            <div class="target-score"> <span
-                                                                    class="currunt_sc">111-6</span> <span
-                                                                    class="currunt_over">(17.1.)</span> <span
-                                                                    class="score-btn"
-                                                                    onclick="showScoreBoard(29968100)">Scoreboard</span>
-                                                            </div>
-                                                        </div>
-                                                        <div class="col-md-4 col-xs-4 col">
-                                                            <div class="teamtype"> <img class=""
-                                                                    src="assets/images/cricket-bat.svg">
-                                                                <p class="matchName">Trinbago Knight Riders (20 O</p>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                    <div class="score-footer">
-                                                        <div class="item-score batsman">
-                                                            <ul>
-                                                                <li class=""><img src="assets/images/cricket-icons.svg">
-                                                                    Mohammad Nabi 0(0)</li>
-                                                                <li class="active"> <img
-                                                                        src="assets/images/cricket-icons.svg"> DJG
-                                                                    Sammy 0(0)</li>
-                                                                <li class=""><img src="assets/images/cricket-ball.svg">
-                                                                    K
-                                                                    Pierre (3-19-1 )</li>
-                                                            </ul>
-                                                        </div>
-                                                        <div class="item-score score-over-fter">
-                                                            <div class="over-status">
-                                                                <div class="score-over">
-                                                                    <ul>
-                                                                        <li>
-                                                                            <p>Over </p>
-                                                                        </li>
-                                                                        <li class="w-color six-balls"><span>w</span>
-                                                                        </li>
-                                                                        <li class="-color six-balls"><span></span></li>
-                                                                        <li class="-color six-balls"><span></span></li>
-                                                                        <li class="-color six-balls"><span></span></li>
-                                                                        <li class="-color six-balls"><span></span></li>
-                                                                        <li class="-color six-balls"><span></span></li>
-                                                                    </ul>
-                                                                </div>
-                                                            </div>
-                                                            <div class="commantry-status"><span class="commantry">St
-                                                                    Lucia Zouks are 111 for 6 after 17.1 overs.</span>
-                                                            </div>
-                                                        </div>
-                                                    </div>
+                                                      </ng-container>
                                                 </div>
                                             </div>
                                         </div>
                                     </div>
                                     <div id="livetv" class="tab-pane fade">
-                                        <iframe id="mobilePlayer" allowfullscreen="true" frameborder="0" scrolling="no"
+                                        <!-- <iframe id="mobilePlayer" allowfullscreen="true" frameborder="0" scrolling="no"
                                             width="100%" height="200px"
-                                            src="https://new.apple365.bet/tvsetting/getMatchTvFeedApi/29968100/27.106.7.153"></iframe>
+                                            src="https://new.apple365.bet/tvsetting/getMatchTvFeedApi/29968100/27.106.7.153"></iframe> -->
+                                            <sxm-video [tvurl]="liveUrl"></sxm-video>
                                     </div>
                                     <div id="animation" class="tab-pane fade">
                                         <iframe id="mobilePlayer" allowfullscreen="true" frameborder="0" scrolling="no"
@@ -145,7 +95,7 @@
                                     <div class="odds-head">
                                         <div class="head-info">
                                             <span class="stake-info"><i class="fas fa-info-circle"
-                                                    onclick="myFunction()"></i></span>
+                                                    ></i></span>
                                             Match Odds <div id="min-stake">
                                                 Min stake:500 Max stake:200000 </div>
                                         </div>
@@ -154,15 +104,15 @@
                                             <span>Lay</span>
                                         </div>
                                     </div>
-                                    <div id="user_row0" class="GameCell runner-row-8693552">
+                                    <div id="user_row0" *ngFor="let market of match.markets; trackBy:trackByMkt" class="GameCell runner-row-8693552">
 
-                                        <div class="spotable">
+                                        <div class="spotable" *ngFor="let runner of market.runners; trackBy:trackByRunner">
                                             <div class="events-row odds-row">
                                                 <div class="team-events">
                                                     <h2>
                                                         <input type="hidden" class="position_1172400732"
                                                             id="selection_0" data-id="8693552" value="0">
-                                                            St Lucia Zouks
+                                                            {{runner.runnerName}}
                                                     </h2>
                                                     <div class="volume-size color-green">
                                                         <i class="fas fa-angle-double-right"></i>
@@ -174,10 +124,10 @@
                                                 <div class="odd-box mark-back 8693552_0availableToBack0_price_1172400732 yello" data-target="mybet"
                                                     onclick="getOddValue('0','29968100','1.172400732','0','St Lucia Zouks','8693552','8693552_0availableToBack0_price_1172400732','B');">
                                                     <div class="bet-odds"
-                                                        id="8693552_0availableToBack0_price_1172400732">3.9</div>
+                                                        >{{runner.back1}}</div>
                                                     <span class="volume">
                                                         <div class="bet-description"
-                                                            id="8693552_0availableToBack0_size_1172400732">12796.00
+                                                            id="8693552_0availableToBack0_size_1172400732">{{runner.backSize1}}
                                                         </div>
                                                     </span>
                                                 </div>
@@ -185,11 +135,9 @@
 
                                                 <div class="odd-box yelbg mark-lay 8693552_0availableToLay0_price_1172400732"
                                                     onclick="getOddValue('0','29968100','1.172400732','1','St Lucia Zouks','8693552','8693552_0availableToLay0_price_1172400732','B');">
-                                                    <div class="bet-odds"
-                                                        id="8693552_0availableToLay0_price_1172400732">4</div>
+                                                    <div class="bet-odds">{{runner.lay1}}</div>
                                                     <span class="volume">
-                                                        <div class="volume bet-description"
-                                                            id="8693552_0availableToLay0_size_1172400732">670.00</div>
+                                                        <div class="volume bet-description">{{runner.laySize1}}</div>
                                                     </span>
                                                 </div>
 
@@ -197,49 +145,7 @@
                                         </div>
 
                                     </div>
-                                    <div id="user_row1" class="GameCell runner-row-11056084">
 
-                                        <div class="spotable">
-                                            <div class="events-row odds-row">
-                                                <div class="team-events">
-                                                    <h2>
-                                                        <input type="hidden" class="position_1172400732"
-                                                            id="selection_0" data-id="11056084" value="0">
-                                                        Trinbago Knight Riders
-                                                    </h2>
-                                                    <div class="volume-size color-green">
-                                                        <i class="fas fa-angle-double-right"></i>
-                                                        <div class="event-details-score" style="color:#fff"
-                                                            id="11056084_maxprofit_loss_runner_1172400732">
-                                                            0 </div>
-                                                    </div>
-                                                </div>
-                                                <div class="odd-box mark-back 11056084_0availableToBack0_price_1172400732"
-                                                    onclick="getOddValue('0','29968100','1.172400732','0','Trinbago Knight Riders','11056084','11056084_0availableToBack0_price_1172400732','B');">
-                                                    <div class="bet-odds"
-                                                        id="11056084_0availableToBack0_price_1172400732">1.33</div>
-                                                    <span class="volume">
-                                                        <div class="bet-description"
-                                                            id="11056084_0availableToBack0_size_1172400732">6026.00
-                                                        </div>
-                                                    </span>
-                                                </div>
-
-
-                                                <div class="odd-box yelbg mark-lay 11056084_0availableToLay0_price_1172400732 yello"
-                                                    onclick="getOddValue('0','29968100','1.172400732','1','Trinbago Knight Riders','11056084','11056084_0availableToLay0_price_1172400732','B');">
-                                                    <div class="bet-odds"
-                                                        id="11056084_0availableToLay0_price_1172400732">1.34</div>
-                                                    <span class="volume">
-                                                        <div class="volume bet-description"
-                                                            id="11056084_0availableToLay0_size_1172400732">37240.00
-                                                        </div>
-                                                    </span>
-                                                </div>
-
-                                            </div>
-                                        </div>
-                                    </div>
                                 </div>
                             </div>
                         </div>

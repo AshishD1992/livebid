@@ -26,6 +26,7 @@
     "bootstrap": "^3.4.1",
     "flipclock": "^0.10.8",
     "jquery": "^3.5.1",
+    "moment": "^2.29.1",
     "ngx-cookie-service": "^10.0.1",
     "ngx-device-detector": "^2.0.5",
     "ngx-toastr": "^13.0.0",

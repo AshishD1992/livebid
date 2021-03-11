@@ -7,7 +7,7 @@ import { FancySignalRService} from 'src/app/services/signalr/fancy.signalr';
 import { ActivatedRoute, Router } from '@angular/router';
 import { ScoreService } from '../../services/score.service';
 import _ from 'lodash';
-import { DomSanitizer } from '@angular/platform-browser';
+import { DomSanitizer, SafeResourceUrl } from '@angular/platform-browser';
 @Component({
 selector: 'app-game',
 templateUrl: './game.component.html',
@@ -16,12 +16,19 @@ styleUrls: ['./game.component.scss']
 export class GameComponent implements OnInit {
 bodyElement: any;
 matchedbets: any;
-
+currTime = new Date();
 fancyHubAddress: string = "http://164.68.97.173:12111";
 
 hubAddressData: any;
 allMarketData: any = [];
-favouriteEvents: any=[];
+favouriteEvents: any= [];
+selectedMatch: any;
+
+liveUrl: string;
+url: string;
+urlSafe: SafeResourceUrl;
+liveUrlSafe: SafeResourceUrl;
+videoEnabled: boolean = false;
 
 UserDescSubscription: Subscription;
 fancySubscription: Subscription;
@@ -32,6 +39,10 @@ favouriteSubscription: Subscription;
 bookExpoCall: boolean = false;
 openBet: any;
 fancyExposures: any;
+
+width: number = 450;
+height: number = 247;
+
 constructor(
   private udService: DataService,
   private dfService:DataFormatService,
@@ -43,9 +54,14 @@ constructor(
   ) { }
 
 ngOnInit(): void {
+  this.dfService._currentDateTimeSource.subscribe(data => {
+    if (data) {
+      this.currTime = data;
+    }
+  });
   this.getFavouriteMarket();
   this.UserDescription();
-this.bodyElement = document.querySelector('body');
+  this.bodyElement = document.querySelector('body');
 }
 
 UserDescription() {
@@ -81,7 +97,7 @@ getMarketRunner() {
     if (data != null) {
       // console.log(this.favouriteEvents)
       _.forEach(this.favouriteEvents, (item, index) => {
-
+        // console.log(this.favouriteEvents)
         // if (item.settings && this.UserSettingData) {
 
         //   if (this.UserSettingData[item.sportId]) {
@@ -212,20 +228,22 @@ getFavouriteMarket() {
   this.favouriteSubscription = this.dfService.navigation$.subscribe(data => {
     // console.log(data)
     if (data != null) {
-      // console.log(this.dfService.favouriteEventWise(data));
+      console.log(this.dfService.favouriteEventWise(data));
       if (this.favouriteEvents.length == 0) {
         this.favouriteEvents = this.dfService.favouriteEventWise(data);
-        // console.log(this.favouriteEvents)
+
         this.allMarketData = [];
         _.forEach(this.favouriteEvents, (item) => {
           _.forEach(item.markets, (item2) => {
             this.allMarketData.push(item2);
+            // console.log(this.allMarketData)
             // this.ExposureBook(item2);
           });
           _.forEach(item.bookRates, (item2) => {
             // this.BMExposureBook(item2, item.markets[0].id);
           });
           this.GetScoreId(item);
+
         });
 
 
@@ -262,6 +280,7 @@ getFavouriteMarket() {
           _.forEach(this.favouriteEvents, (item) => {
             _.forEach(item.markets, (item2) => {
               this.allMarketData.push(item2);
+              // console.log(this.allMarketData)
               // this.ExposureBook(item2);
             });
             _.forEach(item.bookRates, (item2) => {
@@ -296,6 +315,47 @@ GetScoreId(event) {
     })
   }
 
+}
+openTv(match) {
+  if (this.selectedMatch) {
+    if (this.selectedMatch.bfId != match.bfId) {
+      this.selectedMatch = match;
+      this.setIframeUrl();
+    }
+    else {
+      this.selectedMatch = null;
+    }
+  }
+  else {
+    this.selectedMatch = match;
+    this.setIframeUrl();
+  }
+
+}
+setIframeUrl() {
+  if (this.selectedMatch) {
+
+    // this.url = "https://videoplayer.betfair.com/GetPlayer.do?tr=1&eID=" + this.selectedMatch.bfId + "&width=" + this.width + "&height=" + this.height + "&allowPopup=true&contentType=viz&statsToggle=hide&contentOnly=true"
+    this.urlSafe = this.sanitizer.bypassSecurityTrustResourceUrl(this.url);
+
+    // this.liveUrl = "http://tv.allexch.com/index.html?token=696363a6-035b-450c-8ec6-312e779732ac&mtid=" + this.selectedMatch.bfId;
+    this.liveUrl = this.selectedMatch.tvConfig.link;
+    this.liveUrlSafe = this.sanitizer.bypassSecurityTrustResourceUrl(this.liveUrl);
+    console.log(this.liveUrl)
+    if (this.selectedMatch.videoEnabled) {
+      this.videoEnabled = this.selectedMatch.videoEnabled;
+    }
+  }
+}
+
+trackByEvent(index, item) {
+  return item.bfId;
+}
+trackByMkt(index, item) {
+  return item.bfId;
+}
+trackByRunner(index, item) {
+  return item.runnerName;
 }
 // GetCurrentBets(){
 // this.reportService.GetCurrentBets().subscribe(data=>{
