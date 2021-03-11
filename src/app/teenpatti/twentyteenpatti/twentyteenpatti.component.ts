@@ -82,9 +82,9 @@ if (this.subSink) {
 
         if (this.teentype == 1) {
           this.tpData = data.data.t1[0];
-          console.log("",this.tpData)
+          // console.log("",this.tpData)
           this.tpMarket = data.data.t2;
-          console.log("tpMarket", this.tpMarket)
+          // console.log("tpMarket", this.tpMarket)
           if (this.Oldteentype) {
             this.clock.setValue(this.tpData.autotime);
           }
@@ -215,7 +215,7 @@ if (this.subSink) {
     this.reportsService.GetRecentGameResult(this.teentypee).subscribe(data=> {
 
       this.results = data.data;
-      console.log("", this.results)
+      console.log(data)
     })
 
   }

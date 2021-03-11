@@ -24,10 +24,38 @@
     border-bottom: 2px solid black;
   
   }
+  @media screen and (max-width: 360px) {
+    .float-right {
+      font-size: 13px!important;
+    }
+  }
   .float-right {
     float: right;
     font-size: 15px;
   }
+  .suspended1:after {
+    position: absolute;
+    display: flex;
+    align-items: center;
+    height: 84%;
+    right: 0;
+    background-color: rgba(0,0,0,.6);
+    color: #fff;
+    text-transform: uppercase;
+    font-family: 'Font Awesome 5 Free';
+    content: "\f023";
+    font-weight: 900;
+    font-size: 13px;
+    top: 5px;
+}
+
+.suspended, .suspended1:after {
+    justify-content: center;
+    width: 100%;
+}
+*, :after, :before {
+    box-sizing: border-box;
+}
   .fancy-marker-title h4 {
     padding: 10px;
     background-color: #171717;
@@ -65,6 +93,7 @@
   
   td{
     padding: 5px;
+    position: relative;
   }
   
   button.back.back-1 {
@@ -165,39 +194,7 @@
   .date-time{
     font-size: 15px;
   }
-  .suspended {
-    justify-content: center;
-    background-color: rgba(255, 255, 255, .8);
-    color: #b71212;
-    font-weight: 700;
-    position: absolute;
-    z-index: 2;
-    height: 100%;
-    position: relative;
-    // width: 69%;
-    width: 100%;
-    text-align: center;
-    // margin-left: 31%;
-    padding: 10px 0;
-  }
   
-  // .suspended1:after {
-  //   position: absolute;
-  //   display: flex;
-  //   justify-content: center;
-  //   align-items: center;
-  //   height: 73%;
-  //   width: 100%;
-  //   right: 0;
-  //   background-color: rgba(0, 0, 0, 0.6);
-  //   color: #fff;
-  //   text-transform: uppercase;
-  //   font-family: FontAwesome;
-  //   content: "suspended";
-  //   font-weight: 900;
-  //   font-size: 13px;
-  //   top: 10px;
-  // }
   .back-buttons,
   .lay-buttons {
     display: flex;
@@ -273,3 +270,11 @@
     font-size: 13px;
     padding: 4px;
   }
+  p {
+    color: #53555b;
+    font-weight: 400;
+    font-family: Roboto Condensed,sans-serif;
+    line-height: 2;
+    margin-top: 0;
+    margin-bottom: 1rem;
+}

@@ -8,7 +8,7 @@ import { BetsService } from '../../service/bets.service';
 import { SharedataService } from '../../services/sharedata.service';
 import { take } from 'rxjs/operators';
 import { ReportService } from '../../services/report.service';
-import { TpMarket } from '../../models/tpmarket.model';
+// import { TpMarket } from '../../models/tpmarket.model';
 export const BET_TYPES = { MATCH_ODDS: 1, BOOK_MAKING: 2, FANCY: 3 };
 
 @Component({
@@ -123,7 +123,7 @@ if (this.subSink) {
 
           this.ThreeCardJExposureBook(this.tpData.mid, null);
 console.log("log", this.tpData)
-console.log("loggg", this. this.tpMarket)
+// console.log("loggg", this. this.tpMarket)
         }
         if (this.teentype == 7) {
           this.tpData = data.data.t1[0];

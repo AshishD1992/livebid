@@ -135,6 +135,7 @@ if (this.subSink) {
           this.Bresults = [];
           if (data.data.t3[0].aall != "") {
             this.Aallcards = data.data.t3[0].aall.split(',');
+            console.log(this.Aallcards)
           }
           if (data.data.t3[0].ball != "") {
             this.Ballcards = data.data.t3[0].ball.split(',');
