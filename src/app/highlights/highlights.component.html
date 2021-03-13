@@ -479,8 +479,8 @@
                 {{inplay.name}}
               </h2>
             </div>
-            <div class="match-list" *ngFor="let high of inplay.highlights| sortByDate:'matchDate';trackBy:trackByIdx">
-              <div class="spotable sportrow-4 matchrow-29968100 inplay-row" routerLink="/game"
+            <div class="match-list">
+              <div class="spotable sportrow-4 matchrow-29968100 inplay-row" *ngFor="let high of inplay.highlights| sortByDate:'matchDate';trackBy:trackByIdx" routerLink="/game"
               (click)="toggleFavourite(high)" title="Match OODS">
                 <div class="fooetr-bottom">
                   <span><i class="far fa-clock"></i> {{high.matchDate}}</span>

@@ -1,4 +1,5 @@
 import { Component, OnInit ,Input} from '@angular/core';
+import { DataFormatService } from '../services/data-format.service';
 import { Highlight } from '../shared/models/highlight';
 @Component({
   selector: 'app-sport-list',
@@ -17,13 +18,19 @@ export class SportListComponent implements OnInit {
   public get sportsList() {
     return <[]>this._sportsList;
   }
-  constructor() {
+  constructor(private dataFormat: DataFormatService) {
   }
 
   ngOnInit(): void {
     // console.log(this._sportsList)
   }
+  toggleFavourite(event) {
+    this.dataFormat.ToggleFavourite(event.matchBfId, false);
+  }
   trackById(index: number, item: any) {
+    return item.id;
+  }
+  trackByIdx(index: number, item: any) {
     return item.id;
   }
 }

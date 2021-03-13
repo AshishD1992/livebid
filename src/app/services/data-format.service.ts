@@ -37,6 +37,15 @@ export class DataFormatService {
   _currentUserSetting = <BehaviorSubject<any>>new BehaviorSubject(null);
     userSettingSource$ = this._currentUserSetting.asObservable();
 
+    _betStakeSource = <BehaviorSubject<any>>new BehaviorSubject(null);
+    currentBetStake$ = this._betStakeSource.asObservable();
+
+    _fundsSource= <BehaviorSubject<any>>new BehaviorSubject(null);
+    currentFunds = this._fundsSource.asObservable();
+
+    _allMatchUnmatchBetsSource= new BehaviorSubject<any>(null);
+  currentAllMatchUnmatchBets$ = this._allMatchUnmatchBetsSource.asObservable();
+
   constructor() { }
 
   shareNavigationData(data: any) {
@@ -55,6 +64,12 @@ export class DataFormatService {
   shareDateTime(date: Date) {
     this._currentDateTime.next(date);
   }
+  shareBetStake(data: any) {
+    this._betStakeSource.next(data);
+  }
+  shareFunds(data: any) {
+    this._fundsSource.next(data);
+  }
   shareUserSetting(data: any) {
     this._currentUserSetting.next(data);
     UserSettingData = data;
@@ -63,6 +78,10 @@ export class DataFormatService {
   shareUserDescription(data: any) {
     this._currentUserDescription.next(data);
   }
+  shareAllMatchUnmatchBetsData(data: any) {
+    this._allMatchUnmatchBetsSource.next(data);
+  }
+
   sportsDataById(sportsData: SportsData): SportsDataById {
     let sportObj: any = {};
     sportsData.forEach((sport) => {
@@ -754,5 +773,52 @@ export class DataFormatService {
   RemoveFavourites() {
     localStorage.setItem('favourite', JSON.stringify([]));
   }
+  matchUnmatchBetsFormat(matchBets) {
+    // console.log(matchBets)
+    let matchWiseData = {
+      matchWiseBets: [],
+      totalBets: 0
+    }
+    if (!matchBets) {
+      return matchWiseData;
+    }
+    _.forEach(matchBets, (bet, betIndex) => {
 
+      if (bet.backLay == 'YES') {
+        bet.backLay = 'BACK';
+      }
+      if (bet.backLay == 'NO') {
+        bet.backLay = 'LAY';
+      }
+      matchWiseData.totalBets++;
+      if (bet.isFancy == 0) {
+        bet['profit'] = (parseFloat(bet.odds) - 1) * bet.stake;
+        bet['odds'] = parseFloat(bet.odds).toFixed(2);
+      }
+      if (bet.isFancy == 1) {
+
+        if (bet.odds.indexOf('/') > -1) {
+          bet['profit'] = (parseFloat(bet.odds.split('/')[1]) * bet.stake) / 100;
+          // bet['odds'] = (bet.score) + '/' + (bet.odds);
+        }
+      }
+      // console.log(bet.marketName)
+      if (bet.isFancy == 2) {
+        if (bet.marketName == "TO WIN THE TOSS") {
+          bet['profit'] = (parseFloat(bet.odds) - 1) * bet.stake;
+        }
+        else {
+          bet['profit'] = (parseFloat(bet.odds) / 100) * bet.stake;
+        }
+      }
+
+      matchWiseData.matchWiseBets.push(bet);
+
+    });
+
+    // console.log(matchWiseData)
+
+    return matchWiseData;
+
+  }
 }
