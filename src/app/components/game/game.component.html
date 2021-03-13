@@ -1,673 +1,418 @@
 <div class="odds-outer">
-    <div id="MatchOddInfo">
+  <div id="MatchOddInfo">
 
-        <!-- <script>
+    <!-- <script>
             $(document).ready(function () {
                 $(".active-unmatch").hide();
             });
         </script> -->
 
-        <!--scoreboardPopup-->
-        <div id="socreboard_29968100" class="modal fade frame-scoreboard" role="dialog" aria-hidden="true"
-            style="display: none;">
-            <div class="modal-dialog">
-                <!-- Modal content-->
-                <div class="modal-content">
-                    <div class="modal-header">
-                        <button type="button" class="close" data-dismiss="modal">×</button>
-                        <h4 class="modal-title">Socreboard</h4>
-                    </div>
-                    <div class="modal-body">
-                        <iframe src="https://new.kings999.com/?matchid=29968100" class="all-score"></iframe>
-                    </div>
-                </div>
-            </div>
+    <!--scoreboardPopup-->
+    <div id="socreboard_29968100" class="modal fade frame-scoreboard" role="dialog" aria-hidden="true"
+      style="display: none;">
+      <div class="modal-dialog">
+        <!-- Modal content-->
+        <div class="modal-content">
+          <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal">×</button>
+            <h4 class="modal-title">Socreboard</h4>
+          </div>
+          <div class="modal-body">
+            <iframe src="https://new.kings999.com/?matchid=29968100" class="all-score"></iframe>
+          </div>
         </div>
-        <!--scoreboardPopup-->
+      </div>
+    </div>
+    <!--scoreboardPopup-->
 
-        <div class="matchBox_29968100 matchBoxs_1172400732" >
-            <div class="match_score_box" *ngFor="let match of favouriteEvents; trackBy:trackByEvent">
-
-
-
-
-                <div class="match_off matchClosedBox_1172400732" style="display:none">
-                    <div class="pre-text">
-                        Match Odds <br>
-                        <span class="match-colsed"> Closed </span>
-                    </div>
-                    <div class="matchTime">
-                        {{match.startDate}} </div>
-                    <h1 class="match_off">Closed</h1>
-                </div>
-                <div class="tabbable sportrow-4 matchOpenBox_1172400732">
-                    <div class="sport-tab-main odds-inner">
-                        <div class="teamandtv">
-                            <div class="match-info">
-                                <span class="match_name">
-                                   {{match.name}} <input type="hidden"
-                                        value="{{match.name}}" id="sportName_29968100">
-                                </span>
-                                <div class="matchTime">
-                                  {{match.startDate}} </div>
+    <div class="matchBox_29968100 matchBoxs_1172400732">
+      <div class="match_score_box" *ngFor="let match of favouriteEvents; trackBy:trackByEvent">
+        <div class="match_off matchClosedBox_1172400732" style="display:none">
+          <div class="pre-text">
+            Match Odds <br>
+            <span class="match-colsed"> Closed </span>
+          </div>
+          <div class="matchTime">
+            {{match.startDate}} </div>
+          <h1 class="match_off">Closed</h1>
+        </div>
+        <div class="tabbable sportrow-4 matchOpenBox_1172400732">
+          <div class="sport-tab-main odds-inner">
+            <div class="teamandtv">
+              <div class="match-info">
+                <span class="match_name">
+                  {{match.name}} <input type="hidden" value="{{match.name}}" id="sportName_29968100">
+                </span>
+                <div class="matchTime">
+                  {{match.startDate}} </div>
+              </div>
+              <div class="odds-tabs">
+                <ul class="nav nav-tabs tv-tabs">
+                  <li class="active"><a data-toggle="tab" href="#livescore" aria-expanded="true">Live
+                      Score</a></li>
+                  <li class=""><a data-toggle="tab" href="#livetv" aria-expanded="false" (click)="openTv(match)">Live
+                      Tv</a>
+                  </li>
+                  <li><a data-toggle="tab" href="#animation">Score Animation</a></li>
+                </ul>
+                <div class="tab-content">
+                  <div id="livescore" class="tab-pane fade active in">
+                    <div class="score_area  matchScore" id="matchScore_29968100">
+                      <div class="score_main">
+                        <div class="cricket-score">
+                          <ng-container *ngIf="match.sportradar_url && !selectedMatch">
+                            <div>
+                              <iframe allowfullscreen="true" [src]="match.sportradar_url"
+                                style="border: none; width: 100%;height: 281px;"></iframe>
                             </div>
-                            <div class="odds-tabs">
-                                <ul class="nav nav-tabs tv-tabs">
-                                    <li class="active"><a data-toggle="tab" href="#livescore" aria-expanded="true">Live
-                                            Score</a></li>
-                                    <li class=""><a data-toggle="tab" href="#livetv" aria-expanded="false" (click)="openTv(match)">Live Tv</a>
-                                    </li>
-                                    <li><a data-toggle="tab" href="#animation">Score Animation</a></li>
-                                </ul>
-                                <div class="tab-content">
-                                    <div id="livescore" class="tab-pane fade active in">
-                                        <div class="score_area  matchScore" id="matchScore_29968100">
-                                            <div class="score_main">
-                                                <div class="cricket-score">
-                                                    <ng-container *ngIf="match.sportradar_url && !selectedMatch">
-                                                        <div>
-                                                          <iframe allowfullscreen="true" [src]="match.sportradar_url"
-                                                            style="border: none; width: 100%;height: 281px;"></iframe>
-                                                        </div>
-                                                      </ng-container>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div id="livetv" class="tab-pane fade">
-                                        <!-- <iframe id="mobilePlayer" allowfullscreen="true" frameborder="0" scrolling="no"
+                          </ng-container>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  <div id="livetv" class="tab-pane fade">
+                    <!-- <iframe id="mobilePlayer" allowfullscreen="true" frameborder="0" scrolling="no"
                                             width="100%" height="200px"
                                             src="https://new.apple365.bet/tvsetting/getMatchTvFeedApi/29968100/27.106.7.153"></iframe> -->
-                                            <sxm-video [tvurl]="liveUrl"></sxm-video>
-                                    </div>
-                                    <div id="animation" class="tab-pane fade">
-                                        <iframe id="mobilePlayer" allowfullscreen="true" frameborder="0" scrolling="no"
-                                            style="overflow: hidden; width: 100%; max-width: 100%;  max-height: 247px;"
-                                            src="https://videoplayer.betfair.com/GetPlayer.do?tr=1&amp;width=100%&amp;height=247&amp;contentOnly=false&amp;eID=29968100&amp;culture=en-GB&amp;width=100%&amp;height=180"
-                                            height="188"></iframe>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="MatchIndentB" >
-                            <div class="1172400732 matchTable1172400732 " id="matchTable29968100">
-                                <div class="match-odds-section">
-                                    <div class="odds-head">
-                                        <div class="head-info">
-                                            <span class="stake-info"><i class="fas fa-info-circle"
-                                                    ></i></span>
-                                            Match Odds <div id="min-stake">
-                                                Min stake:500 Max stake:200000 </div>
-                                        </div>
-                                        <div class="head-flex">
-                                            <span>Back</span>
-                                            <span>Lay</span>
-                                        </div>
-                                    </div>
-                                    <div id="user_row0" *ngFor="let market of match.markets; trackBy:trackByMkt" class="GameCell runner-row-8693552">
-
-                                        <div class="spotable" *ngFor="let runner of market.runners; trackBy:trackByRunner">
-                                            <div class="events-row odds-row">
-                                                <div class="team-events">
-                                                    <h2>
-                                                        <input type="hidden" class="position_1172400732"
-                                                            id="selection_0" data-id="8693552" value="0">
-                                                            {{runner.runnerName}}
-                                                    </h2>
-                                                    <div class="volume-size color-green">
-                                                        <i class="fas fa-angle-double-right"></i>
-                                                        <div class="event-details-score" style="color:#fff"
-                                                            id="8693552_maxprofit_loss_runner_1172400732">
-                                                            0 </div>
-                                                    </div>
-                                                </div>
-                                                <div class="odd-box mark-back 8693552_0availableToBack0_price_1172400732 yello" data-target="mybet"
-                                                    onclick="getOddValue('0','29968100','1.172400732','0','St Lucia Zouks','8693552','8693552_0availableToBack0_price_1172400732','B');">
-                                                    <div class="bet-odds"
-                                                        >{{runner.back1}}</div>
-                                                    <span class="volume">
-                                                        <div class="bet-description"
-                                                            id="8693552_0availableToBack0_size_1172400732">{{runner.backSize1}}
-                                                        </div>
-                                                    </span>
-                                                </div>
-
-
-                                                <div class="odd-box yelbg mark-lay 8693552_0availableToLay0_price_1172400732"
-                                                    onclick="getOddValue('0','29968100','1.172400732','1','St Lucia Zouks','8693552','8693552_0availableToLay0_price_1172400732','B');">
-                                                    <div class="bet-odds">{{runner.lay1}}</div>
-                                                    <span class="volume">
-                                                        <div class="volume bet-description">{{runner.laySize1}}</div>
-                                                    </span>
-                                                </div>
-
-                                            </div>
-                                        </div>
-
-                                    </div>
-
-                                </div>
-                            </div>
-                        </div>
-                    </div>
+                    <sxm-video [tvurl]="liveUrl"></sxm-video>
+                  </div>
+                  <div id="animation" class="tab-pane fade">
+                    <iframe id="mobilePlayer" allowfullscreen="true" frameborder="0" scrolling="no"
+                      style="overflow: hidden; width: 100%; max-width: 100%;  max-height: 247px;"
+                      src="https://videoplayer.betfair.com/GetPlayer.do?tr=1&amp;width=100%&amp;height=247&amp;contentOnly=false&amp;eID=29968100&amp;culture=en-GB&amp;width=100%&amp;height=180"
+                      height="188"></iframe>
+                  </div>
                 </div>
-                <div class="otherMarket_29968100">
-                    <div class="matchBox_29968100 matchBoxs_1172400734" >
-                        <div class="match_score_box">
-                            <div class="matchClosedBox_1172400734" style="display:none">
-                                <div class="fullrow fullrownew">
-                                    <div class="pre-text">
-                                        Tied Match <br>
-                                        <span class="match-colsed"> Closed </span>
-                                    </div>
-                                    <div class="matchTime">
-                                        26/08/2020 07:30 PM </div>
-                                </div>
-                                <div>
-                                    <div class="closedBox">
-                                        <h1>Closed</h1>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="tabbable sportrow-4 matchOpenBox_1172400734">
-                                <div class="sport-tab-main odds-inner">
-
-                                    <div class="fullrow MatchIndentB" >
-                                        <div class="card-body 1172400734 matchTable1172400734 " id="matchTable29968100">
-                                            <div class="match-odds-section">
-                                                <div class="odds-head">
-                                                    <div class="head-info">
-                                                        <span class="stake-info"><i class="fas fa-info-circle"
-                                                                onclick="myFunction()"></i></span>
-                                                        Tied Match <div id="min-stake">
-                                                            Min stake:500 Max stake:50000
-                                                        </div>
-                                                    </div>
-                                                    <div class="head-flex">
-                                                        <span>Back</span>
-                                                        <span>Lay</span>
-                                                    </div>
-                                                </div>
-                                                <div id="user_row0" class="GameCell runner-row-37302">
-
-                                                    <div class="spotable">
-                                                        <div class="events-row odds-row">
-                                                            <div class="team-events">
-                                                                <h2>
-                                                                    <input type="hidden" class="position_1172400734"
-                                                                        id="selection_0" data-id="37302" value="0">
-                                                                    Yes
-                                                                </h2>
-                                                                <div class="volume-size color-green">
-                                                                    <i class="fas fa-angle-double-right"></i>
-                                                                    <div class="event-details-score" style="color:#fff"
-                                                                        id="37302_maxprofit_loss_runner_1172400734">
-                                                                        0 </div>
-                                                                </div>
-                                                            </div>
-                                                            <div class="odd-box mark-back 37302_0availableToBack0_price_1172400734"
-                                                                onclick="getOddValue('0','29968100','1.172400734','0','Yes','37302','37302_0availableToBack0_price_1172400734','B');">
-
-                                                                <div class="bet-odds"
-                                                                    id="37302_0availableToBack0_price_1172400734">34
-                                                                </div>
-                                                                <span class="volume">
-                                                                    <div class="bet-description"
-                                                                        id="37302_0availableToBack0_size_1172400734">
-                                                                        86944.00</div>
-                                                                </span>
-
-                                                            </div>
-
-
-                                                            <div class="odd-box yelbg mark-lay 37302_0availableToLay0_price_1172400734"
-                                                                onclick="getOddValue('0','29968100','1.172400734','1','Yes','37302','37302_0availableToLay0_price_1172400734','B');">
-
-                                                                <div class="bet-odds"
-                                                                    id="37302_0availableToLay0_price_1172400734">36
-                                                                </div>
-                                                                <span class="volume">
-                                                                    <div class="volume bet-description"
-                                                                        id="37302_0availableToLay0_size_1172400734">
-                                                                        740.00</div>
-                                                                </span>
-                                                            </div>
-
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                                <div id="user_row1" class="GameCell runner-row-37303">
-
-                                                    <div class="spotable">
-                                                        <div class="events-row odds-row">
-                                                            <div class="team-events">
-                                                                <h2>
-                                                                    <input type="hidden" class="position_1172400734"
-                                                                        id="selection_0" data-id="37303" value="0">
-                                                                    No
-                                                                </h2>
-                                                                <div class="volume-size color-green">
-                                                                    <i class="fas fa-angle-double-right"></i>
-                                                                    <div class="event-details-score" style="color:#fff"
-                                                                        id="37303_maxprofit_loss_runner_1172400734">
-                                                                        0 </div>
-                                                                </div>
-                                                            </div>
-                                                            <div class="odd-box mark-back 37303_0availableToBack0_price_1172400734"
-                                                                onclick="getOddValue('0','29968100','1.172400734','0','No','37303','37303_0availableToBack0_price_1172400734','B');">
-
-                                                                <div class="bet-odds"
-                                                                    id="37303_0availableToBack0_price_1172400734">1.02
-                                                                </div>
-                                                                <span class="volume">
-                                                                    <div class="bet-description"
-                                                                        id="37303_0availableToBack0_size_1172400734">
-                                                                        1882128.00</div>
-                                                                </span>
-
-                                                            </div>
-
-
-                                                            <div class="odd-box yelbg mark-lay 37303_0availableToLay0_price_1172400734"
-                                                                onclick="getOddValue('0','29968100','1.172400734','1','No','37303','37303_0availableToLay0_price_1172400734','B');">
-
-                                                                <div class="bet-odds"
-                                                                    id="37303_0availableToLay0_price_1172400734">1.03
-                                                                </div>
-                                                                <span class="volume">
-                                                                    <div class="volume bet-description"
-                                                                        id="37303_0availableToLay0_size_1172400734">
-                                                                        2309308.00</div>
-                                                                </span>
-                                                            </div>
-
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-
-
-
-
-
-                        </div>
+              </div>
+            </div>
+            <div class="MatchIndentB">
+              <div class="1172400732 matchTable1172400732 " id="matchTable29968100">
+                <div class="match-odds-section">
+                  <div class="odds-head">
+                    <div class="head-info">
+                      <span class="stake-info"><i class="fas fa-info-circle"></i></span>
+                      Match Odds <div id="min-stake">
+                        Min stake:500 Max stake:200000 </div>
                     </div>
-                </div>
-                <div id="fancyM_29968100" class="sesion-fancy">
-                    <div class="fancy-section"  id="fbox29968100">
-                        <div class="odds-head">
-                            <svg id="Capa_1" enable-background="new 0 0 512.024 512.024" height="512"
-                                viewBox="0 0 512.024 512.024" width="512" xmlns="http://www.w3.org/2000/svg">
-                                <g>
-                                    <g>
-                                        <g>
-                                            <path
-                                                d="m271.974 269.481h-59.775c-8.284 0-15-6.716-15-15s6.716-15 15-15h59.775c8.284 0 15 6.716 15 15s-6.716 15-15 15z"
-                                                fill=" "></path>
-                                        </g>
-                                        <g>
-                                            <path
-                                                d="m304.015 335.172c-.046 0-.09 0-.136-.001l-85.115-.753c-5.734-.051-10.938-3.366-13.406-8.542s-1.77-11.307 1.8-15.794l10.842-13.632c11.005-14.776 10.739-17.021 8.267-37.754-.031-.26-.062-.522-.094-.787-5.029-7.554-15.492-25.494-15.413-43.877.036-8.284 6.8-14.93 15.064-14.936 8.284.036 14.971 6.78 14.936 15.064-.046 10.777 8.785 25.099 11.882 29.267 1.57 2.112 2.582 4.634 2.885 7.249.182 1.559.359 3.045.528 4.468 2.514 21.081 3.253 32.198-7.375 49.537l55.465.491c8.284.073 14.939 6.848 14.866 15.132-.072 8.24-6.774 14.868-14.996 14.868z"
-                                                fill=" "></path>
-                                        </g>
-                                        <g>
-                                            <path
-                                                d="m225.758 229.097c-8.259 0-14.969-6.68-14.999-14.946-.058-16.028 8.025-29.804 22.176-37.795 17.473-9.867 42.088-9.772 58.53.224 12.363 7.517 21.313 18.383 24.557 29.813 2.261 7.97-2.366 16.264-10.336 18.525-7.966 2.26-16.263-2.366-18.525-10.335-1.147-4.044-5.575-8.899-11.281-12.368-6.313-3.839-19.445-4.674-28.193.265-6.164 3.481-6.94 8.009-6.927 11.564.03 8.285-6.662 15.024-14.946 15.054-.019-.001-.038-.001-.056-.001z"
-                                                fill=" "></path>
-                                        </g>
-                                        <g>
-                                            <path
-                                                d="m256.182 407.078c-11.6 0-23.295-1.338-34.889-4.061-32.465-7.645-61.929-26.246-82.974-52.379-21.79-27.059-33.308-59.775-33.308-94.614 0-34.846 11.521-67.567 33.316-94.625 21.044-26.126 50.505-44.723 82.955-52.365 45.259-10.628 92.091-.176 128.498 28.672 36.371 28.82 57.23 71.945 57.23 118.318s-20.857 89.496-57.224 118.313c-27.08 21.459-59.931 32.741-93.604 32.741zm-.055-272.097c-9.301 0-18.679 1.073-27.976 3.256-54.834 12.914-93.139 61.35-93.139 117.787 0 56.438 38.304 104.875 93.148 117.79 36.266 8.516 73.81.137 102.996-22.991 29.142-23.092 45.855-57.645 45.855-94.799 0-37.155-16.716-71.71-45.862-94.805-21.701-17.197-48.031-26.238-75.022-26.238z"
-                                                fill=" "></path>
-                                        </g>
-                                        <g>
-                                            <path
-                                                d="m287.303 138.635c-1.14 0-2.29-.13-3.431-.398-18.226-4.28-37.495-4.28-55.721 0-5.798 1.363-11.854-.837-15.429-5.603l-65.99-87.98c-2.724-3.631-3.656-8.299-2.538-12.698s4.168-8.054 8.295-9.942c15.184-6.948 35.173-13.377 52.167-16.779 25.23-5.106 48.894-6.435 74.437-4.173 28.019 2.588 56.565 10.027 80.438 20.952 4.127 1.888 7.178 5.544 8.296 9.942 1.119 4.398.186 9.067-2.537 12.698l-65.99 87.98c-2.87 3.829-7.343 6.001-11.997 6.001zm-104.779-96.26 48.532 64.705c16.479-2.73 33.435-2.73 49.914 0l48.571-64.756c-16.721-5.757-35.045-9.709-53.148-11.382-22.529-1.996-43.46-.82-65.814 3.705-8.784 1.757-18.709 4.518-28.055 7.728z"
-                                                fill=" "></path>
-                                        </g>
-                                        <g>
-                                            <path
-                                                d="m476.383 368.304c-3.214 0-6.378-1.033-9.001-3l-87.98-65.99c-4.766-3.574-6.965-9.63-5.603-15.429 4.279-18.228 4.279-37.496 0-55.722-1.362-5.799.837-11.854 5.603-15.428l87.98-65.99c3.629-2.723 8.298-3.657 12.697-2.538 4.398 1.119 8.054 4.169 9.942 8.296 29.219 63.854 29.219 143.188 0 207.042-1.889 4.127-5.544 7.177-9.942 8.296-1.22.311-2.462.463-3.696.463zm-71.427-87.324 64.81 48.611c16.331-46.747 16.331-100.388 0-147.134l-64.81 48.61c2.731 16.48 2.731 33.434 0 49.913z"
-                                                fill=" "></path>
-                                        </g>
-                                        <g>
-                                            <path
-                                                d="m256.012 511.949c-35.797 0-71.594-7.305-103.521-21.915-4.127-1.889-7.177-5.544-8.295-9.942s-.186-9.067 2.538-12.697l65.99-87.979c3.574-4.766 9.628-6.965 15.429-5.603 18.226 4.279 37.494 4.279 55.722 0 5.795-1.359 11.854.836 15.429 5.602l65.99 87.979c2.723 3.631 3.656 8.3 2.537 12.698-1.118 4.398-4.169 8.054-8.296 9.942-31.928 14.61-67.726 21.915-103.523 21.915zm-73.566-42.171c46.746 16.332 100.388 16.332 147.134 0l-48.61-64.809c-16.481 2.731-33.436 2.731-49.914 0z"
-                                                fill=" "></path>
-                                        </g>
-                                        <g>
-                                            <path
-                                                d="m35.641 368.304c-1.235 0-2.476-.152-3.697-.463-4.398-1.118-8.054-4.169-9.942-8.296-29.219-63.854-29.219-143.188 0-207.042 1.888-4.127 5.544-7.177 9.942-8.296 4.399-1.119 9.067-.186 12.698 2.538l87.98 65.99c4.766 3.574 6.964 9.63 5.602 15.429-4.28 18.226-4.28 37.494 0 55.72 1.362 5.8-.836 11.854-5.602 15.43l-87.98 65.99c-2.623 1.967-5.788 3-9.001 3zm6.618-185.846c-16.332 46.747-16.333 100.388 0 147.134l64.809-48.61c-2.731-16.48-2.731-33.434 0-49.913z"
-                                                fill=" "></path>
-                                        </g>
-                                        <g>
-                                            <path
-                                                d="m256.012 512.024c-68.38 0-132.667-26.629-181.02-74.98-48.352-48.353-74.98-112.64-74.98-181.02s26.629-132.667 74.98-181.019c48.352-48.352 112.64-74.98 181.02-74.98s132.667 26.628 181.02 74.98c48.352 48.352 74.98 112.639 74.98 181.019s-26.629 132.667-74.98 181.02c-48.353 48.351-112.64 74.98-181.02 74.98zm0-481.999c-124.617 0-226 101.383-226 226s101.383 226 226 226 226-101.383 226-226c0-124.618-101.383-226-226-226z"
-                                                fill=" "></path>
-                                        </g>
-                                    </g>
-                                </g>
-                            </svg>
-                            <span class="match_name">Fancy</span>
-                        </div>
-                        <div class="fancyLM fancy-row"></div>
-                        <div class="fancyAPI fancy-row">
-                            <div class="col-md-3 col-xs-6">
-                                <div class="fancy-item block_box f_m_29968100 fancy_33303" data-id="33303">
-                                    <div class="fancyhead fancyhead33303 fancyheading" id="fancy_name33303"><span>Lambi
-                                            SLZ</span></div>
-                                    <div class="fancy-noyes"><span>No</span><span>Yes</span></div>
-                                    <div class="fancy-flex">
-                                        <div onclick="betfancy(29968100,33303,1);" class="odd-box"><span
-                                                class="lay-cell cell-btn" id="LayNO_33303">137</span><span
-                                                class="volume disab-btn" id="NoValume_33303">110</span></div>
-                                        <div onclick="betfancy(29968100,33303,0);" class="odd-box yelbg"><span
-                                                class="back-cell cell-btn" id="BackYes_33303">137</span><span
-                                                class="volume" id="YesValume_33303">90</span></div>
-                                        <div class="ball-running 2 show_msg_box_33303"> </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-md-3 col-xs-6">
-                                <div class="fancy-item block_box f_m_29968100 fancy_33442" data-id="33442">
-                                    <div class="fancyhead fancyhead33442 fancyheading" id="fancy_name33442"><span>M Nabi
-                                            run</span></div>
-                                    <div class="fancy-noyes"><span>No</span><span>Yes</span></div>
-                                    <div class="fancy-flex">
-                                        <div onclick="betfancy(29968100,33442,1);" class="odd-box"><span
-                                                class="lay-cell cell-btn" id="LayNO_33442">42</span><span
-                                                class="volume disab-btn" id="NoValume_33442">110</span></div>
-                                        <div onclick="betfancy(29968100,33442,0);" class="odd-box yelbg"><span
-                                                class="back-cell cell-btn" id="BackYes_33442">42</span><span
-                                                class="volume" id="YesValume_33442">90</span></div>
-                                        <div class="ball-running 2 show_msg_box_33442 ball-msg-box">
-                                            <h1>SUSPENDED</h1>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-md-3 col-xs-6">
-                                <div class="fancy-item block_box f_m_29968100 fancy_33443" data-id="33443">
-                                    <div class="fancyhead fancyhead33443 fancyheading" id="fancy_name33443"><span>M Nabi
-                                            Boundaries</span></div>
-                                    <div class="fancy-noyes"><span>No</span><span>Yes</span></div>
-                                    <div class="fancy-flex">
-                                        <div onclick="betfancy(29968100,33443,1);" class="odd-box"><span
-                                                class="lay-cell cell-btn" id="LayNO_33443">5</span><span
-                                                class="volume disab-btn" id="NoValume_33443">100</span></div>
-                                        <div onclick="betfancy(29968100,33443,0);" class="odd-box yelbg"><span
-                                                class="back-cell cell-btn" id="BackYes_33443">6</span><span
-                                                class="volume" id="YesValume_33443">100</span></div>
-                                        <div class="ball-running 2 show_msg_box_33443 ball-msg-box">
-                                            <h1>SUSPENDED</h1>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-md-3 col-xs-6">
-                                <div class="fancy-item block_box f_m_29968100 fancy_33411" data-id="33411">
-                                    <div class="fancyhead fancyhead33411 fancyheading" id="fancy_name33411"><span>20
-                                            over runs SLZ(SLZ vs TKR)adv</span></div>
-                                    <div class="fancy-noyes"><span>No</span><span>Yes</span></div>
-                                    <div class="fancy-flex">
-                                        <div onclick="betfancy(29968100,33411,1);" class="odd-box"><span
-                                                class="lay-cell cell-btn" id="LayNO_33411">137</span><span
-                                                class="volume disab-btn" id="NoValume_33411">110</span></div>
-                                        <div onclick="betfancy(29968100,33411,0);" class="odd-box yelbg"><span
-                                                class="back-cell cell-btn" id="BackYes_33411">137</span><span
-                                                class="volume" id="YesValume_33411">90</span></div>
-                                        <div class="ball-running 2 show_msg_box_33411"> </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-md-3 col-xs-6">
-                                <div class="fancy-item block_box f_m_29968100 fancy_33446" data-id="33446">
-                                    <div class="fancyhead fancyhead33446 fancyheading" id="fancy_name33446"><span>18
-                                            Over SLZ</span></div>
-                                    <div class="fancy-noyes"><span>No</span><span>Yes</span></div>
-                                    <div class="fancy-flex">
-                                        <div onclick="betfancy(29968100,33446,1);" class="odd-box"><span
-                                                class="lay-cell cell-btn" id="LayNO_33446">116</span><span
-                                                class="volume disab-btn" id="NoValume_33446">100</span></div>
-                                        <div onclick="betfancy(29968100,33446,0);" class="odd-box yelbg"><span
-                                                class="back-cell cell-btn" id="BackYes_33446">117</span><span
-                                                class="volume" id="YesValume_33446">100</span></div>
-                                        <div class="ball-running 2 show_msg_box_33446"> </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-md-3 col-xs-6">
-                                <div class="fancy-item block_box f_m_29968100 fancy_33447" data-id="33447">
-                                    <div class="fancyhead fancyhead33447 fancyheading" id="fancy_name33447"><span>19
-                                            Over SLZ</span></div>
-                                    <div class="fancy-noyes"><span>No</span><span>Yes</span></div>
-                                    <div class="fancy-flex">
-                                        <div onclick="betfancy(29968100,33447,1);" class="odd-box"><span
-                                                class="lay-cell cell-btn" id="LayNO_33447">0 </span><span
-                                                class="volume disab-btn" id="NoValume_33447">0</span></div>
-                                        <div onclick="betfancy(29968100,33447,0);" class="odd-box yelbg"><span
-                                                class="back-cell cell-btn" id="BackYes_33447">0</span><span
-                                                class="volume" id="YesValume_33447">0</span></div>
-                                        <div class="ball-running 2 ball-msg-box show_msg_box_33447">
-                                            <h1>BALL RUNNING</h1>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
+                    <div class="head-flex">
+                      <span>Back</span>
+                      <span>Lay</span>
                     </div>
-                </div>
+                  </div>
+                  <div id="user_row0" *ngFor="let market of match.markets; trackBy:trackByMkt"
+                    class="GameCell runner-row-8693552">
 
+                    <div class="spotable" *ngFor="let runner of market.runners; trackBy:trackByRunner">
+                      <div class="events-row odds-row">
+                        <div class="team-events">
+                          <h2>
+                            <input type="hidden" class="position_1172400732" id="selection_0" data-id="8693552"
+                              value="0">
+                            {{runner.runnerName}}
+                          </h2>
+                          <div class="volume-size color-green">
+                            <i class="fas fa-angle-double-right"></i>
+                            <div class="event-details-score" *ngIf="!market.newpnl"
+                             [ngClass]="getPnlClass(runner,market.pnl)"
+                              id="8693552_maxprofit_loss_runner_1172400732">
+                              {{getPnlValue(runner,market.pnl) | number:'1.2-2'}} </div>
+                              <div class="event-details-score" *ngIf="market.newpnl"
+                              [ngClass]="getPnlClass(runner,market.newpnl)">{{getPnlValue(runner,market.newpnl) |
+                              number:'1.2-2'}}</div>
+                          </div>
+                        </div>
+                        <div class="odd-box mark-back 8693552_0availableToBack0_price_1172400732 yello"
+                          data-target="mybet"
+                          (click)="getOddValue(match.sportId,match.tourId,match.bfId,match.id,market.bfId,market.id,match.name,market.name,match.inPlay,runner.runnerName,runner.back1,'back',null,null,null,null,null,null);">
+                          <div class="bet-odds">{{runner.back1}}</div>
+                          <span class="volume">
+                            <div class="bet-description" id="8693552_0availableToBack0_size_1172400732">
+                              {{runner.backSize1}}
+                            </div>
+                          </span>
+                        </div>
+
+
+                        <div class="odd-box yelbg mark-lay 8693552_0availableToLay0_price_1172400732"
+                          (click)="getOddValue(match.sportId,match.tourId,match.bfId,match.id,market.bfId,market.id,match.name,market.name,match.inPlay,runner.runnerName,runner.lay1,'lay',null,null,null,null,null,null);">
+                          <div class="bet-odds">{{runner.lay1}}</div>
+                          <span class="volume">
+                            <div class="volume bet-description">{{runner.laySize1}}</div>
+                          </span>
+                        </div>
+
+                      </div>
+                    </div>
+
+                  </div>
+
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div id="fancyM_29968100" class="sesion-fancy" *ngIf="match.fancyData.length>0">
+          <div class="fancy-section" id="fbox29968100">
+            <div class="odds-head">
+              <svg id="Capa_1" enable-background="new 0 0 512.024 512.024" height="512" viewBox="0 0 512.024 512.024"
+                width="512" xmlns="http://www.w3.org/2000/svg">
+                <g>
+                  <g>
+                    <g>
+                      <path
+                        d="m271.974 269.481h-59.775c-8.284 0-15-6.716-15-15s6.716-15 15-15h59.775c8.284 0 15 6.716 15 15s-6.716 15-15 15z"
+                        fill=" "></path>
+                    </g>
+                    <g>
+                      <path
+                        d="m304.015 335.172c-.046 0-.09 0-.136-.001l-85.115-.753c-5.734-.051-10.938-3.366-13.406-8.542s-1.77-11.307 1.8-15.794l10.842-13.632c11.005-14.776 10.739-17.021 8.267-37.754-.031-.26-.062-.522-.094-.787-5.029-7.554-15.492-25.494-15.413-43.877.036-8.284 6.8-14.93 15.064-14.936 8.284.036 14.971 6.78 14.936 15.064-.046 10.777 8.785 25.099 11.882 29.267 1.57 2.112 2.582 4.634 2.885 7.249.182 1.559.359 3.045.528 4.468 2.514 21.081 3.253 32.198-7.375 49.537l55.465.491c8.284.073 14.939 6.848 14.866 15.132-.072 8.24-6.774 14.868-14.996 14.868z"
+                        fill=" "></path>
+                    </g>
+                    <g>
+                      <path
+                        d="m225.758 229.097c-8.259 0-14.969-6.68-14.999-14.946-.058-16.028 8.025-29.804 22.176-37.795 17.473-9.867 42.088-9.772 58.53.224 12.363 7.517 21.313 18.383 24.557 29.813 2.261 7.97-2.366 16.264-10.336 18.525-7.966 2.26-16.263-2.366-18.525-10.335-1.147-4.044-5.575-8.899-11.281-12.368-6.313-3.839-19.445-4.674-28.193.265-6.164 3.481-6.94 8.009-6.927 11.564.03 8.285-6.662 15.024-14.946 15.054-.019-.001-.038-.001-.056-.001z"
+                        fill=" "></path>
+                    </g>
+                    <g>
+                      <path
+                        d="m256.182 407.078c-11.6 0-23.295-1.338-34.889-4.061-32.465-7.645-61.929-26.246-82.974-52.379-21.79-27.059-33.308-59.775-33.308-94.614 0-34.846 11.521-67.567 33.316-94.625 21.044-26.126 50.505-44.723 82.955-52.365 45.259-10.628 92.091-.176 128.498 28.672 36.371 28.82 57.23 71.945 57.23 118.318s-20.857 89.496-57.224 118.313c-27.08 21.459-59.931 32.741-93.604 32.741zm-.055-272.097c-9.301 0-18.679 1.073-27.976 3.256-54.834 12.914-93.139 61.35-93.139 117.787 0 56.438 38.304 104.875 93.148 117.79 36.266 8.516 73.81.137 102.996-22.991 29.142-23.092 45.855-57.645 45.855-94.799 0-37.155-16.716-71.71-45.862-94.805-21.701-17.197-48.031-26.238-75.022-26.238z"
+                        fill=" "></path>
+                    </g>
+                    <g>
+                      <path
+                        d="m287.303 138.635c-1.14 0-2.29-.13-3.431-.398-18.226-4.28-37.495-4.28-55.721 0-5.798 1.363-11.854-.837-15.429-5.603l-65.99-87.98c-2.724-3.631-3.656-8.299-2.538-12.698s4.168-8.054 8.295-9.942c15.184-6.948 35.173-13.377 52.167-16.779 25.23-5.106 48.894-6.435 74.437-4.173 28.019 2.588 56.565 10.027 80.438 20.952 4.127 1.888 7.178 5.544 8.296 9.942 1.119 4.398.186 9.067-2.537 12.698l-65.99 87.98c-2.87 3.829-7.343 6.001-11.997 6.001zm-104.779-96.26 48.532 64.705c16.479-2.73 33.435-2.73 49.914 0l48.571-64.756c-16.721-5.757-35.045-9.709-53.148-11.382-22.529-1.996-43.46-.82-65.814 3.705-8.784 1.757-18.709 4.518-28.055 7.728z"
+                        fill=" "></path>
+                    </g>
+                    <g>
+                      <path
+                        d="m476.383 368.304c-3.214 0-6.378-1.033-9.001-3l-87.98-65.99c-4.766-3.574-6.965-9.63-5.603-15.429 4.279-18.228 4.279-37.496 0-55.722-1.362-5.799.837-11.854 5.603-15.428l87.98-65.99c3.629-2.723 8.298-3.657 12.697-2.538 4.398 1.119 8.054 4.169 9.942 8.296 29.219 63.854 29.219 143.188 0 207.042-1.889 4.127-5.544 7.177-9.942 8.296-1.22.311-2.462.463-3.696.463zm-71.427-87.324 64.81 48.611c16.331-46.747 16.331-100.388 0-147.134l-64.81 48.61c2.731 16.48 2.731 33.434 0 49.913z"
+                        fill=" "></path>
+                    </g>
+                    <g>
+                      <path
+                        d="m256.012 511.949c-35.797 0-71.594-7.305-103.521-21.915-4.127-1.889-7.177-5.544-8.295-9.942s-.186-9.067 2.538-12.697l65.99-87.979c3.574-4.766 9.628-6.965 15.429-5.603 18.226 4.279 37.494 4.279 55.722 0 5.795-1.359 11.854.836 15.429 5.602l65.99 87.979c2.723 3.631 3.656 8.3 2.537 12.698-1.118 4.398-4.169 8.054-8.296 9.942-31.928 14.61-67.726 21.915-103.523 21.915zm-73.566-42.171c46.746 16.332 100.388 16.332 147.134 0l-48.61-64.809c-16.481 2.731-33.436 2.731-49.914 0z"
+                        fill=" "></path>
+                    </g>
+                    <g>
+                      <path
+                        d="m35.641 368.304c-1.235 0-2.476-.152-3.697-.463-4.398-1.118-8.054-4.169-9.942-8.296-29.219-63.854-29.219-143.188 0-207.042 1.888-4.127 5.544-7.177 9.942-8.296 4.399-1.119 9.067-.186 12.698 2.538l87.98 65.99c4.766 3.574 6.964 9.63 5.602 15.429-4.28 18.226-4.28 37.494 0 55.72 1.362 5.8-.836 11.854-5.602 15.43l-87.98 65.99c-2.623 1.967-5.788 3-9.001 3zm6.618-185.846c-16.332 46.747-16.333 100.388 0 147.134l64.809-48.61c-2.731-16.48-2.731-33.434 0-49.913z"
+                        fill=" "></path>
+                    </g>
+                    <g>
+                      <path
+                        d="m256.012 512.024c-68.38 0-132.667-26.629-181.02-74.98-48.352-48.353-74.98-112.64-74.98-181.02s26.629-132.667 74.98-181.019c48.352-48.352 112.64-74.98 181.02-74.98s132.667 26.628 181.02 74.98c48.352 48.352 74.98 112.639 74.98 181.019s-26.629 132.667-74.98 181.02c-48.353 48.351-112.64 74.98-181.02 74.98zm0-481.999c-124.617 0-226 101.383-226 226s101.383 226 226 226 226-101.383 226-226c0-124.618-101.383-226-226-226z"
+                        fill=" "></path>
+                    </g>
+                  </g>
+                </g>
+              </svg>
+              <span class="match_name">Fancy</span>
+            </div>
+            <div class="fancyLM fancy-row"></div>
+            <div class="fancyAPI fancy-row" >
+              <div class="col-md-3 col-xs-6" *ngFor="let fancy of match.fancyData; trackBy:trackByFancy">
+                <div class="fancy-item block_box f_m_29968100 fancy_{{fancy.id}}">
+                  <div class="fancyhead fancyhead{{fancy.id}} fancyheading" id="fancy_{{fancy.id}}">
+                    <span>{{fancy.name}}</span></div>
+                  <div class="fancy-noyes"><span>No</span><span>Yes</span></div>
+                  <div class="fancy-flex">
+                    <div  (click)="fancy.ballStatus!=''?'':getOddValue(match.sportId,match.tourId,match.bfId,match.id,match.markets[0].bfId,match.markets[0].id,match.name,null,match.inPlay,fancy.name,null,'lay',fancy.noScore,fancy.noRate,fancy.id,null,null,null)" class="odd-box">
+                      <span class="lay-cell cell-btn"
+                        id="LayNO_{{fancy.id}}">{{fancy.noScore}}</span>
+                        <span class="volume disab-btn" id="NoValume_{{fancy.id}}">{{fancy.noRate}}</span></div>
+                        <div (click)="fancy.ballStatus!=''?'':getOddValue(match.sportId,match.tourId,match.bfId,match.id,match.markets[0].bfId,match.markets[0].id,match.name,null,match.inPlay,fancy.name,null,'back',fancy.yesScore,fancy.yesRate,fancy.id,null,null,null)" class="odd-box yelbg">
+                          <span class="back-cell cell-btn" id="BackYes_{{fancy.id}}">{{fancy.yesScore}}</span>
+                          <span class="volume" id="YesValume_{{fancy.id}}">{{fancy.yesRate}}</span></div>
+                          <div class="ball-running 2 show_msg_box_33442 ball-msg-box" *ngIf="fancy.ballStatus!=''">
+                            <h1>{{fancy.ballStatus}}</h1>
+                        </div>
+                  </div>
+                </div>
+              </div>
 
             </div>
+          </div>
         </div>
-        <div class="betbtn" id="draggable"><a (click)="openBet()">Bets</a></div>
 
 
-
-
-
-
-
-
-
-        <!-- <script>
-            var draggable = document.getElementById('draggable');
-            draggable.addEventListener('touchmove', function (event) {
-                var touch = event.targetTouches[0];
-
-                // Place element where the finger is
-                draggable.style.left = touch.pageX - 25 + 'px';
-                draggable.style.top = touch.pageY - 25 + 'px';
-                event.preventDefault();
-            }, false);
-        </script> -->
-
+      </div>
     </div>
-    <div id="mybet" class="betnav">
-        <a href="javascript:void(0)" class="closebet">×</a>
-        <div class="matchBox">
-            <div class="betSlipBox" >
-                <div class="betBox border-box" style="display: none;">
-                    <div class="block_box">
-                        <div class="betslip">
-                            <div class="loader" style="display:none">
-                                <div class="mini-loader">
-                                    <span></span>
-                                    <span></span>
-                                    <span></span>
-                                </div>
-                            </div>
-                            <form method="POST" id="placeBetSilp" style="background-color: rgb(167, 216, 253);">
-                                <div class="fancy-temaname" id="ShowRunnderName">Lokomotiv</div>
-                                <span class="close-betslip"><svg version="1.1" id="Capa_1"
-                                        xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
-                                        x="0px" y="0px" viewBox="0 0 512 512" style="enable-background:new 0 0 512 512;"
-                                        xml:space="preserve">
-                                        <g>
-                                            <g>
-                                                <path d="M436.812,75.188C388.327,26.702,324.113,0,256,0S123.673,26.702,75.188,75.188C26.702,123.673,0,187.887,0,256
+    <div class="betbtn" id="draggable"><a (click)="openBetbox()">Bets</a></div>
+
+
+
+
+  </div>
+  <div id="mybet" class="betnav">
+    <a href="" class="closebet" (click)="closebet()">×</a>
+    <div class="matchBox">
+      <div class="betSlipBox">
+        <div class="betBox border-box" id="betBox" *ngIf="openBet">
+          <div class="block_box">
+            <div class="betslip">
+              <div class="loader" style="display:none">
+                <div class="mini-loader">
+                  <span></span>
+                  <span></span>
+                  <span></span>
+                </div>
+              </div>
+              <form [formGroup]="OpenBetForm" id="placeBetSilp" (ngSubmit)="BetSubmit()"
+                style="background-color:rgb(167, 216, 253)">
+                <div class="fancy-temaname" id="ShowRunnderName">{{f.runnerName.value}}</div>
+                <span class="close-betslip" (click)="closebetslip()"><svg version="1.1" id="Capa_1"
+                    xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
+                    viewBox="0 0 512 512" style="enable-background:new 0 0 512 512;" xml:space="preserve">
+                    <g>
+                      <g>
+                        <path d="M436.812,75.188C388.327,26.702,324.113,0,256,0S123.673,26.702,75.188,75.188C26.702,123.673,0,187.887,0,256
                                                   s26.702,132.327,75.188,180.812C123.673,485.298,187.887,512,256,512s132.327-26.702,180.812-75.188
                                                   C485.298,388.327,512,324.113,512,256S485.298,123.673,436.812,75.188z M256,482C131.383,482,30,380.617,30,256S131.383,30,256,30
                                                   s226,101.383,226,226S380.617,482,256,482z"></path>
-                                            </g>
-                                        </g>
-                                        <g>
-                                            <g>
-                                                <path d="M404.493,171.147l-63.64-63.639L256,192.36l-84.853-84.853l-63.64,63.64L192.36,256l-84.853,84.853l63.64,63.64
+                      </g>
+                    </g>
+                    <g>
+                      <g>
+                        <path d="M404.493,171.147l-63.64-63.639L256,192.36l-84.853-84.853l-63.64,63.64L192.36,256l-84.853,84.853l63.64,63.64
                                                   L256,319.64l84.853,84.853l63.64-63.64L319.64,256L404.493,171.147z M362.066,340.853l-21.213,21.213L256,277.213l-84.853,84.853
                                                   l-21.213-21.213L234.787,256l-84.853-84.853l21.213-21.213L256,234.787l84.853-84.853l21.213,21.213L277.213,256L362.066,340.853z
                                                   "></path>
-                                            </g>
-                                        </g>
-                                        <g>
-                                        </g>
-                                        <g>
-                                        </g>
-                                        <g>
-                                        </g>
-                                        <g>
-                                        </g>
-                                        <g>
-                                        </g>
-                                        <g>
-                                        </g>
-                                        <g>
-                                        </g>
-                                        <g>
-                                        </g>
-                                        <g>
-                                        </g>
-                                        <g>
-                                        </g>
-                                        <g>
-                                        </g>
-                                        <g>
-                                        </g>
-                                        <g>
-                                        </g>
-                                        <g>
-                                        </g>
-                                        <g>
-                                        </g>
-                                    </svg></span>
+                      </g>
+                    </g>
+                    <g>
+                    </g>
+                    <g>
+                    </g>
+                    <g>
+                    </g>
+                    <g>
+                    </g>
+                    <g>
+                    </g>
+                    <g>
+                    </g>
+                    <g>
+                    </g>
+                    <g>
+                    </g>
+                    <g>
+                    </g>
+                    <g>
+                    </g>
+                    <g>
+                    </g>
+                    <g>
+                    </g>
+                    <g>
+                    </g>
+                    <g>
+                    </g>
+                    <g>
+                    </g>
+                  </svg></span>
 
-                                <div class="odds-stake-fild">
-                                    <div class="item-slip input-odds">
-                                        <input type="number" step="0.01" id="ShowBetPrice"
-                                            class="calProfitLoss form-control">
-                                        <div class="inc plus_btn">+</div>
-                                        <div class="dec plus_btn">-</div>
-                                    </div>
-                                    <div class="item-slip input-stake">
-                                        <input type="number" pattern="[0-9]*" step="1" id="stakeValue"
-                                            class="calProfitLoss form-control">
-                                        <input type="hidden" name="selectionId" id="selectionId" value="214365"
-                                            class="form-control">
-                                        <input type="hidden" name="matchId" id="matchId" value="29974943"
-                                            class="form-control">
-                                        <input type="hidden" name="isback" id="isback" value="0" class="form-control">
-                                        <input type="hidden" name="MarketId" id="MarketId" value="1.172356008"
-                                            class="form-control">
-                                        <input type="hidden" name="placeName" id="placeName" value="Lokomotiv"
-                                            class="form-control">
-                                        <input type="hidden" name="text" id="stackcount" value="0" class="form-control">
-                                        <input type="hidden" name="text" id="isfancy" value="0" class="form-control">
-                                        <div class="inc plus_btn">+</div>
-                                        <div class="dec plus_btn">-</div>
-                                    </div>
-                                </div>
-                                <div class="betslip-footer">
-                                    <div class="odds-btn-value">
-                                        <div class="fancy-btngroup">
-                                            <button class="btn btn-default  chipName1" type="button" value="1000"
-                                                onclick="StaKeAmount(this);">1000</button><button
-                                                class="btn btn-default  chipName2" type="button" value="2000"
-                                                onclick="StaKeAmount(this);">2000</button><button
-                                                class="btn btn-default  chipName3" type="button" value="5000"
-                                                onclick="StaKeAmount(this);">5000</button><button
-                                                class="btn btn-default  chipName4" type="button" value="25000"
-                                                onclick="StaKeAmount(this);">25000</button><button
-                                                class="btn btn-default  chipName5" type="button" value="50000"
-                                                onclick="StaKeAmount(this);">50000</button><button
-                                                class="btn btn-default  chipName6" type="button" value="100000"
-                                                onclick="StaKeAmount(this);">1000000</button> </div>
-                                    </div>
-                                    <div class="odds-btn-clear">
-                                        <button class="btn btn-default" type="button" onclick="ClearStack( );"><i
-                                                class="fas fa-backspace"></i></button>
-                                    </div>
-                                </div>
-                                <div class="place-bet-div">
-                                    <button class="btn btn-Cancel" type="button"
-                                        onclick="ClearAllSelection();">Cancel</button>
-                                    <button class="btn btn-placebet placebet" type="button" onclick="PlaceBet();">Place
-                                        Bet</button>
-                                    <button class="btn btn-placebet placefancy" type="button" onclick="PlaceFancy();"
-                                        style="display:none">Place Bet</button>
-                                </div>
-                                <div class="proft-loss-slip">
-                                    <span>Profit or Liability</span>
-                                    <span id="profitData" class="green">144000</span>
-                                    <span id="LossData" class="red">8000</span>
-                                </div>
-                            </form>
-                        </div>
-                    </div>
+                <div class="odds-stake-fild">
+                  <div class="item-slip input-odds">
+                    <input type="number" *ngIf="f.mtype.value=='market'" id="ShowBetPrice" formControlName="odds" (keyup)="update()"
+                      class="calProfitLoss form-control">
+                      <input type="number" *ngIf="f.mtype.value=='fancy'" id="ShowBetPrice" formControlName="score"
+                      class="calProfitLoss odds-input form-control">
+                    <input type="number" *ngIf="f.mtype.value=='book'" id="ShowBetPrice" formControlName="bookodds"
+                      class="calProfitLoss odds-input form-control">
+                    <div class="inc plus_btn" (click)="f.mtype.value=='market'?incOdds():''">+</div>
+                    <div class="dec plus_btn" (click)="f.mtype.value=='market'?decOdds():''">-</div>
+                  </div>
+                  <div class="item-slip input-stake">
+                    <input type="number" pattern="[0-9]*" step="1" id="stakeValue" formControlName="stake"
+                      class="calProfitLoss form-control">
+                    <div class="inc plus_btn" (click)="incStake()">+</div>
+                    <div class="dec plus_btn" (click)="decStake()">-</div>
+                  </div>
                 </div>
-                <div class="odds-tabs tab_bets">
-                    <ul class="nav nav-tabs match-bets">
-                        <li class="nav-item betdata active-all active">
-                            <a class="allbet" href="javascript:void(0);" onclick="getDataByType(this,'4');">All Bets
-                                <span id="cnt_row">(0)</span> </a>
-                        </li>
-                        <!-- <li class="nav-item betdata active-unmatch" style="display: none;">
+                <div class="betslip-footer">
+                  <div class="odds-btn-value">
+                    <div class="fancy-btngroup">
+                      <ng-container *ngFor="let stake of stakeSetting;let index=index;">
+                        <button class="btn btn-default  chipName1" type="button"
+                          (click)="addStake(stake);">{{stakeSetting[index]}}</button>
+
+                      </ng-container>
+                    </div>
+                  </div>
+                  <div class="odds-btn-clear">
+                    <button class="btn btn-default" type="button" (click)="clearStake( );"><i
+                        class="fas fa-backspace"></i></button>
+                  </div>
+                </div>
+                <div class="place-bet-div">
+                  <button class="btn btn-Cancel" type="button" (click)="ClearAllSelection()">Cancel</button>
+                  <button class="btn btn-placebet placebet" type="submit">Place Bet</button>
+
+                </div>
+                <div class="proft-loss-slip">
+                  <span>Profit or Liability</span>
+                  <span id="profitData" class="green">{{f.profit.value | number:'1.2-2'}}</span>
+                  <span id="LossData" class="red">{{f.loss.value | number:'1.2-2'}}</span>
+                </div>
+              </form>
+
+            </div>
+          </div>
+        </div>
+        <div class="odds-tabs tab_bets">
+          <ul class="nav nav-tabs match-bets">
+            <li class="nav-item betdata active-all active">
+              <a class="allbet" href="javascript:void(0);" (click)="getDataByType('4')">All Bets
+                <span id="cnt_row">({{totalBets}})</span> </a>
+            </li>
+            <!-- <li class="nav-item betdata active-unmatch" style="display: none;">
                             <a class="unmatchbet" href="javascript:void(0);" onclick="getDataByType(this,'2');"> UnMatch
                                 Bet <span id="cnt_row1">(0)</span> </a>
                         </li> -->
-                    </ul>
-                </div>
-            </div>
+          </ul>
         </div>
-        <div class="" id="MatchUnMatchBetaData">
-            <style>
-                .searchbtnn {
-                    margin-right: 20px;
-                }
-            </style>
-
-
-            <span id="msg_error"></span>
-            <div class="scroll-table match_bets MachShowHide">
-                <table class="table">
-                    <thead class="head">
-                        <tr class="headings">
-                            <td>Bet ID</td>
-                            <td>Runner</td>
-                            <td>Odds</td>
-                            <td>Stack</td>
-                            <td>Bet Type</td>
-                            <!--td>P&L</td-->
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr class="mark-back"
-                        [ngClass]="{'back':result.type=='BACK' || result.type=='Back' ||result.type=='YES','lay':result.type=='LAY' || result.type=='Lay' || result.type=='NO'}"
-                        *ngFor="let result of matchedbets">
-                            <td>{{result.betId}}</td>
-                            <td>{{result.selection}}</td>
-                            <td>{{result.odds}}</td>
-                            <td>{{result.matchedStake}}</td>
-                            <td>{{result.type}}</td>
-                            <!--td>P&L</td-->
-                        </tr>
-                    </tbody>
-                </table>
-            </div>
-        </div>
+      </div>
     </div>
+    <div class="" id="MatchUnMatchBetaData">
+      <style>
+        .searchbtnn {
+          margin-right: 20px;
+        }
+      </style>
+
+
+      <span id="msg_error"></span>
+      <div class="scroll-table match_bets MachShowHide">
+        <table class="table">
+          <thead class="head">
+            <tr class="headings">
+              <td>No.</td>
+              <td>Runner</td>
+              <td>Odds</td>
+              <td>Stake</td>
+              <td>Bet Type</td>
+              <td>P&L</td>
+              <td>Time</td>
+              <td>ID</td>
+              <td> IP</td>
+            </tr>
+          </thead>
+          <tbody>
+            <tr [ngClass]="{'back':bet.backLay=='BACK' || bet.backLay=='Back' ||bet.backLay=='YES','lay':bet.backLay=='LAY' || bet.backLay=='Lay' || bet.backLay=='NO'}"
+              *ngFor="let bet of eventBets;let index=index;trackBy:trackByBet">
+              <td>{{index+1}}</td>
+              <td>{{bet.runnerName}}</td>
+              <td>{{bet.odds}}</td>
+              <td>{{bet.stake | number:'1.2-2'}}</td>
+              <td>{{bet.backLay}}</td>
+              <td>{{bet.profit | number:'1.2-2'}}</td>
+              <td>{{bet.date}}</td>
+              <td>{{bet.id}}</td>
+              <td>{{bet.ipAddress}}</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
 </div>

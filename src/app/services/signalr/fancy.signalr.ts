@@ -1,76 +1,75 @@
 import { Injectable } from '@angular/core';
 import { Observable, BehaviorSubject } from 'rxjs';
+import _ from 'lodash';
+import { hubConnection } from 'signalr-no-jquery';
 
 @Injectable({
   providedIn: 'root'
 })
-export class FancySignalRService {
+export class FancyService {
 
-  private fancyConnection: any;
-  private fancyProxy: any
-  private fancyHubConn: any;
+  private fancyConnection;
+  private fancyProxy;
+  private fancyHubConn;
 
-  private fancyHubAddress: any;
+  private fancyHubAddress;
 
-  private _fancyDataSub = new BehaviorSubject<any>(null);
-  fancyData$: Observable<any> = this._fancyDataSub.asObservable();
+  fancySource: Observable<any>;
+  private currentFancy: BehaviorSubject<any>;
 
   constructor() {
+    this.currentFancy = <BehaviorSubject<any>>new BehaviorSubject(null);
+    this.fancySource = this.currentFancy.asObservable();
   }
 
-  connectFancy(fancyHubAddress: string, matchid: number) {
-    // console.log(this.fancyHubConn);
-    // this.fancyHubAddress = fancyHubAddress;|
-    this.fancyHubAddress="http://167.86.74.159:5111";
+  connectFancy(fancyHubAddress, fancy) {
+    this.fancyHubAddress = "http://173.249.21.26:13111";
 
     // if(this.fancyHubConn==null){
-    this.fancyConnection = (<any>$).hubConnection(this.fancyHubAddress);
-    this.fancyProxy = this.fancyConnection.createHubProxy('FancyHub');
+      this.fancyConnection = hubConnection(this.fancyHubAddress);
+      this.fancyProxy = this.fancyConnection.createHubProxy("FancyHub");
 
-    this.fancyConnection.start().done((fancyHubConns: any) => {
-      this.fancyHubConn = fancyHubConns;
-      console.log("Fancy Hub Connection Established = " + fancyHubConns.state);
-      // _.forEach(fancy, (item) => {
-      this.fancyProxy.invoke('SubscribeFancy', matchid);
-      // });
-    }).fail((fancyHubErr: any) => {
-      console.log("Could not connect Fancy Hub = " + fancyHubErr.state)
-    })
+      this.fancyConnection.start().done((fancyHubConns) => {
+        this.fancyHubConn = fancyHubConns;
+        console.log("Fancy Hub Connection Established = " + fancyHubConns.state);
+        _.forEach(fancy, (item) => {
+          this.fancyProxy.invoke('SubscribeFancy', item.id);
+        });
+      }).fail((fancyHubErr) => {
+        console.log("Could not connect Fancy Hub = " + fancyHubErr.state)
+      })
     // }
 
 
-    this.fancyConnection.stateChanged((change: any) => {
-      if (change.newState === 4 && this.fancyHubConn != null && this.fancyHubAddress != null) {
-        this.fancyConnection.start().done((fancyHubConns: any) => {
-          this.fancyHubConn = fancyHubConns;
-          console.log("Fancy Hub Reconnection Established = " + fancyHubConns.state);
-          this.fancyProxy.invoke('SubscribeFancy', matchid);
-        }).fail((fancyHubErr: any) => {
-          console.log("Could not Reconnect Fancy Hub = " + fancyHubErr.state)
-        })
-      }
-    })
 
-
-    this.fancyProxy.on("BroadcastSubscribedData", (fancy: any) => {
+    this.fancyProxy.on("BroadcastSubscribedData", (fancy) => {
       // console.log(fancy);
-      this._fancyDataSub.next(fancy);
+      this.currentFancy.next(fancy);
     })
   }
 
-  UnsuscribeFancy(matchId: string) {
-    if (!this.fancyHubConn) {
+  UnsuscribeFancy(fancy) {
+    if(!this.fancyHubConn){
       return;
     }
     if (this.fancyHubConn.state == 1) {
-      this.fancyHubAddress = null;
-      this.fancyProxy.invoke('UnsubscribeFancy', matchId);
-      console.log("Unsubscribe fancy for: ", matchId);
+      _.forEach(fancy, (item) => {
+        this.fancyProxy.invoke('UnsubscribeFancy', item.id);
+      });
       this.fancyConnection.stop();
-      this.fancyHubConn = null;
-      this.fancyConnection = null;
-      this.fancyProxy = null;
-      this._fancyDataSub.next(null);
+      this.fancyHubConn=null;
+      this.fancyConnection=null;
+      this.fancyProxy=null;
+      this.currentFancy.next(null);
+    }
+  }
+
+  UnsuscribeSingleFancy(matchId) {
+    if(!this.fancyHubConn){
+      return;
+    }
+    if (this.fancyHubConn.state == 1) {
+        this.fancyProxy.invoke('UnsubscribeFancy', matchId);
     }
   }
 }

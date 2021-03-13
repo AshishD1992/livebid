@@ -71,7 +71,12 @@ export class HomeSignalrService {
       );
       this.shareData.shareuserData(data);
       this.dataFormat.shareEventData(data.sportsData);
-
+      var AllBetsData = {
+        _userAvgmatchedBets: data._userAvgmatchedBets,
+        _userMatchedBets: data._userMatchedBets,
+        _userUnMatchedBets: data._userUnMatchedBets
+      };
+      this.dataFormat.shareAllMatchUnmatchBetsData(AllBetsData);
     });
   }
 

@@ -4,6 +4,7 @@ import { SettingService } from 'src/app/services/setting.service';
 import { AuthService } from 'src/app/services/auth.service';
 import { ToastrService } from 'ngx-toastr';
 import { Subscription } from 'rxjs';
+import { DataFormatService } from 'src/app/services/data-format.service';
 
 
 @Component({
@@ -31,8 +32,9 @@ export class EditStakeComponent implements OnInit {
     private settingService: SettingService,
     private formBuilder: FormBuilder,
     private auth: AuthService,
-    private toastr: ToastrService
-    
+    private toastr: ToastrService,
+    private dfService: DataFormatService,
+
   ) {
 
   }
@@ -79,6 +81,7 @@ GetBetStakeSetting() {
         }
       } else {
         this.betStakes = this.defaultBetStakes;
+        this.dfService.shareBetStake(this.betStakes.value);
       }
     })
   );
@@ -87,7 +90,7 @@ SaveBetStakeSetting() {
   {
     this.submitted = true;
     if (this.editForm.invalid) {
-      
+
 
       return;
     }
@@ -99,6 +102,7 @@ SaveBetStakeSetting() {
 
           if(data.status="Success"){
             this.toastr.success(data.result);
+            this.dfService.shareBetStake(this.betStakes.value);
           }else{
             this.toastr.error(data.result);
           }
