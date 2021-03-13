@@ -845,7 +845,7 @@ getMatchedUnmatchBets(matchId) {
   }
   let allbets;
   this.eventBetsSubscription = this.dfService.currentAllMatchUnmatchBets$.subscribe(data => {
-    console.log(betMatchId, data);
+    // console.log(betMatchId, data);
 
     if (data != null) {
       if (this.betType == 4) {
