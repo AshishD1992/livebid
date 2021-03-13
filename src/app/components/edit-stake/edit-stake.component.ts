@@ -92,9 +92,7 @@ SaveBetStakeSetting() {
       return;
     }
     this.subSink.add(
-      this.settingService
-        .SaveBetStakeSetting(this.editForm.value)
-        .subscribe((data) => {
+      this.settingService.SaveBetStakeSetting(this.editForm.value).subscribe((data) => {
           this.GetBetStakeSetting();
 
           if(data.status="Success"){
