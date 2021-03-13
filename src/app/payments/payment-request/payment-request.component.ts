@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { ReportService } from 'src/app/services/report.service';
 
 @Component({
   selector: 'app-payment-request',
@@ -6,10 +7,18 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./payment-request.component.scss']
 })
 export class PaymentRequestComponent implements OnInit {
-
-  constructor() { }
+  [x: string]: any;
+  constructor(private reportService:ReportService) { }
 
   ngOnInit(): void {
+    this.GetPaymentHistory();
+  }
+
+  GetPaymentHistory(){
+    this.reportService.GetPaymentHistory().subscribe(data=>{
+      this.Data=data.data
+      console.log(this.Data)
+    })
   }
 
 }

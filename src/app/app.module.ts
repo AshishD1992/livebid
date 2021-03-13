@@ -23,6 +23,7 @@ import { ChangePasswordComponent } from './components/change-password/change-pas
 import { ViewProfileComponent } from './components/view-profile/view-profile.component';
 import{TeenpattiModule} from './teenpatti/teenpatti.module';
 import {SportListComponent} from './sport-list/sport-list.component'
+import { InplayComponent } from './inplay/inplay.component';
 // import { TeenpattiComponent } from './teenpatti/teenpatti.component';
 // import { TwentyteenpattiComponent } from './teenpatti/twentyteenpatti/twentyteenpatti.component';
 // import { ThreecardjudgeComponent } from './teenpatti/threecardjudge/threecardjudge.component';
@@ -55,6 +56,7 @@ import { VideoLiveComponent } from './video-live/video-live.component';
     ReversePipe,
     RemoveSpacePipe,
     VideoLiveComponent,
+    InplayComponent,
     // TeenpattiComponent,
     // TwentyteenpattiComponent,
     // ThreecardjudgeComponent,

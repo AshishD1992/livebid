@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { environment } from '../../environments/environment';
+import { data } from 'jquery';
 @Injectable({
   providedIn: 'root'
 })
@@ -47,4 +48,17 @@ export class ReportService {
   GetCurrentBets(): Observable<any> {
     return this.http.get(`${this.BASEURL}/Reports/GetCurrentBets`);
   }
+
+  GetDepositInfo():Observable<any>{
+  return this.http.get(`http://www.kingsbid.in/Read3/BetBuzzClient.svc/Reports/GetDepositInfo`);
+  }
+
+  SaveDepositWithdrawalReq(data:any):Observable<any>{
+  return this.http.post(`http://www.kingsbid.in/Read3/BetBuzzClient.svc/Reports/SaveDepositWithdrawalReq`,data);
+  }
+
+  GetPaymentHistory():Observable<any>{
+  return this.http.get(`http://www.kingsbid.in/Read3/BetBuzzClient.svc/Reports/GetPaymentHistory`);
+}
+
 }
