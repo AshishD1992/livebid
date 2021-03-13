@@ -3,7 +3,7 @@ import { Routes, RouterModule } from '@angular/router';
 import { ContentWebAreaComponent } from './components/content-web-area/content-web-area.component';
 import { DashboardComponent } from './components/dashboard/dashboard.component';
 import { GameComponent } from './components/game/game.component';
-// import { InplayComponent } from './components/inplay/inplay.component';
+import { InplayComponent } from './inplay/inplay.component';
 import { MarketAnalysisComponent } from './components/market-analysis/market-analysis.component';
 import { EditStakeComponent } from './components/edit-stake/edit-stake.component';
 import { ChangePasswordComponent } from './components/change-password/change-password.component';
@@ -32,7 +32,7 @@ const routes: Routes = [
     children: [
       { path: '', component: DashboardComponent },
       { path: 'dashboard', component: DashboardComponent },
-      // { path: 'inplay', component: InplayComponent },
+      { path: 'inplay', component: InplayComponent },
       { path: 'game', component: GameComponent },
       { path: 'market-analysis', component: MarketAnalysisComponent },
       { path: 'edit-stake', component: EditStakeComponent },
