@@ -13,7 +13,7 @@
 
                     <div class="payment-type-item">
                         <div class="accordion-title">
-                            <h2 data-target="#paymentpopup" data-toggle="modal" onclick="setPaymentOption(1);">
+                            <h2 data-target="#paymentpopup" data-toggle="modal" (click)="setPaymentOption(1);">
                                 <div class="logo-wrapper">
                                     <img src="assets/images/paytm.png">
                                 </div>
@@ -29,7 +29,7 @@
 
                      <div class="payment-type-item">
                         <div class="accordion-title active-title">
-                            <h2 data-target="#paymentimpspopup" data-toggle="modal" onclick="setPaymentOption(2);">
+                            <h2 data-target="#paymentimpspopup" data-toggle="modal" (click)="setPaymentOption(2);">
                                 <div class="logo-wrapper">
                                     <img src="assets/images/imps.png">
                                 </div>
@@ -41,7 +41,7 @@
                             </h2>
 
                         </div>
-                    </div> 
+                    </div>
 
                     <!-- <div class="payment-type-item">
                         <div class="accordion-title active-title">
@@ -130,7 +130,7 @@
                             style="enable-background:new 0 0 384 384;" xml:space="preserve">
                             <g>
                                 <g>
-                                    <polygon points="384,170.667 81.707,170.667 158.187,94.187 128,64 0,192 128,320 158.187,289.813 81.707,213.333 384,213.333 		
+                                    <polygon points="384,170.667 81.707,170.667 158.187,94.187 128,64 0,192 128,320 158.187,289.813 81.707,213.333 384,213.333
                             "></polygon>
                                 </g>
                             </g>
@@ -169,7 +169,7 @@
                 </div>
 
                 <div class="modal-body">
-                    <form class="paytmform" id="confirmTransactionFrom">
+                    <form class="paytmform" id="confirmTransactionFrom" [formGroup]="DWform" (ngSubmit)="SaveDepositWithdrawalReq()" >
                         <h2 class="bank_detail_heading">
                             <span> Deposit Account Detail</span>
                             <div class="payment-logo">
@@ -181,12 +181,12 @@
                             <div class="amount-detail">
                                 <label>paytm No</label>
                                 <input class="form-control" placeholder="Paytm Number:" type="text" readonly=""
-                                    value=": 8791675083">
+                                    value="">
                             </div>
 
                             <div class="amount-detail">
                                 <label>Account Name</label>
-                                <input class="form-control" readonly="" value=": virender kumar" type="text">
+                                <input class="form-control" readonly="" value="" type="text">
                             </div>
                         </div>
                         <div class="clearfix"></div>
@@ -200,24 +200,24 @@
                             <div class="amount-detail">
                                 <label>Utr No.</label>
                                 <input type="text" id="transaction_id" name="TransactionID" placeholder="UTR Number"
-                                    class="form-control">
+                                    class="form-control" formControlName="refCode">
                             </div>
                             <span id="transaction_idN" class="errMsg pay-error"></span>
                             <div class="amount-detail">
                                 <label>Sender Name.</label>
                                 <input type="text" id="sender_name" name="sender_name" placeholder="Sender Name"
-                                    class="form-control">
+                                    class="form-control" formControlName="senderName">
                             </div>
                             <span id="sender_nameN" class="errMsg pay-error"></span>
                             <div class="amount-detail">
                                 <label>Receiver Name.</label>
                                 <input type="text" id="receiver_name" name="receiver_name" placeholder="Receiver Name"
-                                    class="form-control">
+                                    class="form-control" formControlName="receiverName">
                             </div>
                             <span id="receiver_nameN" class="errMsg pay-error"></span>
                         </div>
                         <input type="text" id="amount" name="amount" placeholder="Amount"
-                            class="form-control amount-input">
+                            class="form-control amount-input" formControlName="amount">
                         <span id="amountN" class="errMsg pay-error"></span>
                         <div class="pay_mamount">
                             Minimum :2000
@@ -225,7 +225,7 @@
                         </div>
                         <div class="flex-btn-group">
                             <input type="hidden" class="input" name="type" id="dtype" value="3" readonly="">
-                            <button type="button" class="btn btn-default" id="confirmTransaction">Proceed To
+                            <button type="submit" class="btn btn-default" id="confirmTransaction">Proceed To
                                 Payment</button>
                         </div>
                         <!-- <div class="demo-pay">
@@ -250,7 +250,7 @@
                             style="enable-background:new 0 0 384 384;" xml:space="preserve">
                             <g>
                                 <g>
-                                    <polygon points="384,170.667 81.707,170.667 158.187,94.187 128,64 0,192 128,320 158.187,289.813 81.707,213.333 384,213.333 		
+                                    <polygon points="384,170.667 81.707,170.667 158.187,94.187 128,64 0,192 128,320 158.187,289.813 81.707,213.333 384,213.333
                             "></polygon>
                                 </g>
                             </g>
@@ -289,7 +289,7 @@
                 </div>
 
                 <div class="modal-body">
-                    <form class="impsform" id="confirmTransactionFrom">
+                    <form class="impsform" id="confirmTransactionFrom" [formGroup]="DWform" (ngSubmit)="SaveDepositWithdrawalReq()">
                         <h2 class="bank_detail_heading">
                             <span> Deposit Account Detail</span>
                             <div class="payment-logo">
@@ -325,24 +325,24 @@
                             <div class="amount-detail">
                                 <label>Utr No.</label>
                                 <input type="text" id="transaction_id" name="TransactionID" placeholder="UTR Number"
-                                    class="form-control">
+                                    class="form-control" formControlName="refCode">
                             </div>
                             <span id="transaction_idN" class="errMsg pay-error"></span>
                             <div class="amount-detail">
                                 <label>Sender Name.</label>
                                 <input type="text" id="sender_name" name="sender_name" placeholder="Sender Name"
-                                    class="form-control">
+                                    class="form-control" formControlName="senderName">
                             </div>
                             <span id="sender_nameN" class="errMsg pay-error"></span>
                             <div class="amount-detail">
                                 <label>Receiver Name.</label>
                                 <input type="text" id="receiver_name" name="receiver_name" placeholder="Receiver Name"
-                                    class="form-control">
+                                    class="form-control" formControlName="receiverName">
                             </div>
                             <span id="receiver_nameN" class="errMsg pay-error"></span>
                         </div>
                         <input type="text" id="amount" name="amount" placeholder="Amount"
-                            class="form-control amount-input">
+                            class="form-control amount-input" formControlName="amount">
                         <span id="amountN" class="errMsg pay-error"></span>
                         <div class="pay_mamount">
                             Minimum :2000
@@ -350,7 +350,7 @@
                         </div>
                         <div class="flex-btn-group">
                             <input type="hidden" class="input" name="type" id="dtype" value="3" readonly="">
-                            <button type="button" class="btn btn-default" id="confirmTransaction">Proceed To
+                            <button type="submit" class="btn btn-default" id="confirmTransaction">Proceed To
                                 Payment</button>
                         </div>
                         <!-- <div class="demo-pay">

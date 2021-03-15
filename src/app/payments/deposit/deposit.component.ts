@@ -1,64 +1,68 @@
 import { Component, OnInit } from '@angular/core';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { data } from 'jquery';
 import { ReportService } from 'src/app/services/report.service';
-
+import { ToastrService } from 'ngx-toastr';
 @Component({
   selector: 'app-deposit',
   templateUrl: './deposit.component.html',
   styleUrls: ['./deposit.component.scss']
 })
 export class DepositComponent implements OnInit {
-  [x: string]: any;
 
-  constructor(private reportService:ReportService,) { 
-    
+  DWform:FormGroup;
+  submitted = false;
+  constructor(private reportService:ReportService,private fb:FormBuilder,private toastr: ToastrService) {
+
   }
 
   ngOnInit(): void {
     this.GetDepositInfo();
-    this.SaveDepositWithdrawalReq();
- 
+    this.DWform = this.fb.group({
+      accHolderName: [""],
+      accNo: [""],
+      amount: ["", Validators.required],
+      bankName: [""],
+      branch: [""],
+      description: [""],
+      ifscCode: [""],
+      mobileNo: [0],
+      receiverName: ["", Validators.required],
+      senderName: ["", Validators.required],
+      transtype: [1],
+      walletType: [""],
+      refCode: ["", Validators.required]
+  })
+
   }
 
-//   initDWForm() {
-//     this.DWform = this.fb.group({
-//         accHolderName: [""],
-//         accNo: [""],
-//         amount: [""],
-//         bankName: [""],
-//         branch: [""],
-//         description: [""],
-//         ifscCode: [""],
-//         mobileNo: ["0"],
-//         receiverName: [""],
-//         senderName: [""],
-//         transtype: ["1"],
-//         walletType: [""],
-//         refCode: [""]
-//     })
-// }
-// get f() {
-//     return this.DWform.controls
-// }
+get f() { return this.DWform.controls }
 
   GetDepositInfo(){
     this.reportService.GetDepositInfo().subscribe(data=>{
-      this.Data = data.data,
-      console.log(this.Data)
+
 
     })
   }
 
-  // SaveDepositWithdrawalReq(data){
-  //   this.reportService.SaveDepositWithdrawalReq(data).subscribe(data=>{
-  //     this.Data=data.data
-  //   })
-  // }
-  
-  SaveDepositWithdrawalReq() {
+  setPaymentOption(walltype){
+    this.DWform.controls.walletType.setValue(walltype);
+  }
 
-    this.reportService.SaveDepositWithdrawalReq(data).subscribe(data => {
-      this.Data=data.data;
+
+  SaveDepositWithdrawalReq() {
+   let depoform=this.DWform.value
+    let depositdata=JSON.stringify(depoform)
+    console.log(depositdata)
+    this.reportService.SaveDepositWithdrawalReq(depositdata).subscribe(data => {
+    console.log(data)
+    if (data.status == 'Success') {
+      this.toastr.success(data.result);
+      this.DWform.reset();
+      this.submitted = false
+    } else {
+      this.toastr.error(data.result);
+    }
     })
   }
 

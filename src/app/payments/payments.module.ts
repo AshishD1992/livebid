@@ -6,7 +6,7 @@ import { DepositComponent } from './deposit/deposit.component';
 import { WithdrawalComponent } from './withdrawal/withdrawal.component';
 import { PaymentRequestComponent } from './payment-request/payment-request.component';
 import { CancelRequestComponent } from './cancel-request/cancel-request.component';
-
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 const routes: Routes = [
   {
     path: 'deposit',
@@ -28,14 +28,16 @@ const routes: Routes = [
 
 @NgModule({
   declarations: [
-    DepositComponent, 
-    WithdrawalComponent, 
-    PaymentRequestComponent, 
+    DepositComponent,
+    WithdrawalComponent,
+    PaymentRequestComponent,
     CancelRequestComponent
   ],
   imports: [
     CommonModule,
-    RouterModule.forChild(routes)
+    RouterModule.forChild(routes),
+    FormsModule,
+    ReactiveFormsModule
   ],
   exports: [RouterModule]
 

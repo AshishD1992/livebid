@@ -11,8 +11,8 @@ export class ReportService {
 
   constructor(private http: HttpClient) { }
 
- 
-   
+
+
   AccountStatement(FROM: any, TO: any): Observable<any> {
     return this.http.get(`${this.BASEURL}/Reports/AccountStatement?from=${FROM}&to=${TO}`);
   }
@@ -20,7 +20,7 @@ export class ReportService {
   MyMarket(): Observable<any> {
     return this.http.get(`${this.BASEURL}/Bets/MyMarket`);
   }
-  
+
   GetBetHistory(FROM: any, TO: any, F: any): Observable<any> {
     return this.http.get(`${this.BASEURL}/Reports/GetBetHistory?from=${FROM}&to=${TO}&f=${F}`);
   }
