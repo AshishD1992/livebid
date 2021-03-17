@@ -418,12 +418,14 @@ if (this.subSink) {
   }
 
 
-  ngOnDestroy(){
-    this.subSink.unsubscribe();
+  ngOnDestroy() {
+
     this.teenpattiSubscription.unsubscribe();
-    this.teensignalr.unSubscribeTeenPatti();
-    this.teenpattiCalled=false;
-    this.shareData.shareMatchId(0);
+    (this.bodyElement as HTMLElement).classList.remove('clsbetshow');
+  }
+  ngAfterViewInit() {
+    (this.bodyElement as HTMLElement).classList.add('clsbetshow');
+
   }
 
   trackByIndex(index: number) {

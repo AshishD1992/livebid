@@ -364,10 +364,15 @@ if (this.subSink) {
   }
 
 
-  ngOnDestroy(){
-
-    this.teenpattiSubscription.unsubscribe();
-  }
+  ngAfterViewInit(){
+    (this.bodyElement as HTMLElement).classList.add('clsbetshow');
+    
+    }
+    
+    ngOnDestroy(){
+      this.teenpattiSubscription.unsubscribe();
+    (this.bodyElement as HTMLElement).classList.remove('clsbetshow');
+    }
 
   trackByIndex(index: number) {
     return index;

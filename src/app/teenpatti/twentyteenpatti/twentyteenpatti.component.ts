@@ -3,11 +3,15 @@ import { TeenpattiSignalRService } from '../../services/signalr/teenpatti.signal
 import { ActivatedRoute } from '@angular/router';
 import * as _ from 'lodash';
 import { Subscription, from } from 'rxjs';
+import { FormGroup, FormBuilder,FormControl } from '@angular/forms';
 import { ShareBetDataService } from '../../services/share-bet-data.service';
 import { BetsService } from '../../service/bets.service';
 import { SharedataService } from '../../services/sharedata.service';
 import { take } from 'rxjs/operators';
 import { ReportService } from '../../services/report.service';
+import { SettingService } from 'src/app/services/setting.service';
+import { DataFormatService } from 'src/app/services/data-format.service';
+import { ToastrService } from 'ngx-toastr';
 export const BET_TYPES = { MATCH_ODDS: 1, BOOK_MAKING: 2, FANCY: 3 };
 
 @Component({
@@ -15,7 +19,7 @@ export const BET_TYPES = { MATCH_ODDS: 1, BOOK_MAKING: 2, FANCY: 3 };
   templateUrl: './twentyteenpatti.component.html',
   styleUrls: ['./twentyteenpatti.component.scss']
 })
-export class TwentyteenpattiComponent implements OnInit{
+export class TwentyteenpattiComponent implements OnInit {
 
   clock: any;
   bodyElement: any;
@@ -31,7 +35,7 @@ export class TwentyteenpattiComponent implements OnInit{
   Ballcards = [];
   Aresults = [];
   Bresults: any;
-  matchBfId= "5000"
+  matchBfId = "5000"
   AndarValues: any = []
   BaharValues: any = []
   andar_bahar: any
@@ -45,31 +49,41 @@ export class TwentyteenpattiComponent implements OnInit{
   clock: any;
   rowData: any;
   results: any = [];
+  totalBets = 0;
+  eventBets = [];
+  OpenBetForm: FormGroup;
+
+  eventBetsSubscription: Subscription;
+  BetStakeSubscription: Subscription;
 
   constructor(
     private TeenpattiSignalR: TeenpattiSignalRService,
     private route: ActivatedRoute,
+    private toastr: ToastrService,
+    private fb: FormBuilder,
     private shareBetData: ShareBetDataService,
     private betsService: BetsService,
     private shareData: SharedataService,
     private reportsService: ReportService,
+    private settingService: SettingService,
+    private dfService: DataFormatService,
   ) { }
-  
+
 
   ngOnInit(): void {
-    console.log("",this.matchBfId);
-this.TeenpattiSignalR.TeenPattiSignalr(this.matchBfId);
+    console.log("", this.matchBfId);
+    this.TeenpattiSignalR.TeenPattiSignalr(this.matchBfId);
 
-if (this.subSink) {
-        this.subSink.unsubscribe();
-      }
-      this.subSink = new Subscription();
+    if (this.subSink) {
+      this.subSink.unsubscribe();
+    }
+    this.subSink = new Subscription();
 
-    this.allMKTdata() ;
+    this.allMKTdata();
     this.clock = (<any>$(".clock")).FlipClock(99, {
       clockFace: "Counter"
     });
-    this. GetRecentGameResult();
+    this.GetRecentGameResult();
     this.bodyElement = document.querySelector('body');
 
     this.andar_bahar = ["A", 2, 3, 4, 5, 6, 7, 8, 9, 10, "J", "Q", "K"];
@@ -94,7 +108,7 @@ if (this.subSink) {
 
         if (this.teentype == 2) {
           this.tpMarket = data.data.bf;
-          console.log("tpMarket",this.tpMarket)
+          console.log("tpMarket", this.tpMarket)
           if (this.tpMarket[0].lastime && this.Oldteentype) {
             this.clock.setValue(this.tpMarket[0].lastime);
           }
@@ -204,20 +218,64 @@ if (this.subSink) {
           }
 
         }
-      } catch{ }
+      } catch { }
     })
 
 
 
   }
-  GetRecentGameResult() {
-    this.teentypee = "1"
-    this.reportsService.GetRecentGameResult(this.teentypee).subscribe(data=> {
 
-      this.results = data.data;
-      console.log(data)
+  initOpenBetForm() {
+    
+
+    this.OpenBetForm = this.fb.group({
+      event: [this.placeTPData.event],
+      backlay: [this.placeTPData.backlay],
+      odds: [{value:this.placeTPData.odds,disabled: true}],
+      runnerName: [this.placeTPData.runnerName],
+      runnerId: [this.placeTPData.runnerId],
+      gameId: [this.placeTPData.gameId],
+      gameType: [this.placeTPData.gameType],
+      runnerIndex: [this.placeTPData.runnerIndex],
+      card: [this.placeTPData.gameType],
+     
+      stake: [""],
+    })
+    console.log(this.OpenBetForm.value);
+  }
+
+  get f() {
+    return this.OpenBetForm.controls;
+  }
+
+  GetRecentGameResult() {
+    this.Teentype = "1";
+    this.reportsService.GetRecentGameResult(this.teentypee).subscribe(resp => {
+
+      this.results = resp.data;
     })
 
+  }
+
+  getBetStakeSetting() {
+
+    this.BetStakeSubscription = this.settingService.GetBetStakeSetting().subscribe(data => {
+      if (data != null) {
+        if (data.data.stake1 != 0 && data.data.stake2 != 0) {
+          this.stakeSetting[0] = parseInt(data.data.stake1);
+          this.stakeSetting[1] = parseInt(data.data.stake2);
+          this.stakeSetting[2] = parseInt(data.data.stake3);
+          this.stakeSetting[3] = parseInt(data.data.stake4);
+          this.stakeSetting[4] = parseInt(data.data.stake5);
+          this.stakeSetting[5] = parseInt(data.data.stake6);
+
+
+        }
+        // console.log(this.stakeSetting);
+      }
+
+
+    })
   }
   allMKTdata() {
     this.getHubAddressCalled = false;
@@ -268,7 +326,7 @@ if (this.subSink) {
           })
         }
         if (this.sportBfId == 2000 && this.auth.isLoggedIn() && !this.teenpattiCalled) {
-          this.teenpattiCalled=true;
+          this.teenpattiCalled = true;
           this.teensignalr.TeenPattiSignalr(this.matchBfId);
         }
         this.shareData.shareMatchId(this.matchId!);
@@ -279,16 +337,18 @@ if (this.subSink) {
   }
 
   openTpBetSlip(event: any, backlay: string, odds: string, runnerName: string, runnerId: number, gameId: number, gameType: number, runnerIndex: any, card: any) {
-    // console.log(event, backlay, odds, runnerName, runnerId, gameId, gameType, runnerIndex, card);
+    console.log(event, backlay, odds, runnerName, runnerId, gameId, gameType, runnerIndex, card);
     $('body').addClass('menu-is-toggled');
     $('.mybets').addClass('active');
     this.placeTPData = {
       backlay: backlay,
       gameType: gameType,
+      event: event,
       info: "",
       // info: `device: ${this.deviceInfo.device}, os: ${this.deviceInfo.os}, os_version: ${this.deviceInfo.os_version}, browser: ${this.deviceInfo.browser}, browser_version: ${this.deviceInfo.browser_version}`,
       odds: odds,
       runnerName: runnerName,
+      runnerIndex: runnerIndex,
       runnerId: runnerId,
       source: "Mobile",
       stake: 0,
@@ -318,8 +378,210 @@ if (this.subSink) {
       this.shareBetData.shareBetsData(this.placeTPData);
     }
 
+    this.initOpenBetForm();
+    console.log(this.placeTPData)
+
+  }
+  closebetslip() {
+    this.placeTPData = null
   }
 
+  openBetbox() {
+    document.getElementById("mybet").style.width = "100%";
+  }
+
+  closebet() {
+    document.getElementById("mybet").style.width = "0";
+  }
+  addStake(stake) {
+    if (!this.OpenBetForm.value.stake) {
+      this.OpenBetForm.controls['stake'].setValue(stake.toFixed(0));
+    }
+    else if (this.OpenBetForm.value.stake) {
+      this.OpenBetForm.controls['stake'].setValue((parseFloat(this.OpenBetForm.value.stake) + stake).toFixed(0))
+    }
+
+    this.calcProfit();
+  }
+
+  clearStake() {
+    this.OpenBetForm.controls['stake'].setValue(null);
+    // this.calcProfit();
+  }
+
+  ClearAllSelection() {
+    this.placeTPData = null;
+    // this.marketsNewExposure(this.openBet);
+  }
+
+
+
+  incOdds() {
+    if (!this.OpenBetForm.value.odds) {
+      this.OpenBetForm.controls['odds'].setValue(1.00);
+    }
+    if (parseFloat(this.OpenBetForm.value.odds) >= 1000) {
+      this.OpenBetForm.controls['odds'].setValue(1000);
+      this.calcProfit();
+      return false;
+    }
+    let odds = parseFloat(this.OpenBetForm.value.odds);
+    this.OpenBetForm.controls['odds'].setValue(this.oddsDecimal(odds + this.oddsDiffCalc(odds)));
+  
+    this.calcProfit();
+    // this.calcExposure(bet);
+  }
+  
+  decOdds() {
+    if (this.OpenBetForm.value.odds == "" || this.OpenBetForm.value.odds == null || parseFloat(this.OpenBetForm.value.odds) <= 1.01) {
+      this.OpenBetForm.controls['odds'].setValue(1.01);
+      this.calcProfit();
+      return false;
+    }
+    let odds = parseFloat(this.OpenBetForm.value.odds);
+    this.OpenBetForm.controls['odds'].setValue(this.oddsDecimal(odds - this.oddsDiffCalc(odds)));
+  
+    this.calcProfit();
+    // this.calcExposure(bet);
+  }
+  
+  incStake() {
+    if (!this.OpenBetForm.value.stake) {
+      this.OpenBetForm.controls['stake'].setValue(0);
+    }
+  
+    if (this.OpenBetForm.value.stake > -1) {
+      let stake = parseInt(this.OpenBetForm.value.stake);
+      this.OpenBetForm.controls['stake'].setValue(stake + this.stakeDiffCalc(stake));
+      this.calcProfit();
+    }
+  }
+  
+  decStake() {
+  
+    if (this.OpenBetForm.value.stake <= 0) {
+      this.OpenBetForm.controls['stake'].setValue("");
+      return false;
+    }
+  
+    if (!this.OpenBetForm.value.stake) {
+      this.OpenBetForm.controls['stake'].setValue(0);
+    }
+  
+    if (this.OpenBetForm.value.stake > -1) {
+      let stake = parseInt(this.OpenBetForm.value.stake);
+      this.OpenBetForm.controls['stake'].setValue(stake - this.stakeDiffCalc(stake));
+      this.calcProfit();
+    }
+  }
+
+  oddsDecimal(value) {
+    return (value == null || value == '' || (parseFloat(value) > 19.5)) ? value : ((parseFloat(value) > 9.5) ? parseFloat(value).toFixed(1) : parseFloat(value).toFixed(2));
+  }
+  
+  oddsDiffCalc(currentOdds) {
+    var diff;
+    if (currentOdds < 2) {
+      diff = 0.01
+    } else if (currentOdds < 3) {
+      diff = 0.02
+    } else if (currentOdds < 4) {
+      diff = 0.05
+    } else if (currentOdds < 6) {
+      diff = 0.10
+    } else if (currentOdds < 10) {
+      diff = 0.20
+    } else if (currentOdds < 20) {
+      diff = 0.50
+    } else if (currentOdds < 30) {
+      diff = 1.00
+    } else {
+      diff = 2.00
+    }
+    return diff
+  }
+  
+  stakeDiffCalc(currentStake) {
+    var diff;
+  
+  
+      if (currentStake <= 50) {
+        diff = 5
+      } else if (currentStake <= 100) {
+        diff = 10
+      } else if (currentStake <= 1000) {
+        diff = 100
+      } else if (currentStake <= 10000) {
+        diff = 1000
+      } else if (currentStake <= 100000) {
+        diff = 10000
+      } else if (currentStake <= 1000000) {
+        diff = 100000
+      } else if (currentStake <= 10000000) {
+        diff = 1000000
+      } else if (currentStake <= 100000000) {
+        diff = 10000000
+      } else {
+        diff = 100000000
+      }
+  
+    return diff
+  }
+
+  getDataByType(betType) {
+    this.betType = betType;
+  }
+
+  getMatchedUnmatchBets() {
+    // let betMatchId = matchId;
+    if (this.eventBetsSubscription) {
+      this.eventBetsSubscription.unsubscribe();
+    }
+    let allbets;
+    this.eventBetsSubscription = this.dfService.currentAllMatchUnmatchBets$.subscribe(data => {
+      // console.log(betMatchId, data);
+
+      if (data != null) {
+        if (this.betType == 4) {
+          allbets = this.dfService.matchUnmatchBetsFormat(data._userTpBets[this.gameId]);
+          this.eventBets = allbets.matchWiseBets;
+          this.totalBets = allbets.totalBets;
+        }
+        // console.log(this.eventBets)
+      }
+    })
+  }
+
+  OpenBetSlip(backlay, odds, runnerName, runnerId, gameId, gameType) {
+    this.ClearAllSelection();
+    this.placeTPData = {
+      backlay, odds, runnerName, runnerId, gameId, gameType
+    }
+
+    this.placeTPData['gameType'] = "cards";
+    console.log(this.placeTPData);
+    this.initOpenBetForm();
+    if (this.context != 'Mobile') {
+      window.scrollTo(0, 0);
+    }
+  }
+
+
+  PlaceTpBet() {
+
+    this.betsService.PlaceTpBet(this.OpenBetForm.value).subscribe(resp => {
+
+      
+        
+        
+        this.OpenBetForm.reset();
+        this.ClearAllSelection();
+        this.dfService.shareFunds(null);
+      
+     
+     
+    })
+  }
 
   T20ExposureBook(gameId: number, state: any) {
     if (gameId == 0) {
@@ -344,7 +606,7 @@ if (this.subSink) {
 
     }
   }
-  
+
   ExposureBook(market: any) {
     this.betService.ExposureBook(market.id).subscribe((resp: any) => {
       market['pnl'] = resp.data;
@@ -403,10 +665,16 @@ if (this.subSink) {
   }
 
 
-  ngOnDestroy(){
+  ngOnDestroy() {
 
     this.teenpattiSubscription.unsubscribe();
+    (this.bodyElement as HTMLElement).classList.remove('clsbetshow');
   }
+  ngAfterViewInit() {
+    (this.bodyElement as HTMLElement).classList.add('clsbetshow');
+
+  }
+
 
   trackByIndex(index: number) {
     return index;

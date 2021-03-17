@@ -55,9 +55,7 @@ export class ThreecardjudgeComponent implements OnInit {
     private shareData: SharedataService,
     private reportsService: ReportService,
   ) { }
-  ngAfterViewInit(): void {
-    throw new Error('Method not implemented.');
-  }
+
   
 
   ngOnInit(): void {
@@ -383,10 +381,16 @@ console.log("log", this.tpData)
 
 
 
-  ngOnDestroy(){
-
-    this.teenpattiSubscription.unsubscribe();
-  }
+  ngAfterViewInit(){
+    (this.bodyElement as HTMLElement).classList.add('clsbetshow');
+    throw new Error('Method not implemented.');
+    
+    }
+    
+    ngOnDestroy(){
+      this.teenpattiSubscription.unsubscribe();
+    (this.bodyElement as HTMLElement).classList.remove('clsbetshow');
+    }
 
   trackByIndex(index: number) {
     return index;

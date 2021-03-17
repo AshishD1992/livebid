@@ -155,23 +155,23 @@
 
         </div>
     </div>
-    <!-- <div id="mybet" class="betnav">
+    <div id="mybet" class="betnav">
         <a class="closebet" (click)="closebet()">×</a>
         <div class="matchBox">
             <div class="betSlipBox">
-                <div class="betBox border-box" style="display: none;">
+                <div class="betBox border-box" id="betBox" *ngIf="placeTPData">
                     <div class="block_box">
                         <div class="betslip">
-                            <div class="loader" style="display:none">
+                            <div class="loader"*ngIf="showLoader">
                                 <div class="mini-loader">
                                     <span></span>
                                     <span></span>
                                     <span></span>
                                 </div>
                             </div>
-                            <form method="POST" id="placeBetSilp" style="background-color: rgb(167, 216, 253);">
-                                <div class="fancy-temaname" id="ShowRunnderName">Lokomotiv</div>
-                                <span class="close-betslip"><svg version="1.1" id="Capa_1"
+                            <form [formGroup]="OpenBetForm" (ngSubmit)="BetSubmit()" method="POST" id="placeBetSilp" style="background-color: rgb(167, 216, 253);">
+                                <div class="fancy-temaname" id="ShowRunnderName">{{f.runnerName.value}}</div>
+                                <span class="close-betslip" (click)="closebetslip()"><svg version="1.1" id="Capa_1"
                                         xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
                                         x="0px" y="0px" viewBox="0 0 512 512" style="enable-background:new 0 0 512 512;"
                                         xml:space="preserve">
@@ -225,62 +225,44 @@
 
                                 <div class="odds-stake-fild">
                                     <div class="item-slip input-odds">
-                                        <input type="number" step="0.01" id="ShowBetPrice"
+                                        <input type="number" *ngIf="f.gameType.value=='odds'" step="0.01" id="ShowBetPrice" formControlName="odds" (keyup)="update()"
                                             class="calProfitLoss form-control">
-                                        <div class="inc plus_btn">+</div>
-                                        <div class="dec plus_btn">-</div>
+                                        <div class="inc plus_btn" (click)="f.gameType.value=='odds'?incOdds():''">+</div>
+                                        <div class="dec plus_btn" (click)="f.gameType.value=='odds'?decOdds():''">-</div>
                                     </div>
+
                                     <div class="item-slip input-stake">
-                                        <input type="number" pattern="[0-9]*" step="1" id="stakeValue"
+                                        <input type="number" pattern="[0-9]*" step="1" id="stakeValue" formControlName="stake"
                                             class="calProfitLoss form-control">
-                                        <input type="hidden" name="selectionId" id="selectionId" value="214365"
-                                            class="form-control">
-                                        <input type="hidden" name="matchId" id="matchId" value="29974943"
-                                            class="form-control">
-                                        <input type="hidden" name="isback" id="isback" value="0" class="form-control">
-                                        <input type="hidden" name="MarketId" id="MarketId" value="1.172356008"
-                                            class="form-control">
-                                        <input type="hidden" name="placeName" id="placeName" value="Lokomotiv"
-                                            class="form-control">
-                                        <input type="hidden" name="text" id="stackcount" value="0" class="form-control">
-                                        <input type="hidden" name="text" id="isfancy" value="0" class="form-control">
-                                        <div class="inc plus_btn">+</div>
-                                        <div class="dec plus_btn">-</div>
+                                     
+                                        <div class="inc plus_btn" (click)="incStake()">+</div>
+                                        <div class="dec plus_btn" (click)="decStake()">-</div>
                                     </div>
                                 </div>
                                 <div class="betslip-footer">
                                     <div class="odds-btn-value">
                                         <div class="fancy-btngroup">
-                                            <button class="btn btn-default  chipName1" type="button" value="1000"
-                                                onclick="StaKeAmount(this);">1000</button><button
-                                                class="btn btn-default  chipName2" type="button" value="2000"
-                                                onclick="StaKeAmount(this);">2000</button><button
-                                                class="btn btn-default  chipName3" type="button" value="5000"
-                                                onclick="StaKeAmount(this);">5000</button><button
-                                                class="btn btn-default  chipName4" type="button" value="25000"
-                                                onclick="StaKeAmount(this);">25000</button><button
-                                                class="btn btn-default  chipName5" type="button" value="50000"
-                                                onclick="StaKeAmount(this);">50000</button><button
-                                                class="btn btn-default  chipName6" type="button" value="100000"
-                                                onclick="StaKeAmount(this);">1000000</button> </div>
+                                            <ng-container *ngFor="let stake of stakeSetting;let index=index;">
+                                                <button class="btn btn-default  chipName1" type="button"
+                                                  (click)="addStake(stake);">{{stakeSetting[index]}}</button>
+                        
+                                              </ng-container> 
+                                            </div>
                                     </div>
                                     <div class="odds-btn-clear">
-                                        <button class="btn btn-default" type="button" onclick="ClearStack( );"><i
+                                        <button class="btn btn-default" type="button" (click)="ClearStack( );"><i
                                                 class="fas fa-backspace"></i></button>
                                     </div>
                                 </div>
                                 <div class="place-bet-div">
-                                    <button class="btn btn-Cancel" type="button"
-                                        onclick="ClearAllSelection();">Cancel</button>
-                                    <button class="btn btn-placebet placebet" type="button" onclick="PlaceBet();">Place
-                                        Bet</button>
-                                    <button class="btn btn-placebet placefancy" type="button" onclick="PlaceFancy();"
-                                        style="display:none">Place Bet</button>
+                                    <button class="btn btn-Cancel" type="button" (click)="ClearAllSelection();">Cancel</button>
+                                    <button class="btn btn-placebet placebet" type="submit">Place Bet</button>
+                                 
                                 </div>
                                 <div class="proft-loss-slip">
                                     <span>Profit or Liability</span>
-                                    <span id="profitData" class="green">144000</span>
-                                    <span id="LossData" class="red">8000</span>
+                                    <span id="profitData" class="green">{{f.profit.value | number:'1.2-2'}}</span>
+                                    <span id="LossData" class="red">{{f.loss.value | number:'1.2-2'}}</span>
                                 </div>
                             </form>
                         </div>
@@ -289,8 +271,8 @@
                 <div class="odds-tabs tab_bets">
                     <ul class="nav nav-tabs match-bets">
                         <li class="nav-item betdata active-all active">
-                            <a class="allbet" href="javascript:void(0);" onclick="getDataByType(this,'4');">All Bets
-                                <span id="cnt_row">(0)</span> </a>
+                            <a class="allbet" href="javascript:void(0);" (click)="getDataByType('4');">All Bets
+                                <span id="cnt_row">({{totalBets}})</span> </a>
                         </li>
 =
                     </ul>
@@ -320,7 +302,7 @@
                     <tbody>
                     <tr class="mark-back" 
                     [ngClass]="{'back':result.type=='BACK' || result.type=='Back' ||result.type=='YES','lay':result.type=='LAY' || result.type=='Lay' || result.type=='NO'}" 
-                    *ngFor="let result of matchedbets">
+                    *ngFor="let result of eventBets; let index=index;trackBy:trackByBet">
                         <td>{{result.betId}}</td>
                         <td>{{result.selection}}</td>
                         <td>{{result.odds}}</td>
@@ -331,6 +313,6 @@
                 </table>
             </div>
         </div>
-    </div> -->
+    </div>
 
 </div>

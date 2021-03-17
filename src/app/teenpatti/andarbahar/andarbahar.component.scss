@@ -4,10 +4,10 @@
 :host {
   width: 100%;
 }
-#MatchOddInfo {
-  width: 100%;
-  margin-right: 5px;
-}
+// #MatchOddInfo {
+//   width: 100%;
+//   margin-right: 5px;
+// }
 .videoCards {
   position: absolute;
   content: "";
@@ -450,10 +450,10 @@ button.lay {
   position: relative;
 }
 
-.card {
-  flex: 0 0 auto;
-  margin: 5px auto;
-}
+// .card {
+//   flex: 0 0 auto;
+//   margin: 5px auto;
+// }
 
 .card-andarbahar {
   cursor: pointer;
@@ -597,12 +597,12 @@ img {
   border-style: none;
 }
 
-@media (max-width: 1920px) and (min-width: 768px){
-#MatchOddInfo {
-  // width: 67%;
-  margin-right: 5px;
-}
-}
+// @media (max-width: 1920px) and (min-width: 768px){
+// #MatchOddInfo {
+//   // width: 67%;
+//   margin-right: 5px;
+// }
+// }
 .m-t-10 {
   margin-top: 10px !important;
 }
@@ -686,10 +686,10 @@ font-size: 10px;
 }
 }
 
-.card {
-  flex: 0 0 auto;
-  margin: 5px auto;
-}
+// .card {
+//   flex: 0 0 auto;
+//   margin: 5px auto;
+// }
 .d-inline-block {
   display: inline-block !important;
 }
