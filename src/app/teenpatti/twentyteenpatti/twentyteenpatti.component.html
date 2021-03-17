@@ -114,7 +114,7 @@
                                     <div class="back-buttons suspended1" [ngClass]="{'suspended1':runner.gstatus=='0'}">
 
                                         <button class="back back-1"
-                                        (click)="openTpBetSlip($event,'Back',runner.rate,runner.nation,runner.sid,tpData.mid,subscriptionId,null,null)">
+                                        (click)="runner.rate=='0'?'':openTpBetSlip('back',runner.rate,runner.nation,runner.sectionId,runner.marketId,gameType)">
                                             <div class="rate">  {{runner.rate}} </div>
                                             <div class="price"> </div>
                                         </button></div>
@@ -154,12 +154,13 @@
             </div>
 
         </div>
+        <div class="betbtn" id="draggable"><a (click)="openBetbox()">Bets</a></div>
     </div>
     <div id="mybet" class="betnav">
         <a class="closebet" (click)="closebet()">×</a>
         <div class="matchBox">
             <div class="betSlipBox">
-                <div class="betBox border-box" id="betBox" *ngIf="placeTPData">
+                <div class="betBox border-box" id="betBox" *ngIf="openBet">
                     <div class="block_box">
                         <div class="betslip">
                             <div class="loader"*ngIf="showLoader">
@@ -225,15 +226,15 @@
 
                                 <div class="odds-stake-fild">
                                     <div class="item-slip input-odds">
-                                        <input type="number" *ngIf="f.gameType.value=='odds'" step="0.01" id="ShowBetPrice" formControlName="odds" (keyup)="update()"
-                                            class="calProfitLoss form-control">
-                                        <div class="inc plus_btn" (click)="f.gameType.value=='odds'?incOdds():''">+</div>
-                                        <div class="dec plus_btn" (click)="f.gameType.value=='odds'?decOdds():''">-</div>
+                                        <input type="number" id="ShowBetPrice" formControlName="odds" (keyup)="update()"
+                                            class="calProfitLoss form-control CommanBtn">
+                                        <div class="inc plus_btn">+</div>
+                                        <div class="dec plus_btn">-</div>
                                     </div>
 
                                     <div class="item-slip input-stake">
                                         <input type="number" pattern="[0-9]*" step="1" id="stakeValue" formControlName="stake"
-                                            class="calProfitLoss form-control">
+                                           (keyup)="update()" class="calProfitLoss form-control CommanBtn">
                                      
                                         <div class="inc plus_btn" (click)="incStake()">+</div>
                                         <div class="dec plus_btn" (click)="decStake()">-</div>
@@ -292,24 +293,31 @@
                 <table class="table">
                     <thead class="head">
                         <tr class="headings">
-                            <td>Bet ID</td>
+                            <td>No.</td>
                             <td>Runner</td>
                             <td>Odds</td>
-                            <td>Stack</td>
+                            <td>Stake</td>
                             <td>Bet Type</td>
-                        </tr>
+                            <td>P&L</td>
+                            <td>Time</td>
+                            <td>ID</td>
+                            <td> IP</td>
+                          </tr>
                     </thead>
                     <tbody>
-                    <tr class="mark-back" 
-                    [ngClass]="{'back':result.type=='BACK' || result.type=='Back' ||result.type=='YES','lay':result.type=='LAY' || result.type=='Lay' || result.type=='NO'}" 
-                    *ngFor="let result of eventBets; let index=index;trackBy:trackByBet">
-                        <td>{{result.betId}}</td>
-                        <td>{{result.selection}}</td>
-                        <td>{{result.odds}}</td>
-                        <td>{{result.matchedStake}}</td>
-                        <td>{{result.type}}</td>
-                    </tr>
-                </tbody>
+                        <tr [ngClass]="{'back':bet.backLay=='BACK' || bet.backLay=='Back' ||bet.backLay=='YES','lay':bet.backLay=='LAY' || bet.backLay=='Lay' || bet.backLay=='NO'}"
+                          *ngFor="let bet of eventBets;let index=index;trackBy:trackByBet">
+                          <td>{{index+1}}</td>
+                          <td>{{bet.runnerName}}</td>
+                          <td>{{bet.odds}}</td>
+                          <td>{{bet.stake | number:'1.2-2'}}</td>
+                          <td>{{bet.backLay}}</td>
+                          <td>{{bet.profit | number:'1.2-2'}}</td>
+                          <td>{{bet.date}}</td>
+                          <td>{{bet.id}}</td>
+                          <td>{{bet.ipAddress}}</td>
+                        </tr>
+                      </tbody>
                 </table>
             </div>
         </div>
