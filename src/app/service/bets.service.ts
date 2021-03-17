@@ -49,7 +49,7 @@ export class BetsService {
   PlaceFancyBet(PlaceFancyBetData: PlaceFancyBet) {
     return this.httpClient.post(`${this.baseUrl}/PlaceFancyBet`, PlaceFancyBetData);
   }
-  PlaceTpBet(PlaceTpBet:any) {
+  PlaceTpBet(PlaceTpBet:any):any {
     // delete PlaceTpBet.betType;
     return this.httpClient.post(`${this.baseUrl}/PlaceTpBet`, PlaceTpBet);
   }

@@ -8,10 +8,10 @@ import { ThreecardjudgeComponent } from './threecardjudge/threecardjudge.compone
 import { AndarbaharComponent } from './andarbahar/andarbahar.component';
 import { OnedayComponent } from './oneday/oneday.component';
 import { HttpClientModule } from '@angular/common/http';
-
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 const routes: Routes = [
 
-    
+
       {
         path: 'twenty-teepatti',
         component: TwentyteenpattiComponent,
@@ -43,6 +43,8 @@ const routes: Routes = [
     RouterModule.forChild(routes),
     AgGridModule,
     HttpClientModule,
+    FormsModule,
+    ReactiveFormsModule
   ],
   exports: [RouterModule],
 })

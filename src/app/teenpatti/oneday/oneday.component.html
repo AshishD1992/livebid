@@ -149,7 +149,7 @@
                                                </div>
                                            </button> -->
                                            <button class="back back-1"
-                                           (click)="runner.b1=='0'?'':openTpBetSlip($event,'Back',runner.b1,runner.nation,runner.sectionId,runner.marketId,subscriptionId,null,null)"  >
+                                           (click)="runner.b1=='0'?'':openTpBetSlip('back',runner.b1,runner.nation,runner.sectionId,runner.marketId,gameType)"  >
                                                <div class="rate">
                                                    {{runner.b1}}
                                                </div>
@@ -162,7 +162,7 @@
                                    <td>
                                        <div class="lay-buttons"  [ngClass]="{'suspended1':runner.gstatus!='ACTIVE'}">
                                            <button class="lay lay-1"
-                                           (click)="runner.l1=='0'?'':openTpBetSlip($event,'Lay',runner.l1,runner.nation,runner.sectionId,runner.marketId,subscriptionId,null,null)" >
+                                           (click)="runner.l1=='0'?'':openTpBetSlip('lay',runner.l1,runner.nation,runner.sectionId,runner.marketId,gameType)" >
                                                <div class="rate">
                                                    {{runner.l1}}
                                                </div>
@@ -210,186 +210,177 @@
                     </div>
 
                  </div>
+                 <div class="betbtn" id="draggable"><a (click)="openBetbox()">Bets</a></div>
             </div>
 
 
             <div id="mybet" class="betnav">
-               <a class="closebet" (click)="closebet()">×</a>
-               <div class="matchBox">
-                   <div class="betSlipBox">
-                       <div class="betBox border-box" style="display: none;">
-                           <div class="block_box">
-                               <div class="betslip">
-                                   <div class="loader" style="display:none">
-                                       <div class="mini-loader">
-                                           <span></span>
-                                           <span></span>
-                                           <span></span>
-                                       </div>
-                                   </div>
-                                   <form method="POST" id="placeBetSilp" style="background-color: rgb(167, 216, 253);">
-                                       <div class="fancy-temaname" id="ShowRunnderName">Lokomotiv</div>
-                                       <span class="close-betslip"><svg version="1.1" id="Capa_1"
-                                               xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
-                                               x="0px" y="0px" viewBox="0 0 512 512" style="enable-background:new 0 0 512 512;"
-                                               xml:space="preserve">
-                                               <g>
-                                                   <g>
-                                                       <path d="M436.812,75.188C388.327,26.702,324.113,0,256,0S123.673,26.702,75.188,75.188C26.702,123.673,0,187.887,0,256
-                                                     s26.702,132.327,75.188,180.812C123.673,485.298,187.887,512,256,512s132.327-26.702,180.812-75.188
-                                                     C485.298,388.327,512,324.113,512,256S485.298,123.673,436.812,75.188z M256,482C131.383,482,30,380.617,30,256S131.383,30,256,30
-                                                     s226,101.383,226,226S380.617,482,256,482z"></path>
-                                                   </g>
-                                               </g>
-                                               <g>
-                                                   <g>
-                                                       <path d="M404.493,171.147l-63.64-63.639L256,192.36l-84.853-84.853l-63.64,63.64L192.36,256l-84.853,84.853l63.64,63.64
-                                                     L256,319.64l84.853,84.853l63.64-63.64L319.64,256L404.493,171.147z M362.066,340.853l-21.213,21.213L256,277.213l-84.853,84.853
-                                                     l-21.213-21.213L234.787,256l-84.853-84.853l21.213-21.213L256,234.787l84.853-84.853l21.213,21.213L277.213,256L362.066,340.853z
-                                                     "></path>
-                                                   </g>
-                                               </g>
-                                               <g>
-                                               </g>
-                                               <g>
-                                               </g>
-                                               <g>
-                                               </g>
-                                               <g>
-                                               </g>
-                                               <g>
-                                               </g>
-                                               <g>
-                                               </g>
-                                               <g>
-                                               </g>
-                                               <g>
-                                               </g>
-                                               <g>
-                                               </g>
-                                               <g>
-                                               </g>
-                                               <g>
-                                               </g>
-                                               <g>
-                                               </g>
-                                               <g>
-                                               </g>
-                                               <g>
-                                               </g>
-                                               <g>
-                                               </g>
-                                           </svg></span>
-       
-                                       <div class="odds-stake-fild">
-                                           <div class="item-slip input-odds">
-                                               <input type="number" step="0.01" id="ShowBetPrice"
-                                                   class="calProfitLoss form-control">
-                                               <div class="inc plus_btn">+</div>
-                                               <div class="dec plus_btn">-</div>
-                                           </div>
-                                           <div class="item-slip input-stake">
-                                               <input type="number" pattern="[0-9]*" step="1" id="stakeValue"
-                                                   class="calProfitLoss form-control">
-                                               <input type="hidden" name="selectionId" id="selectionId" value="214365"
-                                                   class="form-control">
-                                               <input type="hidden" name="matchId" id="matchId" value="29974943"
-                                                   class="form-control">
-                                               <input type="hidden" name="isback" id="isback" value="0" class="form-control">
-                                               <input type="hidden" name="MarketId" id="MarketId" value="1.172356008"
-                                                   class="form-control">
-                                               <input type="hidden" name="placeName" id="placeName" value="Lokomotiv"
-                                                   class="form-control">
-                                               <input type="hidden" name="text" id="stackcount" value="0" class="form-control">
-                                               <input type="hidden" name="text" id="isfancy" value="0" class="form-control">
-                                               <div class="inc plus_btn">+</div>
-                                               <div class="dec plus_btn">-</div>
-                                           </div>
-                                       </div>
-                                       <div class="betslip-footer">
-                                           <div class="odds-btn-value">
-                                               <div class="fancy-btngroup">
-                                                   <button class="btn btn-default  chipName1" type="button" value="1000"
-                                                       onclick="StaKeAmount(this);">1000</button><button
-                                                       class="btn btn-default  chipName2" type="button" value="2000"
-                                                       onclick="StaKeAmount(this);">2000</button><button
-                                                       class="btn btn-default  chipName3" type="button" value="5000"
-                                                       onclick="StaKeAmount(this);">5000</button><button
-                                                       class="btn btn-default  chipName4" type="button" value="25000"
-                                                       onclick="StaKeAmount(this);">25000</button><button
-                                                       class="btn btn-default  chipName5" type="button" value="50000"
-                                                       onclick="StaKeAmount(this);">50000</button><button
-                                                       class="btn btn-default  chipName6" type="button" value="100000"
-                                                       onclick="StaKeAmount(this);">1000000</button> </div>
-                                           </div>
-                                           <div class="odds-btn-clear">
-                                               <button class="btn btn-default" type="button" onclick="ClearStack( );"><i
-                                                       class="fas fa-backspace"></i></button>
-                                           </div>
-                                       </div>
-                                       <div class="place-bet-div">
-                                           <button class="btn btn-Cancel" type="button"
-                                               onclick="ClearAllSelection();">Cancel</button>
-                                           <button class="btn btn-placebet placebet" type="button" onclick="PlaceBet();">Place
-                                               Bet</button>
-                                           <button class="btn btn-placebet placefancy" type="button" onclick="PlaceFancy();"
-                                               style="display:none">Place Bet</button>
-                                       </div>
-                                       <div class="proft-loss-slip">
-                                           <span>Profit or Liability</span>
-                                           <span id="profitData" class="green">144000</span>
-                                           <span id="LossData" class="red">8000</span>
-                                       </div>
-                                   </form>
-                               </div>
-                           </div>
-                       </div>
-                       <div class="odds-tabs tab_bets">
-                           <ul class="nav nav-tabs match-bets">
-                               <li class="nav-item betdata active-all active">
-                                   <a class="allbet" href="javascript:void(0);" onclick="getDataByType(this,'4');">All Bets
-                                       <span id="cnt_row">(0)</span> </a>
-                               </li>
-       
-                           </ul>
-                       </div>
-                   </div>
-               </div>
-               <div class="" id="MatchUnMatchBetaData">
-                   <style>
-                       .searchbtnn {
-                           margin-right: 20px;
-                       }
-                   </style>
-       
-       
-                   <span id="msg_error"></span>
-                   <div class="scroll-table match_bets MachShowHide">
-                       <table class="table">
-                           <thead class="head">
-                               <tr class="headings">
-                                   <td>Bet ID</td>
-                                   <td>Runner</td>
-                                   <td>Odds</td>
-                                   <td>Stack</td>
-                                   <td>Bet Type</td>
-                                  
-                               </tr>
-                           </thead>
-                           <tbody>
-                               <tr class="mark-back"
-                                   [ngClass]="{'back':result.type=='BACK' || result.type=='Back' ||result.type=='YES','lay':result.type=='LAY' || result.type=='Lay' || result.type=='NO'}"
-                                   *ngFor="let result of matchedbets">
-                                   <td>{{result.betId}}</td>
-                                   <td>{{result.selection}}</td>
-                                   <td>{{result.odds}}</td>
-                                   <td>{{result.matchedStake}}</td>
-                                   <td>{{result.type}}</td>
-                               </tr>
-                           </tbody>
-                       </table>
-                   </div>
-               </div>
-           </div>
+              <a href="" class="closebet" (click)="closebet()">×</a>
+              <div class="matchBox">
+                <div class="betSlipBox">
+                  <div class="betBox border-box" id="betBox" *ngIf="openBet">
+                    <div class="block_box">
+                      <div class="betslip">
+                        <div class="loader" style="display:none">
+                          <div class="mini-loader">
+                            <span></span>
+                            <span></span>
+                            <span></span>
+                          </div>
+                        </div>
+                        <form [formGroup]="OpenBetForm" id="placeBetSilp" (ngSubmit)="BetSubmit()" style="background-color:rgb(167, 216, 253)">
+                          <div class="fancy-temaname" id="ShowRunnderName">{{f.runnerName.value}}</div>
+                          <span class="close-betslip" (click)="closebetslip()"><svg version="1.1" id="Capa_1"
+                              xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
+                              viewBox="0 0 512 512" style="enable-background:new 0 0 512 512;" xml:space="preserve">
+                              <g>
+                                <g>
+                                  <path d="M436.812,75.188C388.327,26.702,324.113,0,256,0S123.673,26.702,75.188,75.188C26.702,123.673,0,187.887,0,256
+                                                            s26.702,132.327,75.188,180.812C123.673,485.298,187.887,512,256,512s132.327-26.702,180.812-75.188
+                                                            C485.298,388.327,512,324.113,512,256S485.298,123.673,436.812,75.188z M256,482C131.383,482,30,380.617,30,256S131.383,30,256,30
+                                                            s226,101.383,226,226S380.617,482,256,482z"></path>
+                                </g>
+                              </g>
+                              <g>
+                                <g>
+                                  <path d="M404.493,171.147l-63.64-63.639L256,192.36l-84.853-84.853l-63.64,63.64L192.36,256l-84.853,84.853l63.64,63.64
+                                                            L256,319.64l84.853,84.853l63.64-63.64L319.64,256L404.493,171.147z M362.066,340.853l-21.213,21.213L256,277.213l-84.853,84.853
+                                                            l-21.213-21.213L234.787,256l-84.853-84.853l21.213-21.213L256,234.787l84.853-84.853l21.213,21.213L277.213,256L362.066,340.853z
+                                                            "></path>
+                                </g>
+                              </g>
+                              <g>
+                              </g>
+                              <g>
+                              </g>
+                              <g>
+                              </g>
+                              <g>
+                              </g>
+                              <g>
+                              </g>
+                              <g>
+                              </g>
+                              <g>
+                              </g>
+                              <g>
+                              </g>
+                              <g>
+                              </g>
+                              <g>
+                              </g>
+                              <g>
+                              </g>
+                              <g>
+                              </g>
+                              <g>
+                              </g>
+                              <g>
+                              </g>
+                              <g>
+                              </g>
+                            </svg></span>
+
+                          <div class="odds-stake-fild">
+                            <div class="item-slip input-odds">
+                              <input type="number" id="ShowBetPrice" formControlName="odds"
+                              (keyup)="update()" class="calProfitLoss odds-input form-control CommanBtn">
+                              <div class="inc plus_btn">+</div>
+                              <div class="dec plus_btn">-</div>
+                            </div>
+                            <div class="item-slip input-stake">
+                              <input type="number" pattern="[0-9]*" step="1" id="stakeValue"
+                                            formControlName="stake" (keyup)="update()"
+                                            class="calProfitLoss stake-input form-control  CommanBtn">
+                              <div class="inc plus_btn" (click)="incStake()">+</div>
+                              <div class="dec plus_btn" (click)="decStake()">-</div>
+                            </div>
+                          </div>
+                          <div class="betslip-footer">
+                            <div class="odds-btn-value">
+                              <div class="fancy-btngroup">
+                                <ng-container *ngFor="let stake of stakeSetting;let index=index;">
+                                  <button class="btn btn-default  chipName1" type="button"
+                                    (click)="addStake(stake);">{{stakeSetting[index]}}</button>
+
+                                </ng-container>
+                              </div>
+                            </div>
+                            <div class="odds-btn-clear">
+                              <button class="btn btn-default" type="button" (click)="clearStake( );"><i
+                                  class="fas fa-backspace"></i></button>
+                            </div>
+                          </div>
+                          <div class="place-bet-div">
+                            <button class="btn btn-Cancel" type="button" (click)="ClearAllSelection()">Cancel</button>
+                            <button class="btn btn-placebet placebet" type="submit">Place Bet</button>
+
+                          </div>
+                          <div class="proft-loss-slip">
+                            <span>Profit or Liability</span>
+                            <span id="profitData" class="green">{{f.profit.value | number:'1.2-2'}}</span>
+                            <span id="LossData" class="red">{{f.loss.value | number:'1.2-2'}}</span>
+                          </div>
+                        </form>
+
+                      </div>
+                    </div>
+                  </div>
+                  <div class="odds-tabs tab_bets">
+                    <ul class="nav nav-tabs match-bets">
+                      <li class="nav-item betdata active-all active">
+                        <a class="allbet" href="javascript:void(0);" (click)="getDataByType('4')">All Bets
+                          <span id="cnt_row">({{totalBets}})</span> </a>
+                      </li>
+                      <!-- <li class="nav-item betdata active-unmatch" style="display: none;">
+                                      <a class="unmatchbet" href="javascript:void(0);" onclick="getDataByType(this,'2');"> UnMatch
+                                          Bet <span id="cnt_row1">(0)</span> </a>
+                                  </li> -->
+                    </ul>
+                  </div>
+                </div>
+              </div>
+              <div class="" id="MatchUnMatchBetaData">
+                <style>
+                  .searchbtnn {
+                    margin-right: 20px;
+                  }
+                </style>
+
+
+                <span id="msg_error"></span>
+                <div class="scroll-table match_bets MachShowHide">
+                  <table class="table">
+                    <thead class="head">
+                      <tr class="headings">
+                        <td>No.</td>
+                        <td>Runner</td>
+                        <td>Odds</td>
+                        <td>Stake</td>
+                        <td>Bet Type</td>
+                        <td>P&L</td>
+                        <td>Time</td>
+                        <td>ID</td>
+                        <td> IP</td>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <tr [ngClass]="{'back':bet.backLay=='BACK' || bet.backLay=='Back' ||bet.backLay=='YES','lay':bet.backLay=='LAY' || bet.backLay=='Lay' || bet.backLay=='NO'}"
+                        *ngFor="let bet of eventBets;let index=index;trackBy:trackByBet">
+                        <td>{{index+1}}</td>
+                        <td>{{bet.runnerName}}</td>
+                        <td>{{bet.odds}}</td>
+                        <td>{{bet.stake | number:'1.2-2'}}</td>
+                        <td>{{bet.backLay}}</td>
+                        <td>{{bet.profit | number:'1.2-2'}}</td>
+                        <td>{{bet.date}}</td>
+                        <td>{{bet.id}}</td>
+                        <td>{{bet.ipAddress}}</td>
+                      </tr>
+                    </tbody>
+                  </table>
+                </div>
+              </div>
+            </div>
 
         </div>
