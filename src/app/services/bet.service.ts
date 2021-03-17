@@ -1,17 +1,14 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
-
+import { environment } from '../../environments/environment';
 
 @Injectable({
   providedIn: 'root'
 })
 export class BetsService {
-
-
-
-
-
+  baseUrl = `${environment.betUrl}/Bets`;
+  BASE_URL = `${environment.readUrl}/Data`;
 
   constructor(private http: HttpClient) { }
 
@@ -42,16 +39,16 @@ export class BetsService {
     return this.http.get(`http://www.kingsbid.in/Read3/BetBuzzClient.svc/Bets/Fancybook?mtid=${MTID}&fid=${FID}`)
   }
 
-  T20ExposureBook(GAMEID): Observable<any> {
-    return this.http.get(`http://www.kingsbid.in/Bet/BetBuzzClient.svc/Bets/T20ExposureBook?gameid=${GAMEID}`)
+  T20ExposureBook(gameid: number) {
+    return this.http.get(`${this.baseUrl}/T20ExposureBook?gameid=${gameid}`)
   }
-  Lucky7ExposureBook(GAMEID): Observable<any> {
-    return this.http.get(`http://www.kingsbid.in/Bet/BetBuzzClient.svc/Bets/Lucky7ExposureBook?gameid=${GAMEID}`)
+  Lucky7ExposureBook(gameid: number) {
+    return this.http.get(`${this.baseUrl}/Lucky7ExposureBook?gameid=${gameid}`)
   }
-  ThreeCardJExposureBook(GAMEID): Observable<any> {
-    return this.http.get(`http://www.kingsbid.in/Bet/BetBuzzClient.svc/Bets/ThreeCardJExposureBook?gameid=${GAMEID}`)
+  ThreeCardJExposureBook(gameid: number) {
+    return this.http.get(`${this.baseUrl}/ThreeCardJExposureBook?gameid=${gameid}`)
   }
-  AndarBaharExposureBook(GAMEID): Observable<any> {
-    return this.http.get(`http://www.kingsbid.in/Bet/BetBuzzClient.svc/Bets/AndarBaharExposureBook?gameid=${GAMEID}`)
+  AndarBaharExposureBook(gameid: number) {
+    return this.http.get(`${this.baseUrl}/AndarBaharExposureBook?gameid=${gameid}`)
   }
 }

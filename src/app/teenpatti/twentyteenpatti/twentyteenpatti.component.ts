@@ -5,7 +5,7 @@ import * as _ from 'lodash';
 import { Subscription, from } from 'rxjs';
 import { FormGroup, FormBuilder,FormControl } from '@angular/forms';
 import { ShareBetDataService } from '../../services/share-bet-data.service';
-import { BetsService } from '../../service/bets.service';
+import { BetsService } from '../../services/bet.service';
 import { SharedataService } from '../../services/sharedata.service';
 import { take } from 'rxjs/operators';
 import { ReportService } from '../../services/report.service';
@@ -226,7 +226,7 @@ export class TwentyteenpattiComponent implements OnInit {
   }
 
   initOpenBetForm() {
-    
+
 
     this.OpenBetForm = this.fb.group({
       event: [this.placeTPData.event],
@@ -238,7 +238,7 @@ export class TwentyteenpattiComponent implements OnInit {
       gameType: [this.placeTPData.gameType],
       runnerIndex: [this.placeTPData.runnerIndex],
       card: [this.placeTPData.gameType],
-     
+
       stake: [""],
     })
     console.log(this.OpenBetForm.value);
@@ -427,11 +427,11 @@ export class TwentyteenpattiComponent implements OnInit {
     }
     let odds = parseFloat(this.OpenBetForm.value.odds);
     this.OpenBetForm.controls['odds'].setValue(this.oddsDecimal(odds + this.oddsDiffCalc(odds)));
-  
+
     this.calcProfit();
     // this.calcExposure(bet);
   }
-  
+
   decOdds() {
     if (this.OpenBetForm.value.odds == "" || this.OpenBetForm.value.odds == null || parseFloat(this.OpenBetForm.value.odds) <= 1.01) {
       this.OpenBetForm.controls['odds'].setValue(1.01);
@@ -440,34 +440,34 @@ export class TwentyteenpattiComponent implements OnInit {
     }
     let odds = parseFloat(this.OpenBetForm.value.odds);
     this.OpenBetForm.controls['odds'].setValue(this.oddsDecimal(odds - this.oddsDiffCalc(odds)));
-  
+
     this.calcProfit();
     // this.calcExposure(bet);
   }
-  
+
   incStake() {
     if (!this.OpenBetForm.value.stake) {
       this.OpenBetForm.controls['stake'].setValue(0);
     }
-  
+
     if (this.OpenBetForm.value.stake > -1) {
       let stake = parseInt(this.OpenBetForm.value.stake);
       this.OpenBetForm.controls['stake'].setValue(stake + this.stakeDiffCalc(stake));
       this.calcProfit();
     }
   }
-  
+
   decStake() {
-  
+
     if (this.OpenBetForm.value.stake <= 0) {
       this.OpenBetForm.controls['stake'].setValue("");
       return false;
     }
-  
+
     if (!this.OpenBetForm.value.stake) {
       this.OpenBetForm.controls['stake'].setValue(0);
     }
-  
+
     if (this.OpenBetForm.value.stake > -1) {
       let stake = parseInt(this.OpenBetForm.value.stake);
       this.OpenBetForm.controls['stake'].setValue(stake - this.stakeDiffCalc(stake));
@@ -478,7 +478,7 @@ export class TwentyteenpattiComponent implements OnInit {
   oddsDecimal(value) {
     return (value == null || value == '' || (parseFloat(value) > 19.5)) ? value : ((parseFloat(value) > 9.5) ? parseFloat(value).toFixed(1) : parseFloat(value).toFixed(2));
   }
-  
+
   oddsDiffCalc(currentOdds) {
     var diff;
     if (currentOdds < 2) {
@@ -500,11 +500,11 @@ export class TwentyteenpattiComponent implements OnInit {
     }
     return diff
   }
-  
+
   stakeDiffCalc(currentStake) {
     var diff;
-  
-  
+
+
       if (currentStake <= 50) {
         diff = 5
       } else if (currentStake <= 100) {
@@ -524,7 +524,7 @@ export class TwentyteenpattiComponent implements OnInit {
       } else {
         diff = 100000000
       }
-  
+
     return diff
   }
 
@@ -571,15 +571,15 @@ export class TwentyteenpattiComponent implements OnInit {
 
     this.betsService.PlaceTpBet(this.OpenBetForm.value).subscribe(resp => {
 
-      
-        
-        
+
+
+
         this.OpenBetForm.reset();
         this.ClearAllSelection();
         this.dfService.shareFunds(null);
-      
-     
-     
+
+
+
     })
   }
 

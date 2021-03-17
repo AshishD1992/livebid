@@ -4,7 +4,7 @@ import { ActivatedRoute } from '@angular/router';
 import * as _ from 'lodash';
 import { Subscription, from } from 'rxjs';
 import { ShareBetDataService } from '../../services/share-bet-data.service';
-import { BetsService } from '../../service/bets.service';
+import { BetsService } from '../../services/bet.service';
 import { SharedataService } from '../../services/sharedata.service';
 import { take } from 'rxjs/operators';
 import { ReportService } from '../../services/report.service';
@@ -56,7 +56,7 @@ export class ThreecardjudgeComponent implements OnInit {
     private reportsService: ReportService,
   ) { }
 
-  
+
 
   ngOnInit(): void {
     console.log("",this.matchBfId);
@@ -384,9 +384,9 @@ console.log("log", this.tpData)
   ngAfterViewInit(){
     (this.bodyElement as HTMLElement).classList.add('clsbetshow');
     throw new Error('Method not implemented.');
-    
+
     }
-    
+
     ngOnDestroy(){
       this.teenpattiSubscription.unsubscribe();
     (this.bodyElement as HTMLElement).classList.remove('clsbetshow');
