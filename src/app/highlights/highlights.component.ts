@@ -53,6 +53,7 @@ export class HighlightsComponent implements OnInit {
         }
       })
     );
+    this.dataFormat.RemoveFavourites();
 
   }
   getSportsList(sport: Sport) {

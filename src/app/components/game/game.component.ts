@@ -26,10 +26,11 @@ fancyHubAddress: string = "http://173.249.21.26:13111";
 
 hubAddressData: any;
 allMarketData: any = [];
-favouriteEvents: any= [];
+favouriteEvents:Array<any> = [];;
 eventBets = [];
+fancyBookData = [];
 selectedMatch: any;
-
+context: any;
 liveUrl: string;
 url: string;
 urlSafe: SafeResourceUrl;
@@ -43,6 +44,7 @@ marketErrSuscription: Subscription;
 favouriteSubscription: Subscription;
 BetStakeSubscription: Subscription;
 eventBetsSubscription: Subscription;
+fancyExpoSubscription: Subscription;
 bookExpoCall: boolean = false;
 openBet: any;
 fancyExposures: any;
@@ -66,20 +68,46 @@ constructor(
   private betService:BetsService,
   private settingService: SettingService,
   private toastr:ToastrService
-  ) { }
+  ) {
+    navigator.vibrate = navigator.vibrate;
+  }
 
-ngOnInit(): void {
+ngOnInit() {
   this.dfService._currentDateTimeSource.subscribe(data => {
     if (data) {
       this.currTime = data;
     }
   });
-  this.deviceInfo = this.deviceService.getDeviceInfo();
-  this.getFavouriteMarket();
-  this.UserDescription();
-  this.getBetStakeSetting();
+
+    this.getFavouriteMarket();
+    this.getBetStakeSetting();
+    this.epicFunction();
+    this.getFancyExposure();
+    this.UserDescription();
   this.bodyElement = document.querySelector('body');
 
+
+}
+epicFunction() {
+  this.deviceInfo = this.deviceService.getDeviceInfo();
+  const isMobile = this.deviceService.isMobile();
+  const isTablet = this.deviceService.isTablet();
+  const isDesktop = this.deviceService.isDesktop();
+
+
+  if (isMobile) {
+    this.context = "Mobile";
+  }
+  if (isTablet) {
+    this.context = "Tablet";
+  }
+  if (isDesktop) {
+    this.context = "Desktop";
+  }
+  if (!isDesktop) {
+    this.width = window.innerWidth;
+    this.height = Math.ceil(this.width / 1.778);
+  }
 }
 
 initOpenBetForm() {
@@ -114,8 +142,8 @@ initOpenBetForm() {
     profit: [0],
     loss: [0],
     mtype: [this.openBet.mtype],
-    info: [info]
-    // source: [this.context],
+    info: [info],
+    source: [this.context]
     // ipAddress: [this.tokenService.getIpAddrress()]
     // ipAddress:[this.ipInfo.ip]
 
@@ -177,9 +205,9 @@ getMarketRunner() {
   this.marketSuscription = this.mktService.marketsData$.subscribe(data => {
     // console.log(data);
     if (data != null) {
-      // console.log(this.favouriteEvents)
+
       _.forEach(this.favouriteEvents, (item, index) => {
-        // console.log(this.favouriteEvents)
+
         // if (item.settings && this.UserSettingData) {
 
         //   if (this.UserSettingData[item.sportId]) {
@@ -200,8 +228,9 @@ getMarketRunner() {
                 this.favouriteEvents[index].markets[index3].runners[i]["runnerName"] = data.runner;
                 this.favouriteEvents[index].markets[index3].runners[i]["status"] = data.runnerStatus;
                 this.favouriteEvents[index].markets[index3].runners[i]["selectionId"] = data.selectionid;
+
                 if (item.selectionid != 0) {
-                  // this.checkOddsChange(item4, data, null);
+                  this.checkOddsChange(item4, data, null);
                 }
               }
             })
@@ -227,6 +256,7 @@ getFancyData() {
 
     if (data != null) {
       _.forEach(this.favouriteEvents, (item, index) => {
+
         if (item.id == data.matchId) {
           item.fancyData = data.data;
 
@@ -284,7 +314,7 @@ getFancyData() {
 
             if (this.openBet) {
               if (this.openBet.runnerName == fanyItem.name && fanyItem.ballStatus != '') {
-                // this.ClearAllSelection();
+                this.ClearAllSelection();
               }
             }
             if (this.fancyExposures) {
@@ -313,19 +343,17 @@ getFavouriteMarket() {
       // console.log(this.dfService.favouriteEventWise(data));
       if (this.favouriteEvents.length == 0) {
         this.favouriteEvents = this.dfService.favouriteEventWise(data);
-
+        console.log(this.favouriteEvents)
         this.allMarketData = [];
         _.forEach(this.favouriteEvents, (item) => {
           _.forEach(item.markets, (item2) => {
             this.allMarketData.push(item2);
-            // console.log(this.allMarketData)
             this.ExposureBook(item2);
           });
           _.forEach(item.bookRates, (item2) => {
             this.BMExposureBook(item2, item.markets[0].id);
           });
           this.GetScoreId(item);
-
         });
 
 
@@ -362,7 +390,6 @@ getFavouriteMarket() {
           _.forEach(this.favouriteEvents, (item) => {
             _.forEach(item.markets, (item2) => {
               this.allMarketData.push(item2);
-              // console.log(this.allMarketData)
               this.ExposureBook(item2);
             });
             _.forEach(item.bookRates, (item2) => {
@@ -371,7 +398,7 @@ getFavouriteMarket() {
           });
           this.mktService.connectMarket(this.hubAddressData.hubAddress, this.allMarketData);
           this.fancyService.connectFancy(this.hubAddressData.fancyHubAddress, this.favouriteEvents);
-          console.log(this.favouriteEvents)
+
           if (this.favouriteEvents.length > 0) {
             let matchId = this.favouriteEvents[this.favouriteEvents.length - 1].id;
             this.getMatchedUnmatchBets(matchId);
@@ -386,6 +413,7 @@ getFavouriteMarket() {
     }
   })
 }
+
 GetScoreId(event) {
   if (event.sportId == 4) {
     this.scoreService.GetScoreId(event.bfId).subscribe(resp => {
@@ -398,6 +426,7 @@ GetScoreId(event) {
   }
 
 }
+
 openTv(match) {
   if (this.selectedMatch) {
     if (this.selectedMatch.bfId != match.bfId) {
@@ -429,20 +458,322 @@ setIframeUrl() {
     }
   }
 }
+checkOddsChange(OldValue, NewValue, type) {
 
-trackByEvent(index, item) {
-  return item.bfId;
+  if (type == 'fancy') {
+    if (OldValue.noScore != NewValue.noScore) {
+      const noScore = $('#' + NewValue.id + ' .lay');
+      noScore.addClass('yello');
+      this.removeChangeClass(noScore);
+    }
+    if (OldValue.yesScore != NewValue.yesScore) {
+      const yesScore = $('#' + NewValue.id + ' .lay');
+      yesScore.addClass('yello');
+      this.removeChangeClass(yesScore);
+    }
+
+  }
+  else {
+    if (OldValue.back1 != NewValue.back1 || OldValue.backSize1 != NewValue.backSize1) {
+      const back1 = $('#' + NewValue.selectionId + ' .back_1');
+      back1.addClass('yello');
+      this.removeChangeClass(back1);
+    }
+    if (OldValue.back2 != NewValue.back2 || OldValue.backSize2 != NewValue.backSize2) {
+      const back2 = $('#' + NewValue.selectionId + ' .back_2');
+      back2.addClass('yello');
+      this.removeChangeClass(back2);
+    }
+    if (OldValue.back3 != NewValue.back3 || OldValue.backSize3 != NewValue.backSize3) {
+      const back3 = $('#' + NewValue.selectionId + ' .back_3');
+      back3.addClass('yello');
+      this.removeChangeClass(back3);
+    }
+    if (OldValue.lay1 != NewValue.lay1 || OldValue.laySize1 != NewValue.laySize1) {
+
+
+      const lay1 = $('#' + NewValue.selectionId + ' .lay_1');
+      lay1.addClass('yello');
+      this.removeChangeClass(lay1);
+    }
+    if (OldValue.lay2 != NewValue.lay2 || OldValue.laySize2 != NewValue.laySize2) {
+
+      const lay2 = $('#' + NewValue.selectionId + ' .lay_2');
+      lay2.addClass('yello');
+      this.removeChangeClass(lay2);
+    }
+    if (OldValue.lay3 != NewValue.lay3 || OldValue.laySize3 != NewValue.laySize3) {
+
+      const lay3 = $('#' + NewValue.selectionId + ' .lay_3');
+      lay3.addClass('yello');
+      this.removeChangeClass(lay3);
+    }
+  }
+
+
+
 }
-trackByMkt(index, item) {
-  return item.bfId;
-}
-trackByRunner(index, item) {
-  return item.runnerName;
-}
-trackByFancy(index, item) {
-  return item.id;
+removeChangeClass(changeClass) {
+  setTimeout(() => {
+    changeClass.removeClass('yello');
+  }, 300);
 }
 
+getOddValue(sportId, tourid, matchBfId, matchId, bfId, mktId, matchName, marketName, isInplay, runnerName, odds, backlay, score, rate, fancyId, bookId, runnerId, bookType){
+  this.openBet = {
+    sportId, tourid, matchBfId, matchId, bfId, mktId, matchName, marketName, isInplay, runnerName, odds, backlay, score, rate, fancyId, bookId, runnerId, bookType
+  }
+  if (bfId != null && mktId != null && bookType == null) {
+    this.openBet['mtype'] = "market";
+  }
+
+  if (bookId != null && bookType != null) {
+    this.openBet['mtype'] = "book";
+  }
+  if (fancyId != null) {
+    this.openBet['mtype'] = "fancy";
+  }
+  this.initOpenBetForm();
+  console.log(this.openBet)
+
+}
+BetSubmit() {
+  // console.log(this.OpenBetForm)
+
+  if (!this.OpenBetForm.valid) {
+    return;
+  }
+  // console.log(this.OpenBetForm.value)
+  // this.showLoader = true;
+
+  if (this.OpenBetForm.value.mtype == "market") {
+    this.PlaceMOBet();
+  }
+  else if (this.OpenBetForm.value.mtype == "fancy") {
+    this.PlaceFancyBet();
+  }
+  else if (this.OpenBetForm.value.mtype == "book") {
+    this.PlaceBookBet();
+  }
+
+}
+PlaceMOBet() {
+
+  this.betService.PlaceMOBet(this.OpenBetForm.value).subscribe(resp => {
+
+    if (resp.status == "Success") {
+      this.toastr.success(resp.result);
+      // this.betPlacedPlay();
+      this.afterPlaceBetExposure();
+      this.OpenBetForm.reset();
+      this.ClearAllSelection();
+      this.dfService.shareFunds(null);
+    }
+    else {
+      this.toastr.error(resp.result);
+
+      if (resp.result == 'Unmatched bets not allowed') {
+        // this.unmatchNotAllowPlay();
+      }
+    }
+    // this.showLoader = false;
+  }, err => {
+    if (err.status == 401) {
+      this.toastr.error("Error Occured");
+    }
+    else {
+      this.toastr.error("Errors Occured");
+    }
+    // this.showLoader = false;
+  })
+}
+PlaceFancyBet() {
+
+  this.betService.PlaceFancyBet(this.OpenBetForm.value).subscribe(resp => {
+
+    if (resp.status == "Success") {
+      this.toastr.success(resp.result);
+      // this.betPlacedPlay();
+      this.OpenBetForm.reset();
+      this.ClearAllSelection();
+      this.dfService.shareFunds(null);
+    }
+    else {
+      this.toastr.error(resp.result);
+    }
+    // this.showLoader = false;
+  }, err => {
+    if (err.status == 401) {
+      this.toastr.error("Error Occured");
+    }
+    else {
+      this.toastr.error("Errors Occured");
+    }
+    // this.showLoader = false;
+  })
+}
+PlaceBookBet() {
+  this.betService.PlaceBookBet(this.OpenBetForm.value).subscribe(resp => {
+
+    if (resp.status == "Success") {
+      this.toastr.success(resp.result);
+      // this.betPlacedPlay();
+      this.afterPlaceBetExposure();
+      this.OpenBetForm.reset();
+      this.ClearAllSelection();
+      this.dfService.shareFunds(null);
+    }
+    else {
+      this.toastr.error(resp.result);
+    }
+    // this.showLoader = false;
+  }, err => {
+    if (err.status == 401) {
+      //this.toastr.error("Error Occured");
+    }
+    else {
+      this.toastr.error("Errors Occured");
+    }
+    // this.showLoader = false;
+  })
+}
+
+afterPlaceBetExposure() {
+  _.forEach(this.favouriteEvents, (item) => {
+    _.forEach(item.markets, (item2) => {
+      if (this.OpenBetForm.value.mktId == item2.id) {
+        this.ExposureBook(item2);
+      }
+    });
+    _.forEach(item.bookRates, (item2) => {
+      if (this.OpenBetForm.value.bookId == item2.id) {
+        this.BMExposureBook(item2, this.OpenBetForm.value.marketId);
+      }
+    });
+  });
+
+}
+ExposureBook(market) {
+  this.betService.ExposureBook(market.id).subscribe(resp => {
+    market['pnl'] = resp.data;
+  }, err => {
+    if (err.status == 401) {
+      //this.toastr.error("Error Occured");
+    }
+    else {
+      this.toastr.error("Errors Occured");
+    }
+  })
+}
+BMExposureBook(market, marketId) {
+  this.bookExpoCall = true;
+  this.betService.BMExposureBook(marketId, market.id).subscribe(resp => {
+    market['pnl'] = resp.data;
+    this.bookExpoCall = false;
+  }, err => {
+    if (err.status == 401) {
+      //this.toastr.error("Error Occured");
+    }
+    else {
+      this.toastr.error("Errors Occured");
+    }
+    this.bookExpoCall = false;
+  })
+}
+getFancyBook(matchId, fancyId) {
+  this.betService.Fancybook(matchId, fancyId).subscribe(resp => {
+    this.fancyBookData = resp.data;
+  }, err => {
+    if (err.status == 401) {
+      //this.toastr.error("Error Occured");
+    }
+    else {
+      this.toastr.error("Errors Occured");
+    }
+  })
+}
+getFancyExposure() {
+  this.fancyExpoSubscription = this.dfService.fancyExposureSource$.subscribe(data => {
+    // console.log(data);
+    if (data != null) {
+      this.fancyExposures = data;
+    }
+  })
+}
+
+marketsNewExposure(bet) {
+  _.forEach(this.favouriteEvents, (match, matchIndex) => {
+    _.forEach(match.markets, (market, mktIndex) => {
+      if (bet) {
+        let newMktExposure = _.cloneDeep((market.pnl));
+        if (bet.stake != null && market.id == bet.mktId && bet.mtype == 'market') {
+          _.forEach(newMktExposure, (runner) => {
+            if (bet.backlay == "back" && bet.runnerName == runner.Key) {
+              if (bet.profit != null) {
+                runner.Value = this.convertToFloat(parseFloat(runner.Value) + parseFloat(bet.profit));
+              }
+            }
+            if (bet.backlay == "back" && bet.runnerName != runner.Key) {
+              runner.Value = this.convertToFloat(parseFloat(runner.Value) - parseFloat(bet.loss));
+            }
+            if (bet.backlay == "lay" && bet.runnerName == runner.Key) {
+              if (bet.profit != null && (bet.rate == null && bet.odds != null)) {
+                runner.Value = this.convertToFloat(parseFloat(runner.Value) - parseFloat(bet.loss));
+              }
+            }
+            if (bet.backlay == "lay" && bet.runnerName != runner.Key) {
+              if (bet.profit != null && (bet.rate == null && bet.odds != null)) {
+                runner.Value = this.convertToFloat(parseFloat(runner.Value) + parseFloat(bet.profit));
+              }
+            }
+          })
+
+          market['newpnl'] = newMktExposure;
+        }
+      }
+      else {
+        market['newpnl'] = null;
+      }
+
+    })
+    _.forEach(match.bookRates, (book, bookIndex) => {
+      if (bet) {
+        let newbookExposure = _.cloneDeep((book.pnl));
+        if (bet.stake != null && book.id == bet.bookId && bet.mtype == 'book') {
+          _.forEach(newbookExposure, (runner) => {
+            if (bet.backlay == "back" && bet.runnerName == runner.Key) {
+              if (bet.profit != null) {
+                runner.Value = this.convertToFloat(parseFloat(runner.Value) + parseFloat(bet.profit));
+              }
+            }
+            if (bet.backlay == "back" && bet.runnerName != runner.Key) {
+              runner.Value = this.convertToFloat(parseFloat(runner.Value) - parseFloat(bet.loss));
+            }
+            if (bet.backlay == "lay" && bet.runnerName == runner.Key) {
+              if (bet.profit != null && (bet.rate == null && bet.odds != null)) {
+                runner.Value = this.convertToFloat(parseFloat(runner.Value) - parseFloat(bet.loss));
+              }
+            }
+            if (bet.backlay == "lay" && bet.runnerName != runner.Key) {
+              if (bet.profit != null && (bet.rate == null && bet.odds != null)) {
+                runner.Value = this.convertToFloat(parseFloat(runner.Value) + parseFloat(bet.profit));
+              }
+            }
+          })
+
+          book['newpnl'] = newbookExposure;
+        }
+      }
+      else {
+        book['newpnl'] = null;
+      }
+    })
+
+  })
+}
+convertToFloat(value) {
+  return parseFloat(value).toFixed(2);
+}
 
 getPnlValue(runner, Pnl) {
   // console.log(runner,Pnl)
@@ -479,167 +810,21 @@ getPnlClass(runner, Pnl) {
   }
   return pnlClass;
 }
-// GetCurrentBets(){
-// this.reportService.GetCurrentBets().subscribe(data=>{
-// this.matchedbets=data.matchedbets;
-// })
-// }
-ngAfterViewInit(){
-(this.bodyElement as HTMLElement).classList.add('clsbetshow');
 
+trackByEvent(index, item) {
+  return item.bfId;
+}
+trackByMkt(index, item) {
+  return item.bfId;
+}
+trackByRunner(index, item) {
+  return item.runnerName;
+}
+trackByFancy(index, item) {
+  return item.id;
 }
 
-ngOnDestroy(){
-(this.bodyElement as HTMLElement).classList.remove('clsbetshow');
-}
-getOddValue(sportId, tourid, matchBfId, matchId, bfId, mktId, matchName, marketName, isInplay, runnerName, odds, backlay, score, rate, fancyId, bookId, runnerId, bookType){
-  this.openBet = {
-    sportId, tourid, matchBfId, matchId, bfId, mktId, matchName, marketName, isInplay, runnerName, odds, backlay, score, rate, fancyId, bookId, runnerId, bookType
-  }
-  if (bfId != null && mktId != null && bookType == null) {
-    this.openBet['mtype'] = "market";
-  }
-
-  if (bookId != null && bookType != null) {
-    this.openBet['mtype'] = "book";
-  }
-  if (fancyId != null) {
-    this.openBet['mtype'] = "fancy";
-  }
-  this.initOpenBetForm();
-  console.log(this.openBet)
-
-}
-BetSubmit() {
-  // console.log(this.OpenBetForm)
-
-  if (!this.OpenBetForm.valid) {
-    return;
-  }
-  // console.log(this.OpenBetForm.value)
-  // this.showLoader = true;
-
-  if (this.OpenBetForm.value.mtype == "market") {
-    this.PlaceMOBet();
-  }
-  else if (this.OpenBetForm.value.mtype == "fancy") {
-    this.PlaceFancyBet();
-  }
-  else if (this.OpenBetForm.value.mtype == "book") {
-    // this.PlaceBookBet();
-  }
-
-}
-PlaceMOBet() {
-
-  this.betService.PlaceMOBet(this.OpenBetForm.value).subscribe(resp => {
-
-    if (resp.status == "Success") {
-      this.toastr.success(resp.result);
-      // this.betPlacedPlay();
-      // this.afterPlaceBetExposure();
-      this.OpenBetForm.reset();
-      this.ClearAllSelection();
-      this.dfService.shareFunds(null);
-    }
-    else {
-      this.toastr.error(resp.result);
-
-      if (resp.result == 'Unmatched bets not allowed') {
-        // this.unmatchNotAllowPlay();
-      }
-    }
-    // this.showLoader = false;
-  }, err => {
-    if (err.status == 401) {
-      this.toastr.error("Error Occured");
-    }
-    else {
-      this.toastr.error("Errors Occured");
-    }
-    // this.showLoader = false;
-  })
-}
-PlaceFancyBet() {
-
-  this.betService.PlaceFancyBet(this.OpenBetForm.value).subscribe(resp => {
-
-    if (resp.status == "Success") {
-      this.toastr.success(resp.result);
-      // this.betPlacedPlay();
-      this.OpenBetForm.reset();
-      this.ClearAllSelection();
-      // this.dfService.shareFunds(null);
-    }
-    else {
-      this.toastr.error(resp.result);
-    }
-    // this.showLoader = false;
-  }, err => {
-    if (err.status == 401) {
-      this.toastr.error("Error Occured");
-    }
-    else {
-      this.toastr.error("Errors Occured");
-    }
-    // this.showLoader = false;
-  })
-}
-
-afterPlaceBetExposure() {
-  _.forEach(this.favouriteEvents, (item) => {
-    _.forEach(item.markets, (item2) => {
-      if (this.OpenBetForm.value.mktId == item2.id) {
-        this.ExposureBook(item2);
-      }
-    });
-    _.forEach(item.bookRates, (item2) => {
-      if (this.OpenBetForm.value.bookId == item2.id) {
-        this.BMExposureBook(item2, this.OpenBetForm.value.marketId);
-      }
-    });
-  });
-
-}
-
-ExposureBook(market) {
-  this.betService.ExposureBook(market.id).subscribe(resp => {
-    market['pnl'] = resp.data;
-  }, err => {
-    if (err.status == 401) {
-      //this.toastr.error("Error Occured");
-    }
-    else {
-      this.toastr.error("Errors Occured");
-    }
-  })
-}
-BMExposureBook(market, marketId) {
-  this.bookExpoCall = true;
-  this.betService.BMExposureBook(marketId, market.id).subscribe(resp => {
-    market['pnl'] = resp.data;
-    this.bookExpoCall = false;
-  }, err => {
-    if (err.status == 401) {
-      //this.toastr.error("Error Occured");
-    }
-    else {
-      this.toastr.error("Errors Occured");
-    }
-    this.bookExpoCall = false;
-  })
-}
-closebetslip(){
-  this.openBet = null
-}
-
-openBetbox() {
-document.getElementById("mybet").style.width = "100%";
-}
-
-closebet() {
-document.getElementById("mybet").style.width = "0";
-}
+//OPEN BET SLIP CALC
 
 addStake(stake) {
   if (!this.OpenBetForm.value.stake) {
@@ -657,7 +842,7 @@ clearStake() {
 }
 ClearAllSelection() {
   this.openBet = null;
-  // this.marketsNewExposure(this.openBet);
+  this.marketsNewExposure(this.openBet);
 }
 update() {
   this.calcProfit();
@@ -722,7 +907,6 @@ decStake() {
   }
 }
 
-
 calcProfit() {
   // console.log(this.OpenBetForm.value)
   if (this.OpenBetForm.value.stake &&
@@ -779,7 +963,7 @@ calcProfit() {
   if (this.OpenBetForm.value.stake == null) {
     this.OpenBetForm.controls['profit'].setValue(0);
   }
-  // this.marketsNewExposure(this.OpenBetForm.value)
+  this.marketsNewExposure(this.OpenBetForm.value)
 }
 
 oddsDecimal(value) {
@@ -834,6 +1018,10 @@ stakeDiffCalc(currentStake) {
 
   return diff
 }
+
+//CLOSE BET SLIP CALC
+
+
 getDataByType(betType) {
   this.betType = betType;
 }
@@ -866,4 +1054,25 @@ getMatchedUnmatchBets(matchId) {
 trackByBet(bet) {
   return bet.id;
 }
+
+closebetslip(){
+  this.openBet = null
+}
+
+openBetbox() {
+document.getElementById("mybet").style.width = "100%";
+}
+
+closebet() {
+document.getElementById("mybet").style.width = "0";
+}
+
+ngAfterViewInit(){
+  (this.bodyElement as HTMLElement).classList.add('clsbetshow');
+
+  }
+
+  ngOnDestroy(){
+  (this.bodyElement as HTMLElement).classList.remove('clsbetshow');
+  }
 }

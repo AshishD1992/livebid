@@ -17,9 +17,7 @@ let UserSettingData;
   providedIn: 'root',
 })
 export class DataFormatService {
-  private _currentNavigationSub = new BehaviorSubject<Sport[] | null>(
-    null
-  );
+  private _currentNavigationSub = new BehaviorSubject<any>(null);
   navigation$ = this._currentNavigationSub.asObservable();
 
   private _currentEventSub= new BehaviorSubject<Sport[] | null>(null);
@@ -45,6 +43,9 @@ export class DataFormatService {
 
     _allMatchUnmatchBetsSource= new BehaviorSubject<any>(null);
   currentAllMatchUnmatchBets$ = this._allMatchUnmatchBetsSource.asObservable();
+
+  _currentFancyExposure = new BehaviorSubject<any>(null);
+  fancyExposureSource$ = this._currentFancyExposure.asObservable();
 
   constructor() { }
 
@@ -77,6 +78,9 @@ export class DataFormatService {
 
   shareUserDescription(data: any) {
     this._currentUserDescription.next(data);
+  }
+  shareFancyExposure(data: any) {
+    this._currentFancyExposure.next(data);
   }
   shareAllMatchUnmatchBetsData(data: any) {
     this._allMatchUnmatchBetsSource.next(data);

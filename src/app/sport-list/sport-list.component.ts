@@ -23,6 +23,7 @@ export class SportListComponent implements OnInit {
 
   ngOnInit(): void {
     // console.log(this._sportsList)
+    this.dataFormat.RemoveFavourites();
   }
   toggleFavourite(event) {
     this.dataFormat.ToggleFavourite(event.matchBfId, false);

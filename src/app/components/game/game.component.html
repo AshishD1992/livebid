@@ -25,9 +25,9 @@
     </div>
     <!--scoreboardPopup-->
 
-    <div class="matchBox_29968100 matchBoxs_1172400732">
-      <div class="match_score_box" *ngFor="let match of favouriteEvents; trackBy:trackByEvent">
-        <div class="match_off matchClosedBox_1172400732" style="display:none">
+    <div class="matchBox_{{match.bfId}} matchBoxs_{{match.bfId}}" *ngFor="let match of favouriteEvents; trackBy:trackByEvent">
+      <div class="match_score_box" >
+        <div class="match_off matchClosedBox_{{match.bfId}}" style="display:none">
           <div class="pre-text">
             Match Odds <br>
             <span class="match-colsed"> Closed </span>
@@ -36,7 +36,7 @@
             {{match.startDate}} </div>
           <h1 class="match_off">Closed</h1>
         </div>
-        <div class="tabbable sportrow-4 matchOpenBox_1172400732">
+        <div class="tabbable sportrow-4 matchOpenBox_{{match.bfId}}">
           <div class="sport-tab-main odds-inner">
             <div class="teamandtv">
               <div class="match-info">
