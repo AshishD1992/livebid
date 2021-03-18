@@ -5,7 +5,7 @@ import * as _ from 'lodash';
 import { Subscription, from } from 'rxjs';
 import { FormGroup, FormBuilder,FormControl } from '@angular/forms';
 import { ShareBetDataService } from '../../services/share-bet-data.service';
-import { BetsService } from '../../service/bets.service';
+import { BetsService } from '../../services/bet.service';
 import { SharedataService } from '../../services/sharedata.service';
 import { take } from 'rxjs/operators';
 import { ReportService } from '../../services/report.service';
@@ -238,7 +238,6 @@ export class TwentyteenpattiComponent implements OnInit {
 
       })
     }
-
     openTpBetSlip(backlay, odds, runnerName, runnerId, gameId, gameType) {
       this.ClearAllSelection();
       this.openBet = {
@@ -252,7 +251,6 @@ export class TwentyteenpattiComponent implements OnInit {
         window.scrollTo(0, 0);
       }
     }
-
     ClearAllSelection() {
       this.openBet = null;
     }
@@ -275,7 +273,6 @@ export class TwentyteenpattiComponent implements OnInit {
         }
       })
     }
-
     incStake() {
       if (!this.OpenBetForm.value.stake) {
         this.OpenBetForm.controls['stake'].setValue(0);
@@ -305,7 +302,6 @@ export class TwentyteenpattiComponent implements OnInit {
         this.calcProfit();
       }
     }
-
     calcProfit() {
       if (this.OpenBetForm.value.stake &&
         this.OpenBetForm.value.odds &&
@@ -364,60 +360,60 @@ export class TwentyteenpattiComponent implements OnInit {
       }
       return diff
     }
-
-    T20ExposureBook(gameId: number, state: any) {
-      if (gameId == 0) {
-        return;
-      }
-      if (state != undefined) {
-        this.betsService.T20ExposureBook(gameId).subscribe((data: any) => {
-          // this.GetRecentGameResult();
-          let tpExposure = data.data;
-          this.displayExposure(tpExposure, gameId);
-          localStorage.setItem("T20Expo_" + gameId, JSON.stringify(tpExposure));
-        });
-      } else {
-        let tpExposure: any;
-        tpExposure = localStorage.getItem("T20Expo_" + gameId);
-        if (!tpExposure) {
-          // this.T20ExposureBook(gameId, "1");
-        } else {
-          tpExposure = JSON.parse(tpExposure);
-          this.displayExposure(tpExposure, gameId);
-        }
-  
-      }
+  T20ExposureBook(gameId: number, state: any) {
+    if (gameId == 0) {
+      return;
     }
-
-    displayExposure(tpExposure: any, gameId: any) {
-      _.forEach(tpExposure, function (item, index) {
-        var runnerName = item.Key.replace(/[^a-z0-9\s]/gi, "").replace(/[_\s]/g, "_");
-        $("#Tp_" + gameId + "_" + runnerName).removeClass("win");
-        $("#Tp_" + gameId + "_" + runnerName).removeClass("lose");
-        if (item.Value >= 0) {
-          $("#Tp_" + gameId + "_" + runnerName).text(item.Value).addClass("win");
-        } else if (item.Value <= 0) {
-          $("#Tp_" + gameId + "_" + runnerName).text("(" + item.Value + ")").addClass("lose");
-        }
+    if (state != undefined) {
+      this.betsService.T20ExposureBook(gameId).subscribe((data: any) => {
+        // this.GetRecentGameResult();
+        let tpExposure = data.data;
+        this.displayExposure(tpExposure, gameId);
+        localStorage.setItem("T20Expo_" + gameId, JSON.stringify(tpExposure));
       });
+    } else {
+      let tpExposure: any;
+      tpExposure = localStorage.getItem("T20Expo_" + gameId);
+      if (!tpExposure) {
+        // this.T20ExposureBook(gameId, "1");
+      } else {
+        tpExposure = JSON.parse(tpExposure);
+        this.displayExposure(tpExposure, gameId);
+      }
+
     }
-    
-   onClick(event) {
+  }
+
+  displayExposure(tpExposure: any, gameId: any) {
+    _.forEach(tpExposure, function (item, index) {
+      var runnerName = item.Key.replace(/[^a-z0-9\s]/gi, "").replace(/[_\s]/g, "_");
+      $("#Tp_" + gameId + "_" + runnerName).removeClass("win");
+      $("#Tp_" + gameId + "_" + runnerName).removeClass("lose");
+      if (item.Value >= 0) {
+        $("#Tp_" + gameId + "_" + runnerName).text(item.Value).addClass("win");
+      } else if (item.Value <= 0) {
+        $("#Tp_" + gameId + "_" + runnerName).text("(" + item.Value + ")").addClass("lose");
+      }
+    });
+  }
+
+
+  onClick(event) {
 
     if (!this._elRef.nativeElement.contains(event.target)) {
       $('body').removeClass('menu-is-toggledddd');
     }
-   } 
-   trackByBet(bet) {
+  }
+  trackByBet(bet) {
     return bet.id;
-   }
-   update() {
+  }
+  update() {
     this.calcProfit();
-   }
-   closebetslip(){
+  }
+  closebetslip(){
     this.openBet = null
-   }
-   addStake(stake) {
+  }
+  addStake(stake) {
     if (!this.OpenBetForm.value.stake) {
       this.OpenBetForm.controls['stake'].setValue(stake.toFixed(0));
     }
@@ -426,15 +422,15 @@ export class TwentyteenpattiComponent implements OnInit {
     }
 
     this.calcProfit();
-   }
-   clearStake() {
+  }
+  clearStake() {
     this.OpenBetForm.controls['stake'].setValue(null);
     this.calcProfit();
-   }
-   getDataByType(betType) {
+  }
+  getDataByType(betType) {
     this.betType = betType;
-   }
-   BetSubmit() {
+  }
+  BetSubmit() {
     console.log(this.OpenBetForm)
 
     if (!this.OpenBetForm.valid) {
@@ -447,8 +443,8 @@ export class TwentyteenpattiComponent implements OnInit {
       this.PlaceTpBet();
     }
 
-   }
-   PlaceTpBet() {
+  }
+  PlaceTpBet() {
 
     this.betsService.PlaceTpBet(this.OpenBetForm.value).subscribe(resp => {
       console.log(resp)
@@ -473,6 +469,7 @@ export class TwentyteenpattiComponent implements OnInit {
       // this.showLoader = false;
     })
   }
+
 
   ngAfterViewInit(){
     (this.bodyElement as HTMLElement).classList.add('clsbetshow');
