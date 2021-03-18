@@ -4,7 +4,7 @@ import { ActivatedRoute } from '@angular/router';
 import * as _ from 'lodash';
 import { Subscription, from } from 'rxjs';
 import { ShareBetDataService } from '../../services/share-bet-data.service';
-import { BetsService } from '../../service/bets.service';
+import { BetsService } from '../../services/bet.service';
 import { SharedataService } from '../../services/sharedata.service';
 import { take } from 'rxjs/operators';
 import { ReportService } from '../../services/report.service';
