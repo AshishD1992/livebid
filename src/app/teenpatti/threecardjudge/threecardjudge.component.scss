@@ -1,13 +1,4 @@
-.odds-outer {
-  display: flex;
-}
-:host {
-  width: 100%;
-}
-// #MatchOddInfo {
-//   width: 100%;
-//   margin-right: 5px;
-// }
+
 .videoCards {
   position: absolute;
   content: "";
@@ -270,8 +261,8 @@ p {
         bottom: -30px;
         right: -30px;
     }
-  
-    
+
+
 }
 
 .in-play {
