@@ -450,10 +450,10 @@ button.lay {
   position: relative;
 }
 
-// .card {
-//   flex: 0 0 auto;
-//   margin: 5px auto;
-// }
+.card {
+  // flex: 0 0 auto;
+  margin: 5px auto;
+}
 
 .card-andarbahar {
   cursor: pointer;
@@ -659,11 +659,11 @@ b, strong {
 .m-t-10 {
   margin-top: 10px !important;
 }
-.scrolling-wrapper {
-  display: flex;
-  flex-wrap: nowrap;
-  overflow-x: auto;
-}
+// .scrolling-wrapper {
+//   display: flex;
+//   flex-wrap: nowrap;
+//   overflow-x: auto;
+// }
 .teenpatti-wrapper .rules-title, .teenpatti-wrapper .last-result-title, .worli-matka .rules-title, .worli-matka .last-result-title{
   background-color: #163439;
 

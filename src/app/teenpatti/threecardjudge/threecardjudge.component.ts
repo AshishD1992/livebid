@@ -570,5 +570,8 @@ export class ThreecardjudgeComponent implements OnInit {
  closebetslip(){
       this.openBet = null
     }
+    openBetbox() {
+      document.getElementById("mybet").style.width = "100%";
+      }
 
 }

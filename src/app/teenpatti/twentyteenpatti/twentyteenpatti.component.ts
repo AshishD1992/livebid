@@ -99,6 +99,11 @@ export class TwentyteenpattiComponent implements OnInit {
     this.getBetStakeSetting();
     this.teenpattiSubscription = this.TeenpattiSignalR.TeenPattiData$.subscribe((data) => {
       console.log(data)
+
+      if(data==null){
+        this.TeenpattiSignalR.TeenPattiSignalr(this.matchBfId);
+      }
+
       if (data) {
 
         this.teentype = data.teentype;

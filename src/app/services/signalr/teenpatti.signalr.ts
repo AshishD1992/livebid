@@ -80,7 +80,7 @@ export class TeenpattiSignalRService {
       })
       .fail((myHubConnection: any) => {
         this.hubConState = myHubConnection;
-        // console.log("Could not connect= " + hubConState);
+        console.log("Could not connect= " + this.hubConState);
       });
     this.TeenPattiConnection.stateChanged((change: any) => {
       // console.log(change.newState)
