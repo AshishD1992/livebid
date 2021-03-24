@@ -46,6 +46,13 @@ export class HighlightsComponent implements OnInit {
                 highlights: this.dataFormat.inplaylistwise(sport),
               });
             }
+            else{
+               inplayList.push({
+                id: sport.id,
+                name: sport.name,
+                highlights: this.dataFormat.inplaylistwise(sport),
+              });
+            }
             this.eventsCount = this.eventsCount.concat(highlight)
           });
           this.inplayListWise = inplayList;
