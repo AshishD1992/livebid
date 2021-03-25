@@ -4,8 +4,8 @@
 
 export const environment = {
   production: false,
-  readUrl: 'http://www.kingsbid.in/Client/BetBuzzClient.svc',
-  betUrl: 'http://www.kingsbid.in/Client/BetBuzzClient.svc',
+  readUrl: 'http://www.kingsbid.in/Client/BetClient.svc',
+  betUrl: 'http://www.kingsbid.in/Client/BetClient.svc',
 };
 
 /*

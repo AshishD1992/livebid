@@ -13,42 +13,42 @@ export class BetsService {
   constructor(private http: HttpClient) { }
 
   PlaceMOBet(data): Observable<any> {
-    return this.http.post(`http://www.kingsbid.in/Bet/BetBuzzClient.svc/Bets/PlaceMOBet`, data)
+    return this.http.post(`http://www.kingsbid.in/Client/BetClient.svc/Bets/PlaceMOBet`, data)
   }
   PlaceFancyBet(data): Observable<any> {
-    return this.http.post(`http://www.kingsbid.in/Bet/BetBuzzClient.svc/Bets/PlaceFancyBet`, data)
+    return this.http.post(`http://www.kingsbid.in/Client/BetClient.svc/Bets/PlaceFancyBet`, data)
   }
   PlaceBookBet(data): Observable<any> {
-    return this.http.post(`http://www.kingsbid.in/Bet/BetBuzzClient.svc/Bets/PlaceBookBet`, data)
+    return this.http.post(`http://www.kingsbid.in/Client/BetClient.svc/Bets/PlaceBMBet`, data)
   }
 
   PlaceTpBet(data): Observable<any> {
-    return this.http.post(`http://www.kingsbid.in/Bet/BetBuzzClient.svc/Bets/PlaceTpBet`, data)
+    return this.http.post(`http://www.kingsbid.in/Client/BetClient.svc/Bets/PlaceTpBet`, data)
   }
 
   ExposureBook(MKTID): Observable<any> {
-    return this.http.get(`http://www.kingsbid.in/Read3/BetBuzzClient.svc/Bets/ExposureBook?mktid=${MKTID}`)
+    return this.http.get(`http://www.kingsbid.in/Client/BetClient.svc/Bets/ExposureBook?mktid=${MKTID}`)
   }
   GetFancyExposure(MTID, FID): Observable<any> {
-    return this.http.get(`http://www.kingsbid.in/Read3/BetBuzzClient.svc/Bets/GetFancyExposure?mtid=${MTID}&fid=${FID}`)
+    return this.http.get(`http://www.kingsbid.in/Client/BetClient.svc/Bets/GetFancyExposure?mtid=${MTID}&fid=${FID}`)
   }
   BMExposureBook(MKTID, BID): Observable<any> {
-    return this.http.get(`http://www.kingsbid.in/Read3/BetBuzzClient.svc/Bets/BMExposureBook?mktid=${MKTID}&bid=${BID}`)
+    return this.http.get(`http://www.kingsbid.in/Client/BetClient.svc/Bets/BMExposureBook?mktid=${MKTID}&bid=${BID}`)
   }
   Fancybook(MTID, FID): Observable<any> {
-    return this.http.get(`http://www.kingsbid.in/Read3/BetBuzzClient.svc/Bets/Fancybook?mtid=${MTID}&fid=${FID}`)
+    return this.http.get(`http://www.kingsbid.in/Client/BetClient.svc/Bets/Fancybook?mtid=${MTID}&fid=${FID}`)
   }
 
   T20ExposureBook(gameid: number) {
-    return this.http.get(`${this.baseUrl}/T20ExposureBook?gameid=${gameid}`)
+    return this.http.get(`${this.baseUrl}/Bets/T20ExposureBook?gameid=${gameid}`)
   }
   Lucky7ExposureBook(gameid: number) {
-    return this.http.get(`${this.baseUrl}/Lucky7ExposureBook?gameid=${gameid}`)
+    return this.http.get(`${this.baseUrl}/Bets/Lucky7ExposureBook?gameid=${gameid}`)
   }
   ThreeCardJExposureBook(gameid: number) {
-    return this.http.get(`${this.baseUrl}/ThreeCardJExposureBook?gameid=${gameid}`)
+    return this.http.get(`${this.baseUrl}/Bets/ThreeCardJExposureBook?gameid=${gameid}`)
   }
   AndarBaharExposureBook(gameid: number) {
-    return this.http.get(`${this.baseUrl}/AndarBaharExposureBook?gameid=${gameid}`)
+    return this.http.get(`${this.baseUrl}/Bets/AndarBaharExposureBook?gameid=${gameid}`)
   }
 }
