@@ -17,6 +17,7 @@ export class HighlightsComponent implements OnInit {
   inplayListWise: {
     id: number,
     name: string,
+    bfId:string,
     highlights: Highlight[];
   }[] = [];
 
@@ -33,6 +34,7 @@ export class HighlightsComponent implements OnInit {
           let inplayList: {
             id: number;
             name: string;
+            bfId:string;
             highlights: Highlight[];
           }[] = [];
           this.eventsCount = [];
@@ -43,6 +45,7 @@ export class HighlightsComponent implements OnInit {
               inplayList.push({
                 id: sport.id,
                 name: sport.name,
+                bfId:sport.bfId,
                 highlights: this.dataFormat.inplaylistwise(sport),
               });
             }
@@ -50,6 +53,7 @@ export class HighlightsComponent implements OnInit {
                inplayList.push({
                 id: sport.id,
                 name: sport.name,
+                bfId:sport.bfId,
                 highlights: this.dataFormat.inplaylistwise(sport),
               });
             }

@@ -23,7 +23,7 @@ export class FancyService {
   }
 
   connectFancy(fancyHubAddress, fancy) {
-    this.fancyHubAddress = "http://173.249.21.26:13111";
+    this.fancyHubAddress = "http://207.180.220.254:12611";
 
     // if(this.fancyHubConn==null){
       this.fancyConnection = hubConnection(this.fancyHubAddress);

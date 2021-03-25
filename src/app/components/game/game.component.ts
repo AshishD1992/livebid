@@ -22,7 +22,7 @@ export class GameComponent implements OnInit {
 bodyElement: any;
 matchedbets: any;
 currTime = new Date();
-fancyHubAddress: string = "http://173.249.21.26:13111";
+fancyHubAddress: string = "http://207.180.220.254:12611";
 
 hubAddressData: any;
 allMarketData: any = [];

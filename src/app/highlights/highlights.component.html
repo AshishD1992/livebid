@@ -370,7 +370,7 @@
           <!-- <app-inplay></app-inplay> -->
           <div class="prematch-matches" *ngFor="let inplay of inplayListWise">
 
-            <div class="sport-ta-head" *ngIf="inplay.id!=5">
+            <div class="sport-ta-head" *ngIf="inplay.bfId!='10'">
               <h2>
                 <svg id="Capa_1" enable-background="new 0 0 512.038 512.038" height="512" *ngIf="inplay.name=='Cricket'"
                   viewBox="0 0 512.038 512.038" width="512" xmlns="http://www.w3.org/2000/svg">
@@ -428,7 +428,7 @@
                 {{inplay.name}}
               </h2>
             </div>
-            <div class="match-list">
+            <div class="match-list" *ngIf="inplay.bfId!='10'">
               <div class="spotable sportrow-4 matchrow-29968100 inplay-row" *ngFor="let high of inplay.highlights| sortByDate:'matchDate';trackBy:trackByIdx" routerLink="/game"
               (click)="toggleFavourite(high)" title="Match OODS">
                 <div class="fooetr-bottom">
