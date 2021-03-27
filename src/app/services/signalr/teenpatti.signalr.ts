@@ -116,9 +116,12 @@ export class TeenpattiSignalRService {
     }
     if (this.hubConState.state == 1) {
       this.TeenPattiProxy.invoke("UnsubscribeFancy", this.Teentype);
-      this.TeenPattiHubAddress = null;
-      this._TeenPattiData.next(null);
       this.TeenPattiConnection.stop();
+      this.TeenPattiHubAddress = null;
+      this.TeenPattiConnection = null;
+      this.TeenPattiProxy=null;
+      this._TeenPattiData.next(null);
+      
     }
   };
 }

@@ -102,6 +102,7 @@ export class OnedayComponent implements OnInit {
     this.epicFunction();
 
     this.getBetStakeSetting();
+    
     this.teenpattiSubscription = this.TeenpattiSignalR.TeenPattiData$.subscribe((data) => {
       if (data) {
 
@@ -110,12 +111,12 @@ export class OnedayComponent implements OnInit {
 
         if (this.teentype == 2) {
           this.tpMarket = data.data.bf;
-          console.log("tpMarket",this.tpMarket)
+          // console.log("tpMarket",this.tpMarket)
           if (this.tpMarket[0].lastime && this.Oldteentype) {
             this.clock.setValue(this.tpMarket[0].lastime);
           }
           this.teenpattiId = this.tpMarket[0].marketId;
-
+          this.getMatchedUnmatchBets(this.teenpattiId);
           // this.T20ExposureBook(this.tpMarket[0].marketId, null);
         }
 
@@ -241,10 +242,10 @@ export class OnedayComponent implements OnInit {
 
       })
     }
-    openTpBetSlip(backlay, odds, runnerName, runnerId, gameId, gameType) {
+    openTpBetSlip(backlay, odds, runnerName, runnerId, gameId, gameType,info,source,stake) {
       this.ClearAllSelection();
       this.openBet = {
-        backlay, odds, runnerName, runnerId, gameId, gameType
+        backlay, odds, runnerName, runnerId, gameId, gameType,info,source,stake
       }
 
       this.openBet['mtype'] = "casino";
@@ -257,19 +258,20 @@ export class OnedayComponent implements OnInit {
     ClearAllSelection() {
       this.openBet = null;
     }
-    getMatchedUnmatchBets() {
-      // let betMatchId = matchId;
+    getMatchedUnmatchBets(matchId) {
+      let betMatchId = matchId;
       if (this.eventBetsSubscription) {
         this.eventBetsSubscription.unsubscribe();
       }
       let allbets;
       this.eventBetsSubscription = this.dfService.currentAllMatchUnmatchBets$.subscribe(data => {
-        // console.log(betMatchId, data);
+        // console.log( data);
 
         if (data != null) {
           if (this.betType == 4) {
-            allbets = this.dfService.matchUnmatchBetsFormat(data._userTpBets[this.gameId]);
+            allbets = this.dfService.matchUnmatchBetsFormat(data._userTpBets[betMatchId]);
             this.eventBets = allbets.matchWiseBets;
+            // console.log(this.eventBets)
             this.totalBets = allbets.totalBets;
           }
           // console.log(this.eventBets)

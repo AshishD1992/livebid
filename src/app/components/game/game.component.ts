@@ -18,7 +18,7 @@ selector: 'app-game',
 templateUrl: './game.component.html',
 styleUrls: ['./game.component.scss']
 })
-export class GameComponent implements OnInit {
+export class GameComponent implements OnInit,OnDestroy {
 bodyElement: any;
 matchedbets: any;
 currTime = new Date();
@@ -26,7 +26,7 @@ fancyHubAddress: string = "http://207.180.220.254:12611";
 
 hubAddressData: any;
 allMarketData: any = [];
-favouriteEvents:Array<any> = [];;
+favouriteEvents:any= [];
 eventBets = [];
 fancyBookData = [];
 selectedMatch: any;
@@ -79,13 +79,14 @@ ngOnInit() {
     }
   });
 
-    this.getFavouriteMarket();
+   
     this.getBetStakeSetting();
     this.epicFunction();
     this.getFancyExposure();
     this.UserDescription();
+    this.getFavouriteMarket();
   this.bodyElement = document.querySelector('body');
-
+console.log("favouriteEvents",this.favouriteEvents)
 
 }
 epicFunction() {
@@ -340,7 +341,7 @@ getFavouriteMarket() {
   this.favouriteSubscription = this.dfService.navigation$.subscribe(data => {
     // console.log(data)
     if (data != null) {
-      // console.log(this.dfService.favouriteEventWise(data));
+      // console.log(this.favouriteEvents);
       if (this.favouriteEvents.length == 0) {
         this.favouriteEvents = this.dfService.favouriteEventWise(data);
         console.log(this.favouriteEvents)
@@ -380,9 +381,9 @@ getFavouriteMarket() {
           this.favouriteEvents = this.dfService.favouriteEventWise(data);
           oldFavArray = JSON.parse(this.dfService.GetFavourites());
 
-          // _.forEach(this.allMarketData, (item2) => {
-          //   this.mktService.UnsuscribeSingleMarket(item2.bfId);
-          // });
+          _.forEach(this.allMarketData, (item2) => {
+            this.mktService.UnsuscribeSingleMarket(item2.bfId);
+          });
           this.mktService.UnsuscribeMarkets(this.allMarketData);
           this.fancyService.UnsuscribeFancy(this.favouriteEvents);
 
@@ -1074,5 +1075,9 @@ ngAfterViewInit(){
 
   ngOnDestroy(){
   (this.bodyElement as HTMLElement).classList.remove('clsbetshow');
+  _.forEach(this.favouriteEvents, (item, matchIndex) => {
+  
+      this.mktService.UnsuscribeSingleMarket(item.bfId);
+    });
   }
 }

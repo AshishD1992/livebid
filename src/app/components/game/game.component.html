@@ -1,4 +1,4 @@
-<div class="odds-outer">
+<div class="odds-outer" *ngIf="favouriteEvents.length!=0">
   <div id="MatchOddInfo">
 
     <!-- <script>
@@ -123,7 +123,7 @@
                         </div>
                         <div class="odd-box mark-back 8693552_0availableToBack0_price_1172400732 yello"
                           data-target="mybet"
-                          (click)="getOddValue(match.sportId,match.tourId,match.bfId,match.id,market.bfId,market.id,match.name,market.name,match.inPlay,runner.runnerName,runner.back1,'back',null,null,null,null,null,null);">
+                          (click)="getOddValue(match.sportId,match.tourId,match.bfId,match.id,market.bfId,market.id,match.name,market.name,match.inPlay,runner.runnerName,runner.back1,'back',score,null,null,null,null,null,null);">
                           <div class="bet-odds">{{runner.back1}}</div>
                           <span class="volume">
                             <div class="bet-description" id="8693552_0availableToBack0_size_1172400732">
@@ -134,7 +134,7 @@
 
 
                         <div class="odd-box yelbg mark-lay 8693552_0availableToLay0_price_1172400732"
-                          (click)="getOddValue(match.sportId,match.tourId,match.bfId,match.id,market.bfId,market.id,match.name,market.name,match.inPlay,runner.runnerName,runner.lay1,'lay',null,null,null,null,null,null);">
+                          (click)="getOddValue(match.sportId,match.tourId,match.bfId,match.id,market.bfId,market.id,match.name,market.name,match.inPlay,runner.runnerName,runner.lay1,'lay',score,null,null,null,null,null,null);">
                           <div class="bet-odds">{{runner.lay1}}</div>
                           <span class="volume">
                             <div class="volume bet-description">{{runner.laySize1}}</div>

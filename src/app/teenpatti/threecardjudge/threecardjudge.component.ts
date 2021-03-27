@@ -114,7 +114,7 @@ export class ThreecardjudgeComponent implements OnInit {
           }
           this.tpMarket = data.data.t2;
           this.teenpattiId = this.tpData.mid;
-
+          this.getMatchedUnmatchBets(this.teenpattiId);
           // this.ThreeCardJExposureBook(this.tpData.mid, null);
             // console.log("log", this.tpMarket)
 
@@ -248,7 +248,7 @@ export class ThreecardjudgeComponent implements OnInit {
 
     })
   }
-  openTpBetSlip(backlay, odds, runnerName, runnerId, gameId, gameType, card) {
+  openTpBetSlip(backlay, odds, runnerName, runnerId, gameId,profit, gameType, card) {
     if (card) {
       if (this.tpBetSlip) {
         if (this.tpBetSlip.backlay != backlay) {
@@ -256,7 +256,7 @@ export class ThreecardjudgeComponent implements OnInit {
         }
       }
       this.tpBetSlip = {
-        backlay, odds, runnerName, runnerId, gameId, gameType
+        backlay, odds, runnerName, runnerId, gameId, gameType,profit,card
       }
       console.log(this.seletedCards);
       if (this.seletedCards.length < 3) {
@@ -489,8 +489,8 @@ export class ThreecardjudgeComponent implements OnInit {
   getDataByType(betType) {
     this.betType = betType;
   }
-  getMatchedUnmatchBets() {
-      // let betMatchId = matchId;
+  getMatchedUnmatchBets(matchId) {
+      let betMatchId = matchId;
       if (this.eventBetsSubscription) {
         this.eventBetsSubscription.unsubscribe();
       }
@@ -500,7 +500,7 @@ export class ThreecardjudgeComponent implements OnInit {
 
         if (data != null) {
           if (this.betType == 4) {
-            allbets = this.dfService.matchUnmatchBetsFormat(data._userTpBets[this.gameId]);
+            allbets = this.dfService.matchUnmatchBetsFormat(data._userTpBets[betMatchId]);
             this.eventBets = allbets.matchWiseBets;
             this.totalBets = allbets.totalBets;
           }

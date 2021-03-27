@@ -62,6 +62,7 @@ export class AndarbaharComponent implements OnInit{
   eventBetsSubscription: Subscription;
   deviceInfo: any;
   context: any;
+  gameType: number = 7;
 
   constructor(
     private TeenpattiSignalR: TeenpattiSignalRService,
@@ -141,7 +142,7 @@ if (this.subSink) {
             this.clock.setValue(this.tpData.autotime);
           }
           this.teenpattiId = this.tpData.mid;
-
+          this.getMatchedUnmatchBets(this.teenpattiId);
           // this.AndarBaharExposureBook(this.tpData.mid, null);
         }
 
@@ -493,8 +494,8 @@ if (this.subSink) {
 
 
 
-  getMatchedUnmatchBets() {
-    // let betMatchId = matchId;
+  getMatchedUnmatchBets(matchId) {
+    let betMatchId = matchId;
     if (this.eventBetsSubscription) {
       this.eventBetsSubscription.unsubscribe();
     }
@@ -504,11 +505,11 @@ if (this.subSink) {
 
       if (data != null) {
         if (this.betType == 4) {
-          allbets = this.dfService.matchUnmatchBetsFormat(data._userTpBets[this.gameId]);
+          allbets = this.dfService.matchUnmatchBetsFormat(data._userTpBets[betMatchId]);
           this.eventBets = allbets.matchWiseBets;
           this.totalBets = allbets.totalBets;
         }
-        // console.log(this.eventBets)
+        console.log(this.eventBets)
       }
     })
   }

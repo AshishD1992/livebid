@@ -74,7 +74,8 @@ export class HomeSignalrService {
       var AllBetsData = {
         _userAvgmatchedBets: data._userAvgmatchedBets,
         _userMatchedBets: data._userMatchedBets,
-        _userUnMatchedBets: data._userUnMatchedBets
+        _userUnMatchedBets: data._userUnMatchedBets,
+        _userTpBets:data._userTpBets
       };
       this.dataFormat.shareAllMatchUnmatchBetsData(AllBetsData);
     });

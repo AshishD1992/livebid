@@ -19,6 +19,7 @@ export class InplayComponent implements OnInit {
   inplayListWise: {
     id: number,
     name: string,
+    bfId:string;
     highlights: Highlight[];
   }[] = [];
 
@@ -35,6 +36,7 @@ export class InplayComponent implements OnInit {
           let inplayList: {
             id: number;
             name: string;
+            bfId:string;
             highlights: Highlight[];
           }[] = [];
           this.eventsCount = [];
@@ -45,9 +47,18 @@ export class InplayComponent implements OnInit {
               inplayList.push({
                 id: sport.id,
                 name: sport.name,
+                bfId:sport.bfId,
                 highlights: this.dataFormat.inplaylistwise(sport),
               });
             }
+            else{
+              inplayList.push({
+               id: sport.id,
+               name: sport.name,
+               bfId:sport.bfId,
+               highlights: this.dataFormat.inplaylistwise(sport),
+             });
+           }
             this.eventsCount = this.eventsCount.concat(highlight)
           });
           this.inplayListWise = inplayList;

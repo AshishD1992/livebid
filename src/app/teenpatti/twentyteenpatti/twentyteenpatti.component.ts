@@ -79,7 +79,7 @@ export class TwentyteenpattiComponent implements OnInit {
 
 
   ngOnInit(): void {
-    console.log("", this.matchBfId);
+    // console.log("", this.matchBfId);
     this.TeenpattiSignalR.TeenPattiSignalr(this.matchBfId);
 
     if (this.subSink) {
@@ -111,7 +111,7 @@ export class TwentyteenpattiComponent implements OnInit {
 
         if (this.teentype == 1) {
           this.tpData = data.data.t1[0];
-          // console.log("",this.tpData)
+          // console.log("tpData",this.tpData)
           this.tpMarket = data.data.t2;
           // console.log("tpMarket", this.tpMarket)
           if (this.Oldteentype) {
