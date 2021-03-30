@@ -20,7 +20,7 @@ export const BET_TYPES = { MATCH_ODDS: 1, BOOK_MAKING: 2, FANCY: 3 };
   templateUrl: './andarbahar.component.html',
   styleUrls: ['./andarbahar.component.scss']
 })
-export class AndarbaharComponent implements OnInit{
+export class AndarbaharComponent implements OnInit,OnDestroy{
 
   clock: any;
   bodyElement: any;
@@ -540,6 +540,7 @@ if (this.subSink) {
     }
 
     ngOnDestroy(){
+      this.TeenpattiSignalR.unSubscribeTeenPatti();
       this.teenpattiSubscription.unsubscribe();
     (this.bodyElement as HTMLElement).classList.remove('clsbetshow');
     }

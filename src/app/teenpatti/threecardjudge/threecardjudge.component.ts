@@ -21,7 +21,7 @@ export const BET_TYPES = { MATCH_ODDS: 1, BOOK_MAKING: 2, FANCY: 3 };
   templateUrl: './threecardjudge.component.html',
   styleUrls: ['./threecardjudge.component.scss']
 })
-export class ThreecardjudgeComponent implements OnInit {
+export class ThreecardjudgeComponent implements OnInit,OnDestroy {
 
   clock: any;
   bodyElement: any;
@@ -557,6 +557,7 @@ export class ThreecardjudgeComponent implements OnInit {
     }
 
     ngOnDestroy(){
+      this.TeenpattiSignalR.unSubscribeTeenPatti();
       this.teenpattiSubscription.unsubscribe();
     (this.bodyElement as HTMLElement).classList.remove('clsbetshow');
     }

@@ -20,7 +20,7 @@ export const BET_TYPES = { MATCH_ODDS: 1, BOOK_MAKING: 2, FANCY: 3 };
   templateUrl: './twentyteenpatti.component.html',
   styleUrls: ['./twentyteenpatti.component.scss']
 })
-export class TwentyteenpattiComponent implements OnInit {
+export class TwentyteenpattiComponent implements OnInit,OnDestroy,AfterViewInit {
 
   clock: any;
   bodyElement: any;
@@ -79,8 +79,9 @@ export class TwentyteenpattiComponent implements OnInit {
 
 
   ngOnInit(): void {
-    // console.log("", this.matchBfId);
+    
     this.TeenpattiSignalR.TeenPattiSignalr(this.matchBfId);
+    console.log("A", this.matchBfId);
 
     if (this.subSink) {
       this.subSink.unsubscribe();
@@ -98,7 +99,7 @@ export class TwentyteenpattiComponent implements OnInit {
     
     this.getBetStakeSetting();
     this.teenpattiSubscription = this.TeenpattiSignalR.TeenPattiData$.subscribe((data) => {
-      console.log(data)
+      // console.log(data)
 
       if(data==null){
         this.TeenpattiSignalR.TeenPattiSignalr(this.matchBfId);
@@ -118,6 +119,7 @@ export class TwentyteenpattiComponent implements OnInit {
             this.clock.setValue(this.tpData.autotime);
           }
           this.teenpattiId = this.tpData.mid;
+          this.getMatchedUnmatchBets(this.teenpattiId);
           // this.T20ExposureBook(this.tpData.mid, null);
         }
 
@@ -259,8 +261,8 @@ export class TwentyteenpattiComponent implements OnInit {
     ClearAllSelection() {
       this.openBet = null;
     }
-    getMatchedUnmatchBets() {
-      // let betMatchId = matchId;
+    getMatchedUnmatchBets(matchId) {
+      let betMatchId = matchId;
       if (this.eventBetsSubscription) {
         this.eventBetsSubscription.unsubscribe();
       }
@@ -270,7 +272,7 @@ export class TwentyteenpattiComponent implements OnInit {
 
         if (data != null) {
           if (this.betType == 4) {
-            allbets = this.dfService.matchUnmatchBetsFormat(data._userTpBets[this.gameId]);
+            allbets = this.dfService.matchUnmatchBetsFormat(data._userTpBets[betMatchId]);
             this.eventBets = allbets.matchWiseBets;
             this.totalBets = allbets.totalBets;
           }
@@ -482,9 +484,11 @@ export class TwentyteenpattiComponent implements OnInit {
     }
 
   ngOnDestroy(){
+    this.TeenpattiSignalR.unSubscribeTeenPatti();
+    this.teenpattiSubscription.unsubscribe();
     (this.bodyElement as HTMLElement).classList.remove('clsbetshow');
     this.subSink.unsubscribe();
-    this.teenpattiSubscription.unsubscribe();
+  
     this.shareData.shareMatchId(0);
   }
 

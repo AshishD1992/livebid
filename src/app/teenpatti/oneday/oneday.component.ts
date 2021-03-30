@@ -21,7 +21,7 @@ export const BET_TYPES = { MATCH_ODDS: 1, BOOK_MAKING: 2, FANCY: 3 };
   styleUrls: ['./oneday.component.scss'],
 
 })
-export class OnedayComponent implements OnInit {
+export class OnedayComponent implements OnInit,OnDestroy {
   clock: any;
   bodyElement: any;
   matchedbets: any;
@@ -482,9 +482,11 @@ export class OnedayComponent implements OnInit {
     }
 
   ngOnDestroy(){
+    this.TeenpattiSignalR.unSubscribeTeenPatti();
+    this.teenpattiSubscription.unsubscribe();
     (this.bodyElement as HTMLElement).classList.remove('clsbetshow');
     this.subSink.unsubscribe();
-    this.teenpattiSubscription.unsubscribe();
+  
     this.shareData.shareMatchId(0);
   }
 
