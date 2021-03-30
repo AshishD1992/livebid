@@ -29,7 +29,7 @@ export class DashboardComponent implements OnInit {
     this.loader = true;
     setTimeout(() => {
       this.loader = false;
-    }, 2000)
+    }, 3000)
    }
 
   ngOnInit(): void {

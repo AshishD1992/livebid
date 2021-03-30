@@ -60,7 +60,7 @@ export class ThreecardjudgeComponent implements OnInit,OnDestroy {
   context: any;
   OpenBetForm: FormGroup;
   gameType: number = 6;
-
+  showLoader: boolean = false;
   betType = 4;
   eventBets = [];
   totalBets = 0;
@@ -300,7 +300,7 @@ export class ThreecardjudgeComponent implements OnInit,OnDestroy {
       return;
     }
     console.log(this.OpenBetForm.value)
-    // this.showLoader = true;
+    this.showLoader = true;
 
     if (this.OpenBetForm.value.mtype == "casino") {
       this.PlaceTpBet();
@@ -322,7 +322,7 @@ export class ThreecardjudgeComponent implements OnInit,OnDestroy {
       else {
         this.toastr.error(resp.result);
       }
-      // this.showLoader = false;
+      this.showLoader = false;
     }, err => {
       if (err.status == 401) {
         this.toastr.error(err.error.description.result);
@@ -330,7 +330,7 @@ export class ThreecardjudgeComponent implements OnInit,OnDestroy {
       else {
         this.toastr.error("Errors Occured");
       }
-      // this.showLoader = false;
+      this.showLoader = false;
     })
   }
    ClearAllSelection() {

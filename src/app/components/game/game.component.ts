@@ -36,7 +36,7 @@ url: string;
 urlSafe: SafeResourceUrl;
 liveUrlSafe: SafeResourceUrl;
 videoEnabled: boolean = false;
-
+showLoader: boolean = false;
 UserDescSubscription: Subscription;
 fancySubscription: Subscription;
 marketSuscription: Subscription;
@@ -545,7 +545,7 @@ BetSubmit() {
     return;
   }
   // console.log(this.OpenBetForm.value)
-  // this.showLoader = true;
+  this.showLoader = true;
 
   if (this.OpenBetForm.value.mtype == "market") {
     this.PlaceMOBet();
@@ -577,7 +577,7 @@ PlaceMOBet() {
         // this.unmatchNotAllowPlay();
       }
     }
-    // this.showLoader = false;
+    this.showLoader = false;
   }, err => {
     if (err.status == 401) {
       this.toastr.error("Error Occured");
@@ -585,7 +585,7 @@ PlaceMOBet() {
     else {
       this.toastr.error("Errors Occured");
     }
-    // this.showLoader = false;
+    this.showLoader = false;
   })
 }
 PlaceFancyBet() {
@@ -602,7 +602,7 @@ PlaceFancyBet() {
     else {
       this.toastr.error(resp.result);
     }
-    // this.showLoader = false;
+    this.showLoader = false;
   }, err => {
     if (err.status == 401) {
       this.toastr.error("Error Occured");
@@ -610,7 +610,7 @@ PlaceFancyBet() {
     else {
       this.toastr.error("Errors Occured");
     }
-    // this.showLoader = false;
+    this.showLoader = false;
   })
 }
 PlaceBookBet() {
@@ -627,7 +627,7 @@ PlaceBookBet() {
     else {
       this.toastr.error(resp.result);
     }
-    // this.showLoader = false;
+    this.showLoader = false;
   }, err => {
     if (err.status == 401) {
       //this.toastr.error("Error Occured");
@@ -635,7 +635,7 @@ PlaceBookBet() {
     else {
       this.toastr.error("Errors Occured");
     }
-    // this.showLoader = false;
+    this.showLoader = false;
   })
 }
 
@@ -1048,7 +1048,7 @@ getMatchedUnmatchBets(matchId) {
         this.totalBets = allbets.totalBets;
       }
 
-      // console.log(this.eventBets)
+      console.log(this.eventBets)
     }
   })
 }

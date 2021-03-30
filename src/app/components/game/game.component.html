@@ -71,9 +71,9 @@
                     </div>
                   </div>
                   <div id="livetv" class="tab-pane fade">
-                    <iframe id="mobilePlayer" allowfullscreen="true" frameborder="0" scrolling="no"
+                    <!-- <iframe id="mobilePlayer" allowfullscreen="true" frameborder="0" scrolling="no"
                                             width="100%" height="200px"
-                                            src="https://shivexch.com/live_tv/index.html?token=696363a6-035b-450c-8ec6-312e779732ac&mtid='+$scope.matchBfId+"></iframe>
+                                            src="https://shivexch.com/live_tv/index.html?token=696363a6-035b-450c-8ec6-312e779732ac&mtid={{matchBfId}}"></iframe> -->
                     <sxm-video [tvurl]="liveUrl"></sxm-video>
                   </div>
                   <!-- <div id="animation" class="tab-pane fade">
@@ -250,7 +250,7 @@
         <div class="betBox border-box" id="betBox" *ngIf="openBet">
           <div class="block_box">
             <div class="betslip">
-              <div class="loader" style="display:none">
+              <div class="loader" *ngIf="showLoader">
                 <div class="mini-loader">
                   <span></span>
                   <span></span>
