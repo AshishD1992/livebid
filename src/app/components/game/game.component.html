@@ -71,10 +71,9 @@
                     </div>
                   </div>
                   <div id="livetv" class="tab-pane fade">
-                    <iframe id="mobilePlayer" allowfullscreen="true" frameborder="0" scrolling="no"
-                                            width="100%" height="200px"
-                                            src="https://shivexch.com/live_tv/index.html?token=696363a6-035b-450c-8ec6-312e779732ac&mtid='+$scope.matchBfId+"></iframe>
-                    <sxm-video [tvurl]="liveUrl"></sxm-video>
+                    <iframe  allowfullscreen="true" [src]="liveUrlSafe"
+                    style="border: none;height: 250px;" [style.height.px]="height" [style.width.px]="width"></iframe>
+                    <!-- <sxm-video [tvurl]="liveUrl"></sxm-video> -->
                   </div>
                   <!-- <div id="animation" class="tab-pane fade">
                     <iframe id="mobilePlayer" allowfullscreen="true" frameborder="0" scrolling="no"

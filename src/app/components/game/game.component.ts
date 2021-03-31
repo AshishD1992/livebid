@@ -79,7 +79,7 @@ ngOnInit() {
     }
   });
 
-   
+
     this.getBetStakeSetting();
     this.epicFunction();
     this.getFancyExposure();
@@ -450,10 +450,10 @@ setIframeUrl() {
     // this.url = "https://videoplayer.betfair.com/GetPlayer.do?tr=1&eID=" + this.selectedMatch.bfId + "&width=" + this.width + "&height=" + this.height + "&allowPopup=true&contentType=viz&statsToggle=hide&contentOnly=true"
     this.urlSafe = this.sanitizer.bypassSecurityTrustResourceUrl(this.url);
 
-    // this.liveUrl = "http://tv.allexch.com/index.html?token=696363a6-035b-450c-8ec6-312e779732ac&mtid=" + this.selectedMatch.bfId;
-    this.liveUrl = this.selectedMatch.tvConfig.link;
+    this.liveUrl = "https://shivexch.com/live_tv/index.html?token=696363a6-035b-450c-8ec6-312e779732ac&mtid=" + this.selectedMatch.bfId;
+    // this.liveUrl = this.selectedMatch.tvConfig.link;
     this.liveUrlSafe = this.sanitizer.bypassSecurityTrustResourceUrl(this.liveUrl);
-    console.log(this.liveUrl)
+    // console.log(this.liveUrl)
     if (this.selectedMatch.videoEnabled) {
       this.videoEnabled = this.selectedMatch.videoEnabled;
     }
@@ -1076,7 +1076,7 @@ ngAfterViewInit(){
   ngOnDestroy(){
   (this.bodyElement as HTMLElement).classList.remove('clsbetshow');
   _.forEach(this.favouriteEvents, (item, matchIndex) => {
-  
+
       this.mktService.UnsuscribeSingleMarket(item.bfId);
     });
   }
