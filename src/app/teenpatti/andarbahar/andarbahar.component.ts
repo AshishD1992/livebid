@@ -47,7 +47,7 @@ export class AndarbaharComponent implements OnInit,OnDestroy{
   teenpattiSubscription!: Subscription;
   cards: any = [];
   placeTPData: any;
- 
+  showLoader: boolean = false;
   rowData: any;
   results: any = [];
 
@@ -310,7 +310,7 @@ if (this.subSink) {
       else {
         this.toastr.error(resp.result);
       }
-      // this.showLoader = false;
+      this.showLoader = false;
     }, err => {
       if (err.status == 401) {
         this.toastr.error(err.error.description.result);
@@ -318,7 +318,7 @@ if (this.subSink) {
       else {
         this.toastr.error("Errors Occured");
       }
-      // this.showLoader = false;
+      this.showLoader = false;
     })
   }
   BetSubmit() {
@@ -328,7 +328,7 @@ if (this.subSink) {
       return;
     }
     console.log(this.OpenBetForm.value)
-    // this.showLoader = true;
+    this.showLoader = true;
 
     if (this.OpenBetForm.value.mtype == "casino") {
       this.PlaceTpBet();
