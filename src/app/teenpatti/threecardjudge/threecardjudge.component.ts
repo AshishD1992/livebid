@@ -248,7 +248,7 @@ export class ThreecardjudgeComponent implements OnInit,OnDestroy {
 
     })
   }
-  openTpBetSlip(backlay, odds, runnerName, runnerId, gameId,profit, gameType, card) {
+  openTpBetSlip(backlay, odds, runnerName, runnerId, gameId, gameType, card) {
     if (card) {
       if (this.tpBetSlip) {
         if (this.tpBetSlip.backlay != backlay) {
@@ -256,7 +256,7 @@ export class ThreecardjudgeComponent implements OnInit,OnDestroy {
         }
       }
       this.tpBetSlip = {
-        backlay, odds, runnerName, runnerId, gameId, gameType,profit,card
+        backlay, odds, runnerName, runnerId, gameId, gameType
       }
       console.log(this.seletedCards);
       if (this.seletedCards.length < 3) {
