@@ -64,6 +64,14 @@ export class OnedayComponent implements OnInit,OnDestroy {
   betType = 4;
   gameId: number=0;
   stakeSetting = [];
+  defaultBetStakes!: {
+    stake1: number;
+    stake2: number;
+    stake3: number;
+    stake4: number;
+    stake5: number;
+    stake6: number;
+  };
   constructor(
     private TeenpattiSignalR: TeenpattiSignalRService,
     private route: ActivatedRoute,
@@ -237,6 +245,22 @@ export class OnedayComponent implements OnInit,OnDestroy {
 
           }
           // console.log(this.stakeSetting);
+          else {
+            this.defaultBetStakes = {
+              stake1: 100,
+              stake2: 500,
+              stake3: 1000,
+              stake4: 2000,
+              stake5: 5000,
+              stake6: 10000,
+            };
+            this.stakeSetting[0] = this.defaultBetStakes.stake1;
+            this.stakeSetting[1] = this.defaultBetStakes.stake2;
+            this.stakeSetting[2] = this.defaultBetStakes.stake3;
+            this.stakeSetting[3] = this.defaultBetStakes.stake4;
+            this.stakeSetting[4] = this.defaultBetStakes.stake5;
+            this.stakeSetting[5] = this.defaultBetStakes.stake6;
+          }
         }
 
 

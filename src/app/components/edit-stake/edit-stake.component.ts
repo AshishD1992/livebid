@@ -49,6 +49,7 @@ export class EditStakeComponent implements OnInit {
       stake6: 10000,
     };
     this.betStakes = this.defaultBetStakes;
+    console.log(this.betStakes)
     this.editForm = this.formBuilder.group({
       stake1: [this.defaultBetStakes.stake1, Validators.required],
       stake2: [this.defaultBetStakes.stake2, Validators.required],
@@ -66,7 +67,7 @@ get f() { return this.editForm.controls; }
 GetBetStakeSetting() {
   this.subSink.add(
     this.settingService.GetBetStakeSetting().subscribe((data) => {
-      // console.log(data)
+      console.log(data)
 
       if (data.data.stake1 && data.data.stake2) {
         this.editForm.controls['stake1'].setValue(data.data.stake1);
