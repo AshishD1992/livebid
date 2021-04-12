@@ -1,6 +1,10 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild, AfterViewInit, } from '@angular/core';
 import { ReportService } from 'src/app/services/report.service';
-import { CellClassParams } from 'ag-grid-community';
+import { ToastrService } from 'ngx-toastr';
+import { DataTableDirective } from 'angular-datatables';
+import { Subject } from 'rxjs';
+import { ActivatedRoute } from '@angular/router';
+import { param } from 'jquery';
 import { DatePipe } from '@angular/common';
 @Component({
   selector: 'app-profit-loss',
@@ -9,54 +13,146 @@ import { DatePipe } from '@angular/common';
   providers: [DatePipe]
 })
 export class ProfitLossComponent implements OnInit {
-  dataa: any;
-  startDate: Date;
-  endDate: Date;
-  startformat: any;
-  endformat: any;
 
-  constructor(private reportService: ReportService, private dateformat: DatePipe) {
-    this.startDate = new Date();
-    this.endDate = new Date();
-    this.startDate.setDate(this.startDate.getDate() - 7);
-    this.endDate.setDate(this.endDate.getDate());
-  }
-  columnDefs = [
-    { headerName: 'Settled', field: 'settleDate', width: 200 },
-    {
-      headerName: ' Market Name', field: 'market', width: 500,
-    },
-    { headerName: 'Profit/Loss', field: 'pnl', width: 200, },
-    {
-      headerName: ' Market Name', field: 'market', width: 500, cellClass: (params: CellClassParams) => params.value ? 'blue' : 'blue',
-    },
-    { headerName: 'Profit/Loss', field: 'pnl', width: 200, cellClass: (params: CellClassParams) => params.value > 0 ? 'text-success' : 'text-danger', },
-  ];
-  rowData = [];
 
-  gridOptions = {
-    // enable sorting on all columns by default
-    defaultColDef: {
-      sortable: true,
-      filter: true,
-      resizable: true,
-      lockPosition: true,
-    }
-  };
+  ProfitLoss = [];
+  totalPnl = 0;
+  bets: any
+  STYPE = "0";
 
-  ngOnInit(): void {
-    this.pnl()
-  }
-  pnl() {
-    this.startformat = this.dateformat.transform(this.startDate, 'yyyy-MM-dd 00:00:00');
-    this.endformat = this.dateformat.transform(this.endDate, 'yyyy-MM-dd 23:59:00');
-    this.reportService.GetProfitLoss(this.startformat, this.endformat).subscribe(data => {
-      this.dataa = data.data;
-      console.log(this.dataa);
 
+  selectfromdate: Date;
+  selecttodate: Date;
+  selecttotime: Date;
+  selectfromtime: Date;
+
+  @ViewChild(DataTableDirective, { static: true }) dtElement: DataTableDirective;
+  dtOptions: DataTables.Settings = {};
+  dtTrigger: Subject<any> = new Subject();
+
+  params: any;
+  loader: boolean = false;
+
+  constructor(private reportService: ReportService, private dateformat: DatePipe,private route: ActivatedRoute) {
+
+    this.route.params.subscribe(params => {
+      this.params = params;
+
+      if (this.params.mtid) {
+        this.GetProfitLossfromAS(this.params.mtid, this.params.mktid, this.params.type);
+      }
     })
+  
+  }
+ 
+  ngOnInit() {
+    // this.selectfromdate = new Date(new Date().setDate(new Date().getDate() - 1));
+    // this.selecttodate = new Date();
+    this.selectfromdate = new Date(new Date().setHours(0,0,0));
+    this.selecttodate = new Date(new Date().setHours(23, 59, 59));
+
+    this.selectfromtime = new Date(new Date().setHours(0, 0, 0, 0));
+    this.selecttotime = new Date(new Date().setHours(23, 59, 0, 0));
+
+    let ReportDates;
+    if (localStorage.getItem("ReportDates")) {
+      ReportDates = JSON.parse(localStorage.getItem("ReportDates"));
+      this.selectfromdate = new Date(ReportDates.fromdate);
+      this.selecttodate = new Date(ReportDates.todate);
+    }
+
+    if (!this.params.mtid) {
+      this.GetProfitLoss();
+    }
+  }
+
+  GetProfitLoss() {
+    // let FROM = "2020-6-10 00:00:00";
+    // let TO = "2020-7-11 23:59:00";
+
+    this.ProfitLoss = [];
+    this.rerender();
+
+    this.loader = true;
+    let pnldates = {
+      "fromdate": this.getFromDateAndTime(),
+      "todate": this.getToDateAndTime()
+    }
+
+    localStorage.setItem("ReportDates", JSON.stringify(pnldates));
+
+    this.reportService.GetProfitLoss(pnldates.fromdate, pnldates.todate).subscribe(
+      resp => {
+        this.ProfitLoss = resp.data;
+        this.totalPnl = resp.total;
+        this.rerender();
+        this.loader = false;
+
+      },
+      err => {
+        if (err.status == 401) {
+          //this.toastr.error("Error Occured");
+        }
+      }
+    );
+  }
+
+  GetProfitLossfromAS(mtid, mktid, type) {
+    this.ProfitLoss = [];
+    this.rerender();
+
+    this.loader = true;
+
+    this.reportService.GetProfitLossfromAS(mtid, mktid, type).subscribe(
+      resp => {
+        this.ProfitLoss = resp.data;
+        this.totalPnl = resp.total;
+        // console.log(this.totalPnl);
+        this.rerender();
+
+        this.loader = false;
+
+      },
+      err => {
+        if (err.status == 401) {
+          //this.toastr.error("Error Occured");
+        }
+      }
+    );
+  }
+
+  ShowBet(pnl) {
+    this.bets = pnl.bets;
+  }
+  removeBet(event) {
+    this.bets = event;
+  }
+
+  getFromDateAndTime() {
+    // return `${this.selectfromdate.getFullYear()}-${this.selectfromdate.getMonth() + 1}-${this.selectfromdate.getDate()} ${this.selectfromtime.getHours()}:${this.selectfromtime.getMinutes()}:${this.selectfromtime.getSeconds()}`;
+    return `${this.selectfromdate.getFullYear()}-${this.selectfromdate.getMonth() + 1}-${this.selectfromdate.getDate()} ${this.selectfromdate.getHours()}:${this.selectfromdate.getMinutes()}:${this.selectfromdate.getSeconds()}`;
+
+  }
+  getToDateAndTime() {
+    // return `${this.selecttodate.getFullYear()}-${this.selecttodate.getMonth() + 1}-${this.selecttodate.getDate()} ${this.selecttotime.getHours()}:${this.selecttotime.getMinutes()}:${this.selecttotime.getSeconds()}`;
+    return `${this.selecttodate.getFullYear()}-${this.selecttodate.getMonth() + 1}-${this.selecttodate.getDate()} ${this.selecttodate.getHours()}:${this.selecttodate.getMinutes()}:${this.selecttodate.getSeconds()}`;
+  }
+
+  ngAfterViewInit() {
+    this.dtTrigger.next();
+  }
 
 
+  rerender() {
+    if (this.dtElement && this.dtElement.dtInstance) {
+      this.dtElement.dtInstance.then((dtInstance: DataTables.Api) => {
+        // Destroy the table first
+        dtInstance.destroy();
+        // Call the dtTrigger to rerender again
+        this.dtTrigger.next();
+        // dtInstance.column('7').visible(false);
+      });
+    }
   }
 
 }

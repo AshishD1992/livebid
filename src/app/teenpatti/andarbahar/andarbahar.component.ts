@@ -289,12 +289,12 @@ if (this.subSink) {
   get f() {
     return this.OpenBetForm.controls;
   }
-  OpenBetSlip(backlay, odds, runnerName, runnerId, gameId, gameType) {
+  OpenBetSlip(backlay, odds, runnerName, runnerId, gameId, gameType,stake,source) {
 
     this.ClearAllSelection();
 
     this.openBet = {
-      backlay, odds, runnerName, runnerId, gameId, gameType
+      backlay, odds, runnerName, runnerId, gameId, gameType,stake,source
     }
     this.openBet['mtype'] = "casino";
     console.log(this.openBet);

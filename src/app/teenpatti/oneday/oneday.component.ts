@@ -460,7 +460,7 @@ export class OnedayComponent implements OnInit,OnDestroy {
     this.betType = betType;
   }
   BetSubmit() {
-    console.log(this.OpenBetForm)
+    // console.log(this.OpenBetForm)
 
     if (!this.OpenBetForm.valid) {
       return;

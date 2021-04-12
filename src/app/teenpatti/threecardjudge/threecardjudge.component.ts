@@ -272,27 +272,27 @@ export class ThreecardjudgeComponent implements OnInit,OnDestroy {
 
     })
   }
-  openTpBetSlip(backlay, odds, runnerName, runnerId, gameId, gameType, card) {
-    if (card) {
+  openTpBetSlip(backlay, odds, runnerName, runnerId, gameId, gameType, ab) {
+    if (ab) {
       if (this.tpBetSlip) {
         if (this.tpBetSlip.backlay != backlay) {
           return false
         }
       }
       this.tpBetSlip = {
-        backlay, odds, runnerName, runnerId, gameId, gameType
+        backlay, odds, runnerName, runnerId, gameId, gameType,ab
       }
       console.log(this.seletedCards);
       if (this.seletedCards.length < 3) {
-        this.seletedCards.push(card);
+        this.seletedCards.push(ab);
       }
     } else {
       this.ClearAllSelection();
     }
 
-    if (!card) {
+    if (!ab) {
       this.openBet = {
-        backlay, odds, runnerName, runnerId, gameId, gameType
+        backlay, odds, runnerName, runnerId, gameId, gameType,ab
       }
       this.openBet['mtype'] = "casino";
       console.log(this.openBet);
@@ -304,7 +304,7 @@ export class ThreecardjudgeComponent implements OnInit,OnDestroy {
 
     if (this.seletedCards.length > 2) {
       this.openBet = {
-        backlay, odds, runnerName, runnerId, gameId, gameType
+        backlay, odds, runnerName, runnerId, gameId, gameType,ab
       }
       this.openBet['mtype'] = "casino";
       this.openBet.runnerName = this.openBet.runnerName + ' ' + this.seletedCards.toString().replace(/,/g, "");

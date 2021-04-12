@@ -1,60 +1,147 @@
-<div class="tabbable">
-    <div class="sport-tab-main">
-        <div class="report-outer custom-selectbox">
-            <form method="get" id="formSubmit">
-                <input type="hidden" name="ajaxUrl" id="ajaxUrl" value="profitloss">
-                <input type="hidden" name="user_id" value="">
-                <input type="hidden" name="perpage" id="perpage" value="10">
-                <div class="select">
-                    <select name="sportid">
-                        <option value="5" selected="">All</option>
-                        <option value="4">Cricket</option>
-                        <option value="1">Soccer</option>
-                        <option value="2">Tennis</option>
-                        <option value="7">Horse Riding</option>
-                        <option value="11">Live teenpatti</option>
-                        <option value="12">Live Casino</option>
-                        <option value="0">Fancy</option>
-                    </select>
-                </div>
-                <button type="submit" style="display:none" class="blue_button" id="submit_form_button" value="filter"
-                    data-attr="submit">Filter</button>
-            </form>
-            <div id="divLoading"> </div>
-            <div class="appendAjaxTbl">
-               
 
-                <table class="table   table-sm">
-
-
-                    <thead>
-                        <tr>
-                            <th>Settled</th>
-                            <th> Market Name</th>
-                            <th>Profit/Loss</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                <tr *ngFor="let d of dataa">
-                   <td>{{d.settleDate}}</td>
-                   <td>{{d.market}}</td>
-                   <td>{{d.pnl}}</td>
-                </tr>  
-
-
-                    </tbody>
-                </table>
-                <!-- <ag-grid-angular style="width:100%; height: 300px;" class="ag-theme-balham" 
-                [rowData]="rowData"
-                [columnDefs]="columnDefs" 
-                [pagination]="true"
-                [paginationPageSize]="10"
-                [gridOptions]="gridOptions">
-            </ag-grid-angular> -->
-            </div>
-
-
-
-        </div>
+<div class="right_col" role="main" style="min-height: 442px;">
+    <div class="card">
+      <div class="row">
+      <div class="col-md-12">
+          <div class="title_new_at">Profit Loss
+             <div  class="pull-right"> <button class="btn_common" backButton><i aria-hidden="true" class="fa fa-arrow-left"></i>Back</button></div>
+          </div>
+      </div>
+  
+      <ng-container *ngIf="params">
+          <div class="col-md-12" *ngIf="!params.mtid">
+              <div class="clearfix data-background">
+                  <form method="get" id="profitlossform" class="form-horizontal form-label-left input_mask">
+                      <!-- <div class="block_2">
+                          <select class="form-control" [(ngModel)]="STYPE" name="STYPE">
+                              <option value="0">All</option>
+                              <option value="1">Cricket</option>
+                              <option value="2">Tennis</option>
+                              <option value="3">Soccer</option>
+                              <option value="4">Teenpatti</option>
+                              <option value="5">Fancy</option>
+                          </select>
+                      </div> -->
+  
+                      <div class="block_2">
+                        <div class="input-group">
+                          <input type="text" name="from_date" value="2001-06-01" id="from-date"
+                              class="form-control col-md-7 col-xs-12 has-feedback-left" placeholder="From date"
+                              autocomplete="off" bsDatepicker [(ngModel)]="selectfromdate"
+                              [bsConfig]="{ dateInputFormat: 'DD-MM-YYYY HH:mm:ss', containerClass: 'theme-default', isAnimated: true }">
+                              <span class="input-group-addon"><i class="glyphicon-calendar glyphicon"></i></span>
+                            </div>
+  
+                      </div>
+  
+                      <div class="block_2">
+                        <div class="input-group">
+                          <input type="text" name="to_date" value="2020-07-11" id="to-date"
+                              class="form-control col-md-7 col-xs-12 has-feedback-left" placeholder="To date"
+                              autocomplete="off" bsDatepicker [(ngModel)]="selecttodate"
+                              [bsConfig]="{ dateInputFormat: 'DD-MM-YYYY HH:mm:ss', containerClass: 'theme-default', isAnimated: true }">
+                              <span class="input-group-addon"><i class="glyphicon-calendar glyphicon"></i></span>
+                            </div>
+                      </div>
+                      <!-- <div class="block_2">
+                          <input type="text" class="form-control" placeholder="Via event name" name="searchTerm" value="">
+                      </div> -->
+                      <div class="block_2 buttonacount">
+                          <button style="padding: 7px;" type="submit" id="frmsbmt" class="blue_button" [disabled]="loader"
+                              (click)="GetProfitLoss()">Filter</button>
+                          <!-- <a class="red_button">
+                              <i class="fa fa-eraser"></i>Clear
+                          </a> -->
+                          <!--
+                          <button type="submit" name="submit" value="export" class="blue_button">
+                              <i class="fa fa-file-excel-o"></i> Export
+                          </button> -->
+                      </div>
+                  </form>
+              </div>
+          </div>
+      </ng-container>
+  
+      <div class="col-md-12 col-sm-12 col-xs-12">
+          <div id="divLoading"> </div>
+          <!--Loading class -->
+  
+          <div class="table-scroll">
+              <table class="table table-bordered table-dark table_new_design jambo_table bulk_action" datatable [dtOptions]="dtOptions"
+                  [dtTrigger]="dtTrigger">
+                  <thead>
+                      <tr class="headings">
+                          <th>S.No. </th>
+                          <!-- <th style="min-width: 200px;">Event_Name </th> -->
+                          <th style="min-width: 100px;">Market </th>
+                          <th>P_L </th>
+                          <th>Commission </th>
+                          <th style="min-width:130px;">Created_On </th>
+                          <th style="min-width: 70px;">Action </th>
+                      </tr>
+                  </thead>
+  
+                  <tbody>
+                      <tr *ngFor="let pnl of ProfitLoss;let index=index">
+                          <td>{{index+1}}.</td>
+  
+                          <!-- <td>
+                              <ng-container *ngIf="pnl.eventName">
+                                  {{pnl.eventName}}
+                              </ng-container>
+                              <ng-container *ngIf="pnl.description">
+                                  {{pnl.description}}
+                              </ng-container>
+  
+                          </td> -->
+                          <td>{{pnl.market}} {{pnl.marketName}}</td>
+                          <td [ngClass]="{'red':pnl.pNl<0,'green':pnl.pNl>0}">{{pnl.pNl | number:'1.2-2'}} </td>
+                          <td [ngClass]="{'red':pnl.commission<0 || pnl.comm<0,'green':pnl.commission>0 || pnl.comm>0}">
+                              {{pnl.commission}}
+                              {{pnl.comm}}
+                              <!-- <ng-container *ngIf="pnl.commission!=0">
+                                  {{pnl.commission | number:'1.2-2'}}
+                              </ng-container>
+                              <ng-container *ngIf="pnl.comm!=0">
+                                  {{pnl.comm | number:'1.2-2'}}
+                              </ng-container> -->
+                          </td>
+                          <td>
+                              <ng-container *ngIf="pnl.createdOn">
+                                  {{pnl.createdOn}}
+                              </ng-container>
+                              <ng-container *ngIf="pnl.date">
+                                  {{pnl.date}}
+                              </ng-container>
+                          </td>
+                          <td>
+                              <a (click)="ShowBet(pnl);">Show Bet</a>
+                          </td>
+  
+                      </tr>
+  
+                  </tbody>
+              </table>
+              <div class="loader" *ngIf="loader">
+                <div class="mini-loader">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                  </div>
+              </div>
+          </div>
+          <table class="table table-striped jambo_table bulk_action">
+              <thead>
+                  <tr>
+                      <th>(Total P &amp; L ) {{totalPnl | number:'1.2-2'}}</th>
+                      <th>(Total Commission) 0.00</th>
+                  </tr>
+  
+              </thead>
+          </table>
+      </div>
     </div>
-</div>
+  </div>
+  </div>
+  <app-show-bet-history *ngIf="bets" [bets]="bets" (removeBet)="removeBet($event)"></app-show-bet-history>
+  

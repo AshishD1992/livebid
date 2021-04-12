@@ -29,6 +29,8 @@
             ],
             "styles": [
               "node_modules/bootstrap/dist/css/bootstrap.min.css",
+              "node_modules/ngx-bootstrap/datepicker/bs-datepicker.css",
+              "node_modules/datatables.net-dt/css/jquery.dataTables.min.css",
               "src/assets/css/responsive.scss",
               "src/assets/css/intlTelInput.scss",
               "src/assets/css/styleTellnput.scss",
@@ -40,6 +42,7 @@
             "scripts": [
               "node_modules/jquery/dist/jquery.min.js",
               "node_modules/bootstrap/dist/js/bootstrap.min.js",
+              "node_modules/datatables.net/js/jquery.dataTables.js",
               "node_modules/signalr/jquery.signalR.min.js",
               "src/assets/js/slick.min.js",
               "src/assets/js/flipclock.js"

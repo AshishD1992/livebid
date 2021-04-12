@@ -149,7 +149,7 @@
                                                </div>
                                            </button> -->
                                            <button class="back back-1"
-                                           (click)="runner.b1=='0'?'':openTpBetSlip('back',runner.b1,runner.nation,runner.sectionId,runner.marketId,gameType)"  >
+                                           (click)="runner.b1=='0'?'':openTpBetSlip('back',runner.b1,runner.nation,runner.sectionId,runner.marketId,gameType,runner.info,runner.source,runner.stake)"  >
                                                <div class="rate">
                                                    {{runner.b1}}
                                                </div>
@@ -162,7 +162,7 @@
                                    <td>
                                        <div class="lay-buttons"  [ngClass]="{'suspended1':runner.gstatus!='ACTIVE'}">
                                            <button class="lay lay-1"
-                                           (click)="runner.l1=='0'?'':openTpBetSlip('lay',runner.l1,runner.nation,runner.sectionId,runner.marketId,gameType)" >
+                                           (click)="runner.l1=='0'?'':openTpBetSlip('lay',runner.l1,runner.nation,runner.sectionId,runner.marketId,gameType,runner.info,runner.source,runner.stake)" >
                                                <div class="rate">
                                                    {{runner.l1}}
                                                </div>

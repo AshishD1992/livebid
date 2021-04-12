@@ -7,6 +7,7 @@ import { data } from 'jquery';
   providedIn: 'root'
 })
 export class ReportService {
+
   BASEURL = environment.betUrl;
 
   constructor(private http: HttpClient) { }
@@ -34,6 +35,9 @@ export class ReportService {
 
   GetProfitLoss(FROM: any, TO: any): Observable<any> {
     return this.http.get(`${this.BASEURL}/Reports/GetProfitLoss?from=${FROM}&to=${TO}`);
+  }
+  GetProfitLossfromAS(MTID, MKTID, TYPE): Observable<any> {
+    return this.http.get(`${this.BASEURL}/Reports/GetProfitLossfromAS?mtid=${MTID}&mktid=${MKTID}&type=${TYPE}`);
   }
   GetCaisnoResults(FROM: any, TO: any, GTYPE: any): Observable<any> {
     return this.http.get(`${this.BASEURL}/Reports/GetCaisnoResults?from=${FROM}&to=${TO}&gtype=${GTYPE}`);

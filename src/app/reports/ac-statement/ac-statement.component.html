@@ -1,614 +1,112 @@
-<div class="tabbable">
-    <div class="sport-tab-main">
-        <div class="col-md-12">
-        </div>
-        <div class="report-outer custom-selectbox">
-            <form id="formSubmit">
-                <input type="hidden" name="ajaxUrl" id="ajaxUrl" value="acStatement">
-                <div class="select">
-                    <select name="fltrselct" id="slct" [(ngModel)]="filter">
-                        <option value="0" selected="">All</option>
-                        <option value="1">Chips in/out</option>
-                        <option value="3">Profit Loss</option>
-                        <option value="4">Statement</option>
-                    </select>
+<div class="right_col" role="main" style="min-height: 442px;">
+    <div class="card">
+      <div class="row">
+          <div class="col-md-12">
+              <div class="title_new_at"> Account Statement
+                  <div class="pull-right"><button routerLink="/dashboard" class="btn_common" backButton><i aria-hidden="true" class="fa fa-arrow-left"></i>Back</button> </div>
+              </div>
+          </div>
+          <div class="col-md-12">
+          </div>
+          <div class="col-md-12">
+            <div class="clearfix  data-background">
+              <form method="get" id="filtrdata">
+                  <!-- <div class="col-md-12">
+                      <input type="radio" name="fltrselct" [(ngModel)]="filter" value="1">All
+                      <input type="radio" name="fltrselct" [(ngModel)]="filter" value="2">Free Chips
+                      <input type="radio" name="fltrselct" [(ngModel)]="filter" value="3">Settlement
+                      <input type="radio" name="fltrselct" [(ngModel)]="filter" value="4">Profit and Loss
+                      <input type="radio" name="fltrselct" [(ngModel)]="filter" value="5">Account Statement
+                  </div> -->
+                  <div class="block_2">
+                  <select  name="Filter" [(ngModel)]="filter" class="form-control ng-pristine ng-valid ng-touched">
+                    <option  value="0" selected="selected">All</option>
+                    <option  value="1">Show D|W Point</option>
+                    <option  value="2">Show Market P|L</option>
+                    <option  value="3">Cash</option>
+                    <option  value="4">Credit</option>
+                    <option  value="5">Cash &amp; P|L</option>
+                  </select>
+                  </div>
+                  <div class="block_2">
+                    <div class="input-group">
+                      <input type="text" name="fdate" id="fdate" value="2019-08-01" class="form-control"
+                          placeholder="From Date" autocomplete="off" bsDatepicker [(ngModel)]="selectfromdate"
+                          [bsConfig]="{ dateInputFormat: 'DD-MM-YYYY HH:mm:ss', containerClass: 'theme-default', isAnimated: true }">
+                          <span class="input-group-addon"><i class="glyphicon-calendar glyphicon"></i></span>
+                          </div>
+  
+                  </div>
+                  <div class="block_2">
+                    <div class="input-group">
+                      <input type="text" name="tdate" id="tdate" value="2020-08-05" class="form-control"
+                          placeholder="To Date" autocomplete="off" bsDatepicker [(ngModel)]="selecttodate"
+                          [bsConfig]="{ dateInputFormat: 'DD-MM-YYYY HH:mm:ss', containerClass: 'theme-default', isAnimated: true }">
+                          <span class="input-group-addon"><i class="glyphicon-calendar glyphicon"></i></span>
+                  </div>
                 </div>
-
-                <button type="submit" style="display:none;" name="submit" id="submit_form_button" class="blue_button"
-                    data-attr="submit">Filter</button>
-            </form>
-            <div id="divLoading"> </div>
-            <div class="scroll-table appendAjaxTbl">
-
-
-
-                <div class="report_odds" *ngFor="let result of Data">
-
-                    <div class="report_flex">
-                        <div class="sr_date">
-
-                            <div class="num">1</div>
-
-
-                            <div class="box_date_dex">
-                                <div class="date_des">
-
-                                    <span>
-                                        <a title="show bet">
-                                            {{result.description}} </a>
-
-                                    </span>
-                                    <span class="title_small_size"> </span>
-                                </div>
-                            </div>
-
-
-                        </div>
-
-
-                        <div class="dr_cr">
-                            <span class="title_small_size">
-                                {{result.date}}
-
-                            </span>
-                            <div class="dr_cr_bal">
-
-                                <span class="red">{{result.dr}}</span>
-                            </div>
-
-                        </div>
-
-                    </div>
-
-
-                    <div class="box_bal">
-                        <div class="balance_report">
-
-
-                            <span class="green">{{result.cr}} </span>
-
-
-
-
-                        </div>
-                    </div>
-
-                </div>
-
-
-
-
-
-
-
-
-
-
-
-
-                <!-- <div class="report_odds">
-
-                    <div class="report_flex">
-                        <div class="sr_date">
-
-                            <div class="num">2</div>
-
-
-                            <div class="box_date_dex">
-                                <div class="date_des">
-
-                                    <span>
-                                        <a title="show bet">
-                                            Live game-LiveGame-1595735341 </a>
-
-                                    </span>
-                                    <span class="title_small_size"> </span>
-                                </div>
-                            </div>
-
-
-                        </div>
-
-
-                        <div class="dr_cr">
-                            <span class="title_small_size">
-                                2020-07-26 09:19:01
-
-                            </span>
-                            <div class="dr_cr_bal">
-
-                                <span class="red">Dr.3000 </span>
-                            </div>
-
-                        </div>
-
-                    </div>
-
-
-                    <div class="box_bal">
-                        <div class="balance_report">
-
-
-                            <span class="green">14.05 </span>
-
-
-
-
-                        </div>
-                    </div>
-
-                </div>
-
-
-
-
-
-
-
-
-
-
-
-
-                <div class="report_odds">
-
-                    <div class="report_flex">
-                        <div class="sr_date">
-
-                            <div class="num">3</div>
-
-
-                            <div class="box_date_dex">
-                                <div class="date_des">
-
-                                    <span>
-                                        Amaresh Received From Parent
-
-                                    </span>
-                                    <span class="title_small_size"> </span>
-                                </div>
-                            </div>
-
-
-                        </div>
-
-
-                        <div class="dr_cr">
-                            <span class="title_small_size">
-                                2020-07-26 08:46:09
-
-                            </span>
-                            <div class="dr_cr_bal">
-
-                                <span class="green">Cr.3005</span>
-                            </div>
-
-                        </div>
-
-                    </div>
-
-
-                    <div class="box_bal">
-                        <div class="balance_report">
-
-
-                            <span class="green">3014.05 </span>
-
-
-
-
-                        </div>
-                    </div>
-
-                </div>
-
-
-
-
-
-
-
-
-
-
-
-
-                <div class="report_odds">
-
-                    <div class="report_flex">
-                        <div class="sr_date">
-
-                            <div class="num">4</div>
-
-
-                            <div class="box_date_dex">
-                                <div class="date_des">
-
-                                    <span>
-                                        Parent Withdraw From Amaresh
-
-                                    </span>
-                                    <span class="title_small_size"> </span>
-                                </div>
-                            </div>
-
-
-                        </div>
-
-
-                        <div class="dr_cr">
-                            <span class="title_small_size">
-                                2020-07-25 23:05:50
-
-                            </span>
-                            <div class="dr_cr_bal">
-
-                                <span class="red">Dr.5000 </span>
-                            </div>
-
-                        </div>
-
-                    </div>
-
-
-                    <div class="box_bal">
-                        <div class="balance_report">
-
-
-                            <span class="green">9.05 </span>
-
-
-
-
-                        </div>
-                    </div>
-
-                </div>
-
-
-
-
-
-
-
-
-
-
-
-
-                <div class="report_odds">
-
-                    <div class="report_flex">
-                        <div class="sr_date">
-
-                            <div class="num">5</div>
-
-
-                            <div class="box_date_dex">
-                                <div class="date_des">
-
-                                    <span>
-                                        <a title="show bet" >
-                                            Live game-LiveGame-1595689681 </a>
-
-                                    </span>
-                                    <span class="title_small_size"> </span>
-                                </div>
-                            </div>
-
-
-                        </div>
-
-
-                        <div class="dr_cr">
-                            <span class="title_small_size">
-                                2020-07-25 20:38:02
-
-                            </span>
-                            <div class="dr_cr_bal">
-
-                                <span class="red">Dr.4695 </span>
-                            </div>
-
-                        </div>
-
-                    </div>
-
-
-                    <div class="box_bal">
-                        <div class="balance_report">
-
-
-                            <span class="green">5009.05 </span>
-
-
-
-
-                        </div>
-                    </div>
-
-                </div>
-
-
-                <div class="report_odds">
-
-                    <div class="report_flex">
-                        <div class="sr_date">
-
-                            <div class="num">6</div>
-
-
-                            <div class="box_date_dex">
-                                <div class="date_des">
-
-                                    <span>
-                                        <a title="show bet" >
-                                            Live game-LiveGame-1595688541 </a>
-
-                                    </span>
-                                    <span class="title_small_size"> </span>
-                                </div>
-                            </div>
-
-
-                        </div>
-
-
-                        <div class="dr_cr">
-                            <span class="title_small_size">
-                                2020-07-25 20:19:01
-
-                            </span>
-                            <div class="dr_cr_bal">
-
-                                <span class="green">Cr.6158</span>
-                            </div>
-
-                        </div>
-
-                    </div>
-
-
-                    <div class="box_bal">
-                        <div class="balance_report">
-
-
-                            <span class="green">9704.05 </span>
-
-
-
-
-                        </div>
-                    </div>
-
-                </div>
-
-
-                <div class="report_odds">
-
-                    <div class="report_flex">
-                        <div class="sr_date">
-
-                            <div class="num">7</div>
-
-
-                            <div class="box_date_dex">
-                                <div class="date_des">
-
-                                    <span>
-                                        <a title="show bet" >
-                                            Live game-LiveGame-1595687221 </a>
-
-                                    </span>
-                                    <span class="title_small_size"> </span>
-                                </div>
-                            </div>
-
-
-                        </div>
-
-
-                        <div class="dr_cr">
-                            <span class="title_small_size">
-                                2020-07-25 19:57:02
-
-                            </span>
-                            <div class="dr_cr_bal">
-
-                                <span class="green">Cr.490</span>
-                            </div>
-
-                        </div>
-
-                    </div>
-
-
-                    <div class="box_bal">
-                        <div class="balance_report">
-
-
-                            <span class="green">3546.05 </span>
-
-
-
-
-                        </div>
-                    </div>
-
-                </div>
-
-                <div class="report_odds">
-
-                    <div class="report_flex">
-                        <div class="sr_date">
-
-                            <div class="num">8</div>
-
-
-                            <div class="box_date_dex">
-                                <div class="date_des">
-
-                                    <span>
-                                        Amaresh Received From Parent
-
-                                    </span>
-                                    <span class="title_small_size"> </span>
-                                </div>
-                            </div>
-
-
-                        </div>
-
-
-                        <div class="dr_cr">
-                            <span class="title_small_size">
-                                2020-07-25 19:52:12
-
-                            </span>
-                            <div class="dr_cr_bal">
-
-                                <span class="green">Cr.3050</span>
-                            </div>
-
-                        </div>
-
-                    </div>
-
-
-                    <div class="box_bal">
-                        <div class="balance_report">
-
-
-                            <span class="green">3056.05 </span>
-
-
-
-
-                        </div>
-                    </div>
-
-                </div>
-
-
-                <div class="report_odds">
-
-                    <div class="report_flex">
-                        <div class="sr_date">
-
-                            <div class="num">9</div>
-
-
-                            <div class="box_date_dex">
-                                <div class="date_des">
-
-                                    <span>
-                                        <a title="show bet" >
-                                            Live game-LiveGame-1595611621 </a>
-
-                                    </span>
-                                    <span class="title_small_size"> </span>
-                                </div>
-                            </div>
-
-
-                        </div>
-
-
-                        <div class="dr_cr">
-                            <span class="title_small_size">
-                                2020-07-24 22:57:03
-
-                            </span>
-                            <div class="dr_cr_bal">
-
-                                <span class="red">Dr.3500 </span>
-                            </div>
-
-                        </div>
-
-                    </div>
-
-
-                    <div class="box_bal">
-                        <div class="balance_report">
-
-
-                            <span class="green">6.05 </span>
-
-
-
-
-                        </div>
-                    </div>
-
-                </div>
-
-
-                <div class="report_odds">
-
-                    <div class="report_flex">
-                        <div class="sr_date">
-
-                            <div class="num">10</div>
-
-
-                            <div class="box_date_dex">
-                                <div class="date_des">
-
-                                    <span>
-                                        <a title="show bet">
-                                            Roulette-ROULETTE-1595611261 </a>
-
-                                    </span>
-                                    <span class="title_small_size"> </span>
-                                </div>
-                            </div>
-
-
-                        </div>
-
-
-                        <div class="dr_cr">
-                            <span class="title_small_size">
-                                2020-07-24 22:51:01
-
-                            </span>
-                            <div class="dr_cr_bal">
-
-                                <span class="red">Dr.80 </span>
-                            </div>
-
-                        </div>
-
-                    </div>
-
-
-                    <div class="box_bal">
-                        <div class="balance_report">
-
-
-                            <span class="green">3506.05 </span>
-
-
-
-
-                        </div>
-                    </div>
-
-                </div> -->
-
-<!-- 
-
-                <p>Showing 1 to 10 of 78 entries </p>
-                <p id="paginateClick" class="pagination-row dataTables_paginate paging_simple_numbers">
-                    <strong>1</strong><a data-ci-pagination-page="2">2</a><a data-ci-pagination-page="3">3</a><a
-                        data-ci-pagination-page="4">4</a><a data-ci-pagination-page="5">5</a><a
-                        data-ci-pagination-page="6">6</a><a data-ci-pagination-page="2" rel="next">&gt;</a><a
-                        data-ci-pagination-page="8">Last ›</a> </p> -->
-            </div>
-
-
-
-        </div>
-    </div>
-</div>
+                  <!-- <div class="block_2">
+                      <input type="text" name="searchTerm" id="searchTerm" value="" class="form-control"
+                          placeholder="Search" autocomplete="off">
+                  </div> -->
+                  <div class="block_2 buttonacount">
+                      <button type="submit" style="padding: 7px;" name="submit" id="frmsbmt" class="blue_button" [disabled]="loader"
+                          (click)="AccountStatement()">Filter</button>
+                      <!-- <a class="red_button">Clear</a> -->
+                  </div>
+              </form>
+          </div>
+          </div>
+          <div class="col-md-12 col-sm-12 col-xs-12">
+              <div id="divLoading"> </div>
+              <!--Loading class -->
+              <div class="table-scroll table-responsive" id="filterdata">
+  
+                  <table class="table table-bordered table-dark table_new_design jambo_table bulk_action" datatable
+                      [dtOptions]="dtOptions" [dtTrigger]="dtTrigger">
+                      <thead>
+                          <tr class="headings">
+                              <th class="">S.No. </th>
+                              <th class="">Date </th>
+                              <!--th>User Name </th>
+                              <th>Chips </th-->
+                              <th class="">Description </th>
+                              <th class="rrig text-right">Credit </th>
+                              <th class="rrig text-right">Debit </th>
+                              <th class="rrig text-right">Balance </th>
+                          </tr>
+                      </thead>
+                      <tbody>
+                          <tr *ngFor="let statement of Data;let index=index">
+                              <td>{{index+1}}</td>
+                              <td>{{statement.date}} </td>
+                              <td>
+                                  <a *ngIf="statement.type=='P|L Market'" title="show bet">
+                                      {{statement.description}}
+                                  </a>
+                                  <ng-container *ngIf="statement.type!='P|L Market'">
+                                      {{statement.description}}
+                                  </ng-container>
+                              </td>
+                              <td class="green text-right">{{statement.cr}} </td>
+                              <td class="red text-right">{{statement.dr}} </td>
+                              <td class="green text-right">{{statement.balance | number:'1.2-2'}} </td>
+                          </tr>
+  
+                      </tbody>
+                  </table>
+                  <div class="loader" *ngIf="loader">
+                    <div class="mini-loader">
+                        <span></span>
+                        <span></span>
+                        <span></span>
+                      </div>
+                  </div>
+              </div>
+  
+  
+          </div>
+      </div>
+      </div>
+  </div>
+  

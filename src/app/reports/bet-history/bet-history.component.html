@@ -38,6 +38,33 @@
             <div id="divLoading"></div>
             <div class="scroll-table appendAjaxTbl">
                 <div class="scroll-table appendAjaxTbl">
+                    <table class="table   table-sm">
+
+
+                        <thead>
+                            <tr>
+                                <th>Sport</th>
+                                <th>Date</th>
+                                <th> Market Name</th>
+                                <th> Match Name</th>
+                                <th>Selection</th>
+                                <th>Type</th>
+                                
+                            </tr>
+                        </thead>
+                        <tbody>
+                    <tr *ngFor="let d of Data">
+                        <td>{{d.sport}}</td>
+                       <td>{{d.dateMatched}}</td>
+                       <td>{{d.marketName}}</td>
+                       <td>{{d.matchName}}</td>
+                       <td>{{d.selection}}</td>
+                       <td>{{d.type}}</td>
+                    </tr>  
+    
+    
+                        </tbody>
+                    </table>
                 </div>
                 <div class="bethistroy_table ">
 

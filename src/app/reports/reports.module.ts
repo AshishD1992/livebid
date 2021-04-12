@@ -9,7 +9,8 @@ import { ReportService } from '../services/report.service';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { LoginhistoryComponent } from './loginhistory/loginhistory.component';
 import { CasinoComponent } from './casino/casino.component';
-
+import { BsDatepickerModule } from 'ngx-bootstrap';
+import { DataTablesModule } from 'angular-datatables';
 const routes: Routes = [
   {
     path: 'bet-history',
@@ -51,7 +52,9 @@ const routes: Routes = [
     FormsModule,
     ReactiveFormsModule ,
     CommonModule,
-    RouterModule.forChild(routes)
+    RouterModule.forChild(routes),
+    BsDatepickerModule.forRoot(),
+    DataTablesModule.forRoot(),
   ],
   providers:[ReportService],
   exports: [RouterModule]

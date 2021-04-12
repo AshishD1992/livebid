@@ -124,7 +124,7 @@
                       src="assets/images/lucky7/{{(Aresults.length>0)?Aresults[index]:'0'}}.jpg" class="ng-star-inserted">
 
                       <img *ngIf="andar.gstatus=='1'"
-                      (click)="andar.gstatus=='0'?'':OpenBetSlip('back',andar.rate,andar.nation,andar.sid,tpData.mid,gameType)"
+                      (click)="andar.gstatus=='0'?'':OpenBetSlip('back',andar.rate,andar.nation,andar.sid,tpData.mid,gameType,stake,source)"
                                  src="assets/images/lucky7/{{index+1}}.jpg">
                    </div>
                    <div class="ng-star-inserted">
@@ -141,7 +141,7 @@
                       <img *ngIf="bahar.gstatus=='0'"
                        src="assets/images/lucky7/{{(Bresults.length>0 && Bresults[index]!='0') ? Bresults[index]-20 : '0'}}.jpg" class="ng-star-inserted">
                        <img *ngIf="bahar.gstatus=='1'"
-                       (click)="bahar.gstatus=='0'?'':OpenBetSlip('back',bahar.rate,bahar.nation,bahar.sid,tpData.mid,gameType)"
+                       (click)="bahar.gstatus=='0'?'':OpenBetSlip('back',bahar.rate,bahar.nation,bahar.sid,tpData.mid,gameType,stake,source)"
                            src="assets/images/lucky7/{{index+1}}.jpg">
                    </div>
                    <div>
